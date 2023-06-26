@@ -3,8 +3,14 @@ import { LoginLayout } from "@/components/LoginLayout"
 
 export const Login = () => {
 
+    const title = "Log in";
+    const onSubmit = () => { console.log("submitted") }
+
     return (
-        <LoginLayout title="Log In">
+        <LoginLayout
+            title={title}
+            onSubmit={onSubmit}
+        >
             <TextField
                 type="email"
                 placeholder="example@site.com"
@@ -20,7 +26,7 @@ export const Login = () => {
             <Button
                 submit
                 fullWidth
-                primary 
+                primary
                 children="Log In"
             />
         </LoginLayout>

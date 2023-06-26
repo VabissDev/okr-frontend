@@ -3,10 +3,7 @@ import { styled } from 'styled-components'
 export const FormWrapper = styled.div`
 display: grid;
 place-items: center;
-
-form > & {
-    height: calc(100vh - 28px);
-}
+height: calc(100vh - 28px);
 
 .Polaris-Box {
     width: 300px;
