@@ -1,7 +1,6 @@
 import React from "react";
 import { Page, Layout, Card, Text } from "@shopify/polaris";
-import { Stack } from "@shopify/polaris/utilities";
-import "@shopify/polaris/build/esm/styles.css";
+import { VerticalStack } from "@shopify/polaris";
 
 export const Profile = () => {
   return (
@@ -9,12 +8,12 @@ export const Profile = () => {
       <Layout>
         <Layout.Section>
           <Card sectioned>
-            <Stack vertical>
+            <VerticalStack>
               <Text>Name: John Doe</Text>
               <Text>Email: johndoe@example.com</Text>
               <Text>Company: ABC Company</Text>
               <Text>Position: Frontend Developer</Text>
-            </Stack>
+            </VerticalStack>
           </Card>
         </Layout.Section>
 
