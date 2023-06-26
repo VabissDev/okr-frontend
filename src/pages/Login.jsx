@@ -1,25 +1,28 @@
 import { Button, TextField } from "@shopify/polaris"
-import { LoginLayout } from "../components/LoginLayout"
+import { LoginLayout } from "@/components/LoginLayout"
 
 export const Login = () => {
-  return (
-   <LoginLayout>
-          <TextField
-            type="email"
-            placeholder="example@sitem.com"
-            label="Username / Email:"
-            bg="purple"
-            onChange={(e) => {console.log(e.target.value);}}
-            autoComplete="email"
-          />
-          <Button 
-          submit
-          fullWidth
-          children="Log In"
-          style={
-            {}
-          }
-          />
-   </LoginLayout>
-  )
+
+    return (
+        <LoginLayout title="Log In">
+            <TextField
+                type="email"
+                placeholder="example@site.com"
+                label="Username / Email:"
+                onChange={(e) => { console.log(e.target.value); }}
+                autoComplete="email"
+            />
+            <TextField
+                label="Password:"
+                type="password"
+                onChange={(e) => { console.log(e.target.value); }}
+            />
+            <Button
+                submit
+                fullWidth
+                primary 
+                children="Log In"
+            />
+        </LoginLayout>
+    )
 }
