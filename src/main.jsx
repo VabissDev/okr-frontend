@@ -12,22 +12,22 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <BrowserRouter>
         <AppProvider
-        i18n={{
-          Polaris: {
-            ResourceList: {
-              sortingLabel: 'Sort by',
-              defaultItemSingular: 'item',
-              defaultItemPlural: 'items',
-              showing: 'Showing {itemsCount} {resource}',
-              Item: {
-                viewItem: 'View details for {itemName}',
-              },
-            },
-            Common: {
-              checkbox: 'checkbox',
-            },
-          },
-        }}
+        // i18n={{
+        //   Polaris: {
+        //     ResourceList: {
+        //       sortingLabel: 'Sort by',
+        //       defaultItemSingular: 'item',
+        //       defaultItemPlural: 'items',
+        //       showing: 'Showing {itemsCount} {resource}',
+        //       Item: {
+        //         viewItem: 'View details for {itemName}',
+        //       },
+        //     },
+        //     Common: {
+        //       checkbox: 'checkbox',
+        //     },
+        //   },
+        // }}
         >
           <App />
         </AppProvider>
