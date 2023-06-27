@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { Button, TextField, Text, Divider, Icon } from "@shopify/polaris";
-import { LoginLayout } from "@/components/LoginLayout";
+import { Button, TextField, Text, Divider, Icon } from "@shopify/polaris"
+import { LoginLayout } from "@/components/LoginLayout"
 import { Link } from "react-router-dom";
 import {
     ViewMinor,
@@ -9,14 +8,8 @@ import {
 import { useState } from "react";
 import { PasswordInputWrapper } from "../styled/inputs";
 
-
 export const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const handleEmailChange = (value) => {
-    setEmail(value);
-  };
-  
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false)
@@ -87,4 +80,3 @@ export const Login = () => {
         </LoginLayout>
     )
 }
-
