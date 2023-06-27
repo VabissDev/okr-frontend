@@ -1,7 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "@/redux/slices/userSlice";
 import { useState } from "react";
-import { TextField, Button, Text, Divider, Checkbox, Icon } from "@shopify/polaris";
+import {
+  TextField,
+  Button,
+  Text,
+  Divider,
+  Checkbox,
+  Icon,
+} from "@shopify/polaris";
 import { LoginLayout } from "@/components/LoginLayout";
 import { Link } from "react-router-dom";
 import { PasswordInputWrapper } from "@/styled/inputs";
@@ -18,7 +25,7 @@ export const SignUp = () => {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState({
     password: false,
-    confirm: false
+    confirm: false,
   });
   const title = "Sign Up";
 
@@ -100,15 +107,18 @@ export const SignUp = () => {
           placeholder="*********"
           value={password}
           onChange={handlePasswordChange}
+          error={error && error.toLowerCase().includes("password") ? error : ""}
         />
         <Button
           className="show-password-btn"
-          onClick={() => setShowPassword({ ...showPassword, password: !showPassword.password })}
+          onClick={() =>
+            setShowPassword({
+              ...showPassword,
+              password: !showPassword.password,
+            })
+          }
         >
-          <Icon
-            source={showPassword ? ViewMinor : HideMinor}
-            color="base"
-          />
+          <Icon source={showPassword ? ViewMinor : HideMinor} color="base" />
         </Button>
       </PasswordInputWrapper>
       <PasswordInputWrapper>
@@ -121,12 +131,11 @@ export const SignUp = () => {
         />
         <Button
           className="show-password-btn"
-          onClick={() => setShowPassword({ ...showPassword, confirm: !showPassword.confirm })}
+          onClick={() =>
+            setShowPassword({ ...showPassword, confirm: !showPassword.confirm })
+          }
         >
-          <Icon
-            source={showPassword ? ViewMinor : HideMinor}
-            color="base"
-          />
+          <Icon source={showPassword ? ViewMinor : HideMinor} color="base" />
         </Button>
       </PasswordInputWrapper>
 
