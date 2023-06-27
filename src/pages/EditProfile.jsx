@@ -51,7 +51,7 @@ const EditProfile = () => {
             name="emailAddress"
             value={profile.emailAddress}
             onChange={(value) => handleInputChange(value, "emailAddress")}
-            required
+            readOnly
           />
           <TextField
             label="Password:"
