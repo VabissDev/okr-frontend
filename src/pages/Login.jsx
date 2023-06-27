@@ -2,13 +2,30 @@ import { Button, TextField, Text, Divider, Icon } from "@shopify/polaris"
 import { LoginLayout } from "@/components/LoginLayout"
 import { Link } from "react-router-dom";
 import {
-    ViewMajor
-  } from '@shopify/polaris-icons';
+    ViewMinor,
+    HideMinor
+} from '@shopify/polaris-icons';
+import { useState } from "react";
+import { PasswordInputWrapper } from "../styled/inputs";
 
 export const Login = () => {
 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false)
     const title = "Log in";
+
+    const handleEmailChange = (value) => {
+        setEmail(value);
+    };
+
+    const handlePasswordChange = (value) => {
+        setPassword(value);
+    };
+
     const onSubmit = () => { console.log("submitted") }
+
+
 
 
     return (
@@ -20,26 +37,38 @@ export const Login = () => {
                 type="email"
                 placeholder="example@site.com"
                 label="Username / Email:"
-                onChange={(e) => { console.log(e.target.value); }}
+                value={email}
+                onChange={handleEmailChange}
                 autoComplete="email"
             />
-            <TextField
-                label="Password:"
-                type="password"
-                placeholder="*********"
-                onChange={(e) => { console.log(e.target.value); }}
-            />
-<Icon
-  source={ViewMajor}
-  color="base"
-/>
+            <PasswordInputWrapper>
+                <TextField
+                    label="Password:"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="*********"
+                    value={password}
+                    onChange={
+
+                        handlePasswordChange
+                    }
+                />
+                <Button
+                    className="show-password-btn"
+                    onClick={() => setShowPassword(!showPassword)}
+                >
+                    <Icon
+                        source={showPassword ? ViewMinor : HideMinor}
+                        color="base"
+                    />
+                </Button>
+            </PasswordInputWrapper>
             <Button
                 submit
                 fullWidth
                 primary
                 children="Log In"
             />
-            <Divider/>
+            <Divider />
             <Text
                 alignment="center"
                 variant="headingSm"
