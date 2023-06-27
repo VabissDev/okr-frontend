@@ -1,5 +1,6 @@
-import { Button, TextField } from "@shopify/polaris"
+import { Button, TextField, Text } from "@shopify/polaris"
 import { LoginLayout } from "@/components/LoginLayout"
+import { Link } from "react-router-dom";
 
 export const Login = () => {
 
@@ -21,6 +22,7 @@ export const Login = () => {
             <TextField
                 label="Password:"
                 type="password"
+                placeholder="*********"
                 onChange={(e) => { console.log(e.target.value); }}
             />
             <Button
@@ -29,6 +31,14 @@ export const Login = () => {
                 primary
                 children="Log In"
             />
+            <Text
+                alignment="center"
+                variant="headingSm"
+                as="p"
+                color="subdued"
+            >
+                Or  <Link to="/signup"> Sign Up</Link>
+            </Text>
         </LoginLayout>
     )
 }
