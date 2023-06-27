@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "@/redux/slices/userSlice";
 import { useState } from "react";
-import { TextField, Button, Text } from "@shopify/polaris";
+import { TextField, Button, Text, Divider } from "@shopify/polaris";
 import { LoginLayout } from "@/components/LoginLayout";
 import { Link } from "react-router-dom";
 
@@ -69,6 +69,7 @@ export const SignUp = () => {
       <Button primary submit fullWidth>
         Sign Up
       </Button>
+      <Divider/>
       <Text
         alignment="center"
         variant="headingSm"
