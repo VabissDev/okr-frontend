@@ -5,8 +5,8 @@ import { SignUp } from "@/pages/SignUp";
 import { MainLayout } from "@/components/MainLayout";
 import { NotFound } from "@/pages/NotFound";
 import { WorkspaceManagement } from "@/pages/WorkspaceManagement";
-import { Profile } from "@/pages/Profile";
 import EditProfile from "@/pages/EditProfile";
+import Profile from "../pages/Profile";
 
 export const Routing = () => {
 
@@ -25,7 +25,7 @@ export const Routing = () => {
             <Route path='/signup' element={<SignUp />} />
             <Route path="/" element={<MainLayout />}>
                 <Route index element={<WorkspaceManagement />} />
-                <Route path='profile/:id' element={<Profile/>} />
+                <Route path='profile' element={<Profile/>} />
                 <Route path='editprofile/:id' element={<EditProfile />} />
             </Route>
             <Route path='*' element={<NotFound />} />

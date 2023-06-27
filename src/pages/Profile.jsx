@@ -1,34 +1,61 @@
 import React from "react";
-import { Page, Layout, Card, Text } from "@shopify/polaris";
-import { VerticalStack } from "@shopify/polaris";
-
-export const Profile = () => {
+import { Header } from "../components/Header";
+import { Btn, Left } from "../styled/profilee";
+import { First, Second, Edit, Item } from "../styled/profilee";
+export default function Profile() {
+  const user = {
+    firstName: "John",
+    lastName: "Doe",
+    email: "johndoe@gmail.com",
+    phone: "055455555",
+    bio: "Team Manager",
+  };
   return (
-    <Page>
-      <Layout>
-        <Layout.Section>
-          <Card sectioned>
-            <VerticalStack>
-              <Text>Name: John Doe</Text>
-              <Text>Email: johndoe@example.com</Text>
-              <Text>Company: ABC Company</Text>
-              <Text>Position: Frontend Developer</Text>
-            </VerticalStack>
-          </Card>
-        </Layout.Section>
-
-        <Layout.Section>
-          <Card sectioned>
-            <Text>Progress of My Objectives</Text>
-            <ul>
-              <li>Objective 1</li>
-              <li>Objective 2</li>
-              <li>Objective 3</li>
-            </ul>
-          </Card>
-        </Layout.Section>
-      </Layout>
-    </Page>
+    <div className="profile">
+      <Header />
+      <h2 style={{ paddingBottom: 20, fontSize: 30 }}>My Profile</h2>
+      <First>
+        <Left>
+          <img
+            src="https://palmettopayroll.net/wp-content/uploads/2020/07/bigstock-Female-hacker-hacking-security-351691055.jpg"
+            alt=""
+            style={{ width: 100, height: 100, borderRadius: "50%" }}
+          />
+          <div className="profile__first--text">
+            <p>
+              {user.firstName} {user.lastName}
+            </p>
+            <span>{user.bio}</span>
+          </div>
+        </Left>
+        <Btn>Edit</Btn>
+      </First>
+      <Second>
+        <h5 style={{ paddingBottom: 30 }}>Personal Information</h5>
+        <Edit>
+          <Item>
+            <p style={{ color: "gray" }}>First name</p>
+            <p>{user.firstName}</p>
+          </Item>
+          <Item>
+            <p style={{ color: "gray" }}>Last name</p>
+            <p>{user.lastName}</p>
+          </Item>
+          <Item>
+            <p style={{ color: "gray" }}>Email address</p>
+            <p>{user.email}</p>
+          </Item>
+          <Item>
+            <p style={{ color: "gray" }}>Phone</p>
+            <p>{user.phone}</p>
+          </Item>
+          <Item>
+            <p style={{ color: "gray" }}>Bio</p>
+            <p>{user.bio}</p>
+          </Item>
+            <Btn>Edit</Btn>
+        </Edit>
+      </Second>
+    </div>
   );
 }
-
