@@ -1,11 +1,15 @@
-import { Button, TextField, Text, Divider } from "@shopify/polaris"
+import { Button, TextField, Text, Divider, Icon } from "@shopify/polaris"
 import { LoginLayout } from "@/components/LoginLayout"
 import { Link } from "react-router-dom";
+import {
+    ViewMajor
+  } from '@shopify/polaris-icons';
 
 export const Login = () => {
 
     const title = "Log in";
     const onSubmit = () => { console.log("submitted") }
+
 
     return (
         <LoginLayout
@@ -25,6 +29,10 @@ export const Login = () => {
                 placeholder="*********"
                 onChange={(e) => { console.log(e.target.value); }}
             />
+<Icon
+  source={ViewMajor}
+  color="base"
+/>
             <Button
                 submit
                 fullWidth
