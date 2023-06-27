@@ -3,11 +3,10 @@ import { useEffect } from "react"
 import { Login } from "@/pages/Login";
 import { SignUp } from "@/pages/SignUp";
 import { MainLayout } from "@/components/MainLayout";
-import { Organization } from "@/pages/Organization";
 import { NotFound } from "@/pages/NotFound";
 import { WorkspaceManagement } from "@/pages/WorkspaceManagement";
 import { Profile } from "@/pages/Profile";
-import  EditProfile from "@/pages/EditProfile";
+import EditProfile from "@/pages/EditProfile";
 
 export const Routing = () => {
 
@@ -24,11 +23,10 @@ export const Routing = () => {
         <Routes>
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
-            <Route path='/profile' element = {<Profile/>}/>
-            <Route path='/editprofile' element = {<EditProfile/>}/>
-            <Route path='/work' element = {<WorkspaceManagement/>}/>
             <Route path="/" element={<MainLayout />}>
-                <Route index element={<Organization />} />
+                <Route index element={<WorkspaceManagement />} />
+                <Route path='profile/:id' element={<Profile/>} />
+                <Route path='editprofile/:id' element={<EditProfile />} />
             </Route>
             <Route path='*' element={<NotFound />} />
         </Routes>
