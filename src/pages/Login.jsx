@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { Button, TextField, Text, Divider, Icon } from "@shopify/polaris";
 import { LoginLayout } from "@/components/LoginLayout";
 import { Link } from "react-router-dom";
-import { ViewMajor } from "@shopify/polaris-icons";
+import {
+    ViewMinor,
+    HideMinor
+} from '@shopify/polaris-icons';
+import { useState } from "react";
+import { PasswordInputWrapper } from "../styled/inputs";
+
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,40 +16,75 @@ export const Login = () => {
   const handleEmailChange = (value) => {
     setEmail(value);
   };
+  
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false)
+    const title = "Log in";
 
-  const handlePasswordChange = (value) => {
-    setPassword(value);
-  };
-  const title = "Log in";
-  const onSubmit = () => {
-    setEmail("");
-    setPassword("");
-    console.log("submitted");
-  };
+    const handleEmailChange = (value) => {
+        setEmail(value);
+    };
 
-  return (
-    <LoginLayout title={title} onSubmit={onSubmit}>
-      <TextField
-        type="email"
-        placeholder="example@site.com"
-        label="Username / Email:"
-        value={email}
-        onChange={handleEmailChange}
-        autoComplete="email"
-      />
-      <TextField
-        label="Password:"
-        type="password"
-        placeholder="*********"
-        onChange={handlePasswordChange}
-        value={password}
-      />
-      <Icon source={ViewMajor} color="base" />
-      <Button submit fullWidth primary children="Log In" />
-      <Divider />
-      <Text alignment="center" variant="headingSm" as="p" color="subdued">
-        Or <Link to="/signup"> Sign Up</Link>
-      </Text>
-    </LoginLayout>
-  );
-};
+    const handlePasswordChange = (value) => {
+        setPassword(value);
+    };
+
+    const onSubmit = () => { console.log("submitted") }
+
+
+
+
+    return (
+        <LoginLayout
+            title={title}
+            onSubmit={onSubmit}
+        >
+            <TextField
+                type="email"
+                placeholder="example@site.com"
+                label="Username / Email:"
+                value={email}
+                onChange={handleEmailChange}
+                autoComplete="email"
+            />
+            <PasswordInputWrapper>
+                <TextField
+                    label="Password:"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="*********"
+                    value={password}
+                    onChange={
+
+                        handlePasswordChange
+                    }
+                />
+                <Button
+                    className="show-password-btn"
+                    onClick={() => setShowPassword(!showPassword)}
+                >
+                    <Icon
+                        source={showPassword ? ViewMinor : HideMinor}
+                        color="base"
+                    />
+                </Button>
+            </PasswordInputWrapper>
+            <Button
+                submit
+                fullWidth
+                primary
+                children="Log In"
+            />
+            <Divider />
+            <Text
+                alignment="center"
+                variant="headingSm"
+                as="p"
+                color="subdued"
+            >
+                Or  <Link to="/signup"> Sign Up</Link>
+            </Text>
+        </LoginLayout>
+    )
+}
+

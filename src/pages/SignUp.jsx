@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "@/redux/slices/userSlice";
 import { useState } from "react";
-import { TextField, Button, Text, Divider, Checkbox } from "@shopify/polaris";
+import { TextField, Button, Text, Divider, Checkbox, Icon } from "@shopify/polaris";
 import { LoginLayout } from "@/components/LoginLayout";
 import { Link } from "react-router-dom";
+import { PasswordInputWrapper } from "@/styled/inputs";
+import { HideMinor, ViewMinor } from "@shopify/polaris-icons";
 
 export const SignUp = () => {
   const dispatch = useDispatch();
@@ -11,8 +13,13 @@ export const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [isOrganization, setIsOrganization] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState({
+    password: false,
+    confirm: false
+  });
   const title = "Sign Up";
 
   const handleNameChange = (value) => {
@@ -25,6 +32,10 @@ export const SignUp = () => {
 
   const handlePasswordChange = (value) => {
     setPassword(value);
+  };
+
+  const handlePasswordConfirmChange = (value) => {
+    setPasswordConfirm(value);
   };
 
   const handleCheckbox = () => {
@@ -82,14 +93,42 @@ export const SignUp = () => {
         onChange={handleEmailChange}
         error={error && error.includes("email") ? error : ""}
       />
-      <TextField
-        label="Password"
-        type="password"
-        placeholder="*********"
-        value={password}
-        onChange={handlePasswordChange}
-        error={error && error.toLowerCase().includes("password") ? error : ""}
-      />
+      <PasswordInputWrapper>
+        <TextField
+          label="Password:"
+          type={showPassword.password ? "text" : "password"}
+          placeholder="*********"
+          value={password}
+          onChange={handlePasswordChange}
+        />
+        <Button
+          className="show-password-btn"
+          onClick={() => setShowPassword({ ...showPassword, password: !showPassword.password })}
+        >
+          <Icon
+            source={showPassword ? ViewMinor : HideMinor}
+            color="base"
+          />
+        </Button>
+      </PasswordInputWrapper>
+      <PasswordInputWrapper>
+        <TextField
+          label="Password Confirm:"
+          type={showPassword.confirm ? "text" : "password"}
+          placeholder="*********"
+          value={passwordConfirm}
+          onChange={handlePasswordConfirmChange}
+        />
+        <Button
+          className="show-password-btn"
+          onClick={() => setShowPassword({ ...showPassword, confirm: !showPassword.confirm })}
+        >
+          <Icon
+            source={showPassword ? ViewMinor : HideMinor}
+            color="base"
+          />
+        </Button>
+      </PasswordInputWrapper>
 
       <Checkbox
         label="Organization"
