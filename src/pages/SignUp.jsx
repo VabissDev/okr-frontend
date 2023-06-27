@@ -72,7 +72,7 @@ export const SignUp = () => {
         placeholder="John Doe"
         value={name}
         onChange={handleNameChange}
-        error={error && error.includes("name")}
+        error={error && error.includes("name") ? error : ""}
       />
       <TextField
         label="Email"
@@ -80,7 +80,7 @@ export const SignUp = () => {
         placeholder="example@site.com"
         value={email}
         onChange={handleEmailChange}
-        error={error && error.includes("email")}
+        error={error && error.includes("email") ? error : ""}
       />
       <TextField
         label="Password"
@@ -88,7 +88,7 @@ export const SignUp = () => {
         placeholder="*********"
         value={password}
         onChange={handlePasswordChange}
-        error={error && error.includes("password")}
+        error={error && error.toLowerCase().includes("password") ? error : ""}
       />
 
       <Checkbox
@@ -97,7 +97,6 @@ export const SignUp = () => {
         onChange={handleCheckbox}
       />
 
-      {error && <div style={{ color: "red" }}>{error}</div>}
       <Button primary submit fullWidth>
         Sign Up
       </Button>
