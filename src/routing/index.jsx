@@ -6,6 +6,7 @@ import { MainLayout } from "@/components/MainLayout";
 import { NotFound } from "@/pages/NotFound";
 import { WorkspaceManagement } from "@/pages/WorkspaceManagement";
 import { Profile } from "@/pages/Profile";
+import { OrganizationForm } from "../components/OrgForm/OrgForm";
 import EditProfile from "@/pages/EditProfile";
 
 export const Routing = () => {
@@ -24,6 +25,7 @@ export const Routing = () => {
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path="/" element={<MainLayout />}>
+            <Route path="/org" element={<OrganizationForm />}/>
                 <Route index element={<WorkspaceManagement />} />
                 <Route path='profile/:id' element={<Profile/>} />
                 <Route path='editprofile/:id' element={<EditProfile />} />
