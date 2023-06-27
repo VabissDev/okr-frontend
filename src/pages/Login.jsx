@@ -1,4 +1,4 @@
-import { Button, TextField, Text } from "@shopify/polaris"
+import { Button, TextField, Text, Divider } from "@shopify/polaris"
 import { LoginLayout } from "@/components/LoginLayout"
 import { Link } from "react-router-dom";
 
@@ -31,6 +31,7 @@ export const Login = () => {
                 primary
                 children="Log In"
             />
+            <Divider/>
             <Text
                 alignment="center"
                 variant="headingSm"
