@@ -6,7 +6,7 @@ import { MainLayout } from "@/components/MainLayout";
 import { Organization } from "@/pages/Organization";
 import { NotFound } from "@/pages/NotFound";
 import { Profile } from "@/pages/Profile";
-
+import  EditProfile from "@/pages/EditProfile";
 
 export const Routing = () => {
 
@@ -24,6 +24,7 @@ export const Routing = () => {
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/profile' element = {<Profile/>}/>
+            <Route path='/editprofile' element = {<EditProfile/>}/>
             <Route path="/" element={<MainLayout />}>
                 <Route index element={<Organization />} />
             </Route>
