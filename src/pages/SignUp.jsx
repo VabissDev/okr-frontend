@@ -64,6 +64,9 @@ export const SignUp = () => {
     } else if (password.trim().length < 8) {
       setError("Password should be at least 8 characters long.");
       return;
+    } else if (password.trim() !== passwordConfirm.trim()) {
+      setError("Passwords do not match.");
+      return;
     }
 
     // Proceed with form submission
@@ -80,6 +83,7 @@ export const SignUp = () => {
     setName("");
     setEmail("");
     setPassword("");
+    setPasswordConfirm("");
   };
 
   return (
@@ -128,6 +132,9 @@ export const SignUp = () => {
           placeholder="*********"
           value={passwordConfirm}
           onChange={handlePasswordConfirmChange}
+          error={
+            error && error.toLowerCase().includes("passwords") ? error : ""
+          }
         />
         <Button
           className="show-password-btn"
