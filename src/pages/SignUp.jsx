@@ -12,6 +12,7 @@ export const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isOrganization, setIsOrganization] = useState(false);
+  const [error, setError] = useState("");
   const title = "Sign Up";
 
   const handleNameChange = (value) => {
@@ -32,6 +33,23 @@ export const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!name.trim()) {
+      setError("Please enter your name.");
+      return;
+    } else if (!email.trim()) {
+      setError("Please enter your email address.");
+      return;
+    } else if (!password.trim()) {
+      setError("Please enter a password.");
+      return;
+    } else if (password.trim().length < 8) {
+      setError("Password should be at least 8 characters long.");
+      return;
+    }
+
+    // Proceed with form submission
+    setError("");
     dispatch(
       signup({
         id: Date.now(),
@@ -54,6 +72,7 @@ export const SignUp = () => {
         placeholder="John Doe"
         value={name}
         onChange={handleNameChange}
+        error={error && error.includes("name")}
       />
       <TextField
         label="Email"
@@ -61,6 +80,7 @@ export const SignUp = () => {
         placeholder="example@site.com"
         value={email}
         onChange={handleEmailChange}
+        error={error && error.includes("email")}
       />
       <TextField
         label="Password"
@@ -68,12 +88,16 @@ export const SignUp = () => {
         placeholder="*********"
         value={password}
         onChange={handlePasswordChange}
+        error={error && error.includes("password")}
       />
+
       <Checkbox
         label="Organization"
         checked={isOrganization}
         onChange={handleCheckbox}
       />
+
+      {error && <div style={{ color: "red" }}>{error}</div>}
       <Button primary submit fullWidth>
         Sign Up
       </Button>
