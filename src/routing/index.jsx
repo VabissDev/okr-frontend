@@ -5,8 +5,10 @@ import { SignUp } from "@/pages/SignUp";
 import { MainLayout } from "@/components/MainLayout";
 import { NotFound } from "@/pages/NotFound";
 import { WorkspaceManagement } from "@/pages/WorkspaceManagement";
+
 import { Profile } from "@/pages/Profile";
 import { OrganizationForm } from "../components/OrgForm/OrgForm";
+
 import EditProfile from "@/pages/EditProfile";
 
 export const Routing = () => {
