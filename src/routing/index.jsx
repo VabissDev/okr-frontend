@@ -25,7 +25,7 @@ export const Routing = () => {
             <Route path='/signup' element={<SignUp />} />
             <Route path="/" element={<MainLayout />}>
                 <Route index element={<WorkspaceManagement />} />
-                <Route path='profile' element={<Profile/>} />
+                <Route path='profile/:id' element={<Profile/>} />
                 <Route path='editprofile/:id' element={<EditProfile />} />
             </Route>
             <Route path='*' element={<NotFound />} />
