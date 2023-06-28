@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
-import { Page, Card, Layout, FormLayout, Button, TextField } from '@shopify/polaris';
+import React, { useState } from "react";
+import {
+  Page,
+  Card,
+  Layout,
+  FormLayout,
+  Button,
+  TextField,
+} from "@shopify/polaris";
+import { MembersModal } from "../components/Workspace/MembersModal";
 
 export const WorkspaceManagement = () => {
-  const [workspaceName, setWorkspaceName] = useState('');
+  const [workspaceName, setWorkspaceName] = useState("");
   const [workspaces, setWorkspaces] = useState([
-    { id: 1, name: 'Example 1' },
-    { id: 2, name: 'Example 2' }
+    { id: 1, name: "Example 1" },
+    { id: 2, name: "Example 2" },
   ]);
 
   const handleNameChange = (value) => {
@@ -18,8 +26,8 @@ export const WorkspaceManagement = () => {
       id: Date.now(),
       name: workspaceName,
     };
-    setWorkspaces((prevWorkspaces) => [newWorkspace,...prevWorkspaces]);
-    setWorkspaceName('');
+    setWorkspaces((prevWorkspaces) => [newWorkspace, ...prevWorkspaces]);
+    setWorkspaceName("");
   };
 
   return (
@@ -54,6 +62,9 @@ export const WorkspaceManagement = () => {
             </Card>
           </Card>
         </Layout>
+
+        {/* Workspace members */}
+        <MembersModal />
       </Layout>
     </Page>
   );
