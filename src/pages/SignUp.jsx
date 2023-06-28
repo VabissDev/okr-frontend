@@ -89,7 +89,7 @@ export const SignUp = () => {
   return (
     <LoginLayout title={title} onSubmit={handleSubmit}>
       <TextField
-        label="Full Name"
+        label="Full Name / Organization Name"
         type="text"
         placeholder="John Doe"
         value={name}
