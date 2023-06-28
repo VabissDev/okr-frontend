@@ -1,4 +1,4 @@
-import { Button, TextField, Text, Divider, Icon } from "@shopify/polaris";
+import { Button, TextField, Text, Divider, Icon, Checkbox } from "@shopify/polaris";
 import { LoginLayout } from "@/components/LoginLayout";
 import { Link } from "react-router-dom";
 import { ViewMinor, HideMinor } from "@shopify/polaris-icons";
@@ -9,6 +9,7 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isOrganization, setIsOrganization] = useState(false);
   const [error, setError] = useState("");
   const title = "Log in";
 
@@ -18,6 +19,10 @@ export const Login = () => {
 
   const handlePasswordChange = (value) => {
     setPassword(value);
+  };
+
+  const handleCheckbox = () => {
+    setIsOrganization(!isOrganization);
   };
 
   const onSubmit = () => {
@@ -41,7 +46,7 @@ export const Login = () => {
       <TextField
         type="email"
         placeholder="example@site.com"
-        label="Username / Email:"
+        label="Email:"
         value={email}
         onChange={handleEmailChange}
         autoComplete="email"
@@ -63,10 +68,15 @@ export const Login = () => {
           <Icon source={showPassword ? ViewMinor : HideMinor} color="base" />
         </Button>
       </PasswordInputWrapper>
+      <Checkbox
+        label="Organization"
+        checked={isOrganization}
+        onChange={handleCheckbox}
+      />
       <Button submit fullWidth primary children="Log In" />
       <Divider />
       <Text alignment="center" variant="headingSm" as="p" color="subdued">
-        Or <Link to="/signup"> Sign Up</Link>
+        Or <Link to="/signup"> Join Us</Link>
       </Text>
     </LoginLayout>
   );
