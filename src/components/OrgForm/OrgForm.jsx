@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Form, FormLayout, TextField, Button, Card } from "@shopify/polaris";
+import { Form, FormLayout, TextField, Button, Card,Banner } from "@shopify/polaris";
 
 export const OrganizationForm = () => {
   const [organizationName, setOrganizationName] = useState("");
   const [organizations, setOrganizations] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleNameChange = (value) => {
     setOrganizationName(value);
@@ -11,17 +12,27 @@ export const OrganizationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!organizationName) {
+      setErrorMessage('Organization Name not defined.Please add');
+      return;
+    }
     const newOrganization = {
       id: Date.now(),
       name: organizationName,
     };
     setOrganizations([newOrganization, ...organizations]);
     setOrganizationName("");
+    setErrorMessage('')
   };
 
   return (
     <Card>
       <Card>
+      {errorMessage && (
+          <Banner status="critical">
+            <p>{errorMessage}</p>
+          </Banner>
+        )}
         <Form onSubmit={handleSubmit}>
           <FormLayout>
             <TextField
