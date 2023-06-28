@@ -7,6 +7,7 @@ import { NotFound } from "@/pages/NotFound";
 import { WorkspaceManagement } from "@/pages/WorkspaceManagement";
 import { Profile } from "@/pages/Profile";
 import EditProfile from "@/pages/EditProfile";
+import { CreateWorkspace } from "@/components/Workspace/CreateWorkspace";
 
 export const Routing = () => {
 
@@ -27,6 +28,8 @@ export const Routing = () => {
                 <Route index element={<WorkspaceManagement />} />
                 <Route path='profile/:id' element={<Profile/>} />
                 <Route path='editprofile/:id' element={<EditProfile />} />
+                <Route path='workspace/create' element={<CreateWorkspace />} />
+
             </Route>
             <Route path='*' element={<NotFound />} />
         </Routes>
