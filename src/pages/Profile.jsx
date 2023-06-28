@@ -7,7 +7,7 @@ import { EditMinor } from "@shopify/polaris-icons";
 import { Link } from "react-router-dom";
 
 
-export default function Profile() {
+export const Profile = () => {
   const user = {
     firstName: "John",
     lastName: "Doe",
