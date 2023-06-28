@@ -6,6 +6,7 @@ import {
   FormLayout,
   Button,
   TextField,
+  Banner,
 } from "@shopify/polaris";
 import { MembersModal } from "../components/Workspace/MembersModal";
 
@@ -15,6 +16,7 @@ export const WorkspaceManagement = () => {
     { id: 1, name: "Example 1" },
     { id: 2, name: "Example 2" },
   ]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleNameChange = (value) => {
     setWorkspaceName(value);
@@ -22,12 +24,17 @@ export const WorkspaceManagement = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!workspaceName) {
+      setErrorMessage("Workspace Name not defined.Please add");
+      return;
+    }
     const newWorkspace = {
       id: Date.now(),
       name: workspaceName,
     };
     setWorkspaces((prevWorkspaces) => [newWorkspace, ...prevWorkspaces]);
     setWorkspaceName("");
+    setErrorMessage("");
   };
 
   return (
@@ -36,6 +43,11 @@ export const WorkspaceManagement = () => {
         <Layout>
           <Card title="Create Workspace">
             <Card>
+              {errorMessage && (
+                <Banner status="critical">
+                  <p>{errorMessage}</p>
+                </Banner>
+              )}
               <form onSubmit={handleSubmit}>
                 <FormLayout>
                   <FormLayout>
