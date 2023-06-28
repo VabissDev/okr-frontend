@@ -7,6 +7,7 @@ import { NotFound } from "@/pages/NotFound";
 import { WorkspaceManagement } from "@/pages/WorkspaceManagement";
 import { Profile } from "@/pages/Profile";
 import EditProfile from "@/pages/EditProfile";
+import Organization from "../pages/Organization";
 
 export const Routing = () => {
 
@@ -29,6 +30,7 @@ export const Routing = () => {
                 <Route path='editprofile/:id' element={<EditProfile />} />
             </Route>
             <Route path='*' element={<NotFound />} />
+
         </Routes>
     )
 }
