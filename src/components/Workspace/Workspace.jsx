@@ -13,7 +13,7 @@ export const Workspace = () => {
     padding="8"
   >
     <Bleed marginInline="8">
-      <Placeholder label="Organization" />
+      <Placeholder label="Organization name" />
     </Bleed>
   </Box>
 );
