@@ -17,7 +17,7 @@ export const Navigations = () => {
             label: "Profile",
           },
           {
-            url: "/",
+            url: "/editprofile/:id",
             excludePaths: ["/"],
             label: "Edit Profile",
           },
