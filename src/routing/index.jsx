@@ -7,7 +7,8 @@ import { NotFound } from "@/pages/NotFound";
 import { WorkspaceManagement } from "@/pages/WorkspaceManagement";
 import { Profile } from "@/pages/Profile";
 import EditProfile from "@/pages/EditProfile";
-import {UserList} from "../components/Users/UserList"
+import {UserList} from "../components/Users/UserList";
+import { Workspace } from "../components/Workspace/Workspace";
 
 export const Routing = () => {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ export const Routing = () => {
                 <Route path='profile/:id' element={<Profile/>} />
                 <Route path='editprofile/:id' element={<EditProfile />} />
                 <Route path='workspace/create' element={<WorkspaceManagement />} />
+                <Route path="workspace/:id" element={<Workspace/>} />
             </Route>
             <Route path='*' element={<NotFound />} />
 
