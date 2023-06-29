@@ -7,6 +7,7 @@ import {
   Text,
   VerticalStack,
   HorizontalStack,
+  Box,
 } from "@shopify/polaris";
 import { Icon } from "@shopify/polaris";
 import { EditMinor } from "@shopify/polaris-icons";
