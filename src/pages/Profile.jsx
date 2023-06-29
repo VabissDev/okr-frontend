@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Btn, Display } from "../styled/profilee";
 import { Space } from "../styled/profilee";
 import {
@@ -12,16 +12,17 @@ import { Icon } from "@shopify/polaris";
 import { EditMinor } from "@shopify/polaris-icons";
 import { Link } from "react-router-dom";
 
-
-export const Profile = () => {
-  const user = {
-    fullName: "John Doe",
-    email: "johndoe@gmail.com",
-    password: "**********",
-    orgName: "VABISS",
-    teamName: "Developers",
-  };
+export const Profile = ({ user, onSave}) => {
+  
   const id = 1;
+
+  const [updatedUser, setUpdatedUser] = useState(null);
+
+  const handleSaveProfile = (updatedProfile) => {
+    setUpdatedUser(updatedProfile);
+    onSave(updatedProfile);
+  };
+
   return (
     <Card>
       <Text variant="heading3xl" as="h1">
@@ -29,16 +30,22 @@ export const Profile = () => {
       </Text>
       <HorizontalStack>
         <Space>
-          <div>
-            <Text variant="heading2xl" as="h4">
-              {user.fullName}
-            </Text>
-            <Space>
-              <Text>{user.orgName}</Text>
-            </Space>
-            <Text>{user.teamName}</Text>
-          </div>
-          <img
+          {/*
+          {user.image ? (
+            <img
+              src={user.image}
+              alt=""
+              style={{ width: 100, height: 100, borderRadius: "50%" }}
+            />
+          ) : (
+            <img
+              src="https://srv1.portal.p-cd.net/850p/2022/04/08/177405-1649405499-962966.jpg"
+              alt=""
+              style={{ width: 100, height: 100, borderRadius: "50%" }}
+            />
+          )}
+          */}
+         <img
             src="https://srv1.portal.p-cd.net/850p/2022/04/08/177405-1649405499-962966.jpg"
             alt=""
             style={{ width: 100, height: 100, borderRadius: "50%" }}
@@ -53,30 +60,32 @@ export const Profile = () => {
           <Text variant="heading2xl" as="h3">
             Personal Information
           </Text>
-          <Link to={`/editprofile/${id}`}><Btn>Edit</Btn></Link> 
+          <Link to={`/editprofile/${id}`}>
+            <Btn>Edit</Btn>
+          </Link>
         </Space>
       </HorizontalStack>
 
       <Display>
         <div>
           <Text style="strong">Full name:</Text>
-          <p>{user.fullName}</p>
+          <p>{updatedUser ? updatedUser.fullName : user.fullName}</p>
         </div>
         <div>
           <Text style="strong">Email Address:</Text>
-          <p>{user.fullName}</p>
+          <p>{updatedUser ? updatedUser.email : user.email}</p>
         </div>
         <div>
           <Text style="strong">Password:</Text>
-          <p>{user.password}</p>
+          <p>{updatedUser ? updatedUser.password : user.password}</p>
         </div>
         <div>
           <Text style="strong">Organization name:</Text>
-          <p>{user.orgName}</p>
+          <p>{updatedUser ? updatedUser.orgName : user.orgName}</p>
         </div>
         <div>
           <Text style="strong">Team name:</Text>
-          <p>{user.teamName}</p>
+          <p>{updatedUser ? updatedUser.teamName : user.teamName}</p>
         </div>
       </Display>
     </Card>
