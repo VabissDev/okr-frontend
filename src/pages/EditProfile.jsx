@@ -111,9 +111,6 @@ const EditProfile = ({ onSave }) => {
         </HorizontalStack>
         </Box>
 
-
-
-
         {/*
         <label>Select an image:</label>
         <input type="file"  onChange={handleImageChange} name="image" required />
