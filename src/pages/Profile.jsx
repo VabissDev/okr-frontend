@@ -35,7 +35,7 @@ export const Profile = () => {
               <Text>{user.org_name}</Text>
             </Space>
             <Space>
-            <Text fontWeight="semibold" variant="headingMd" as="p">Email: </Text>
+              <Text fontWeight="semibold" variant="headingMd" as="p">Email: </Text>
               <Text>{user.email}</Text>
             </Space>
           </Box>
@@ -49,29 +49,27 @@ export const Profile = () => {
       </HorizontalStack>
       <Divider />
 
-        <Space>
-          <Text variant="headingXl" as="h3">
-            Personal Information
-          </Text>
-          <Link to={`/editprofile/${id}`}><Btn>Edit</Btn></Link>
-        </Space>
-        <Space>
+      <Space>
+        <Text variant="headingXl" as="h3">
+          Personal Information
+        </Text>
+        <Link to={`/editprofile/${id}`}><Btn>Edit</Btn></Link>
+      </Space>
+      <Space>
         <Text fontWeight="semibold" variant="headingMd" as="p">Bio: </Text>
-              <Text>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis doloremque beatae hic blanditiis ipsa dolor, iure quisquam nesciunt facilis commodi!</Text>
-            </Space>
+        <Text>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis doloremque beatae hic blanditiis ipsa dolor, iure quisquam nesciunt facilis commodi!</Text>
+      </Space>
+      <HorizontalStack gap="4" >
+        <Text fontWeight="semibold" variant="headingMd" as="p">Teams: </Text>
+        {
+          user.teams.map((option) => (
+            <Tag key={option}>
+              {option}
+            </Tag>
+          ))
+        }
+      </HorizontalStack>
 
-        <Box>
-          <Text fontWeight="semibold" variant="headingMd" as="p">Teams: </Text>
-          <HorizontalStack gap="4" >
-            {
-              user.teams.map((option) => (
-                  <Tag key={option}>
-                    {option}
-                  </Tag>
-              ))
-            }
-          </HorizontalStack>
-        </Box>
     </Card>
   );
 };
