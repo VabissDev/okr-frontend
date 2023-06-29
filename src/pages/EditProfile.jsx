@@ -17,10 +17,9 @@ const EditProfile = () => {
 
   const [profile, setProfile] = useState({
     fullName: "",
-    orgName: "",
-    email: "",
+    userName: "",
+    emailAddress: "",
     password: "",
-    teamName: ""
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -53,11 +52,19 @@ const EditProfile = () => {
             required
           />
           <TextField
+            label="Username:"
+            type="text"
+            name="userName"
+            value={profile.userName}
+            onChange={(value) => handleInputChange(value, "userName")}
+            required
+          />
+          <TextField
             label="Email:"
             type="email"
-            name="email"
-            value={profile.email}
-            onChange={(value) => handleInputChange(value, "email")}
+            name="emailAddress"
+            value={profile.emailAddress}
+            onChange={(value) => handleInputChange(value, "emailAddress")}
             readOnly
           />
           <TextField
@@ -66,22 +73,6 @@ const EditProfile = () => {
             name="password"
             value={profile.password}
             onChange={(value) => handleInputChange(value, "password")}
-            required
-          />
-          <TextField
-            label="Organization Name:"
-            type="text"
-            name="orgName"
-            value={profile.orgName}
-            onChange={(value) => handleInputChange(value, "orgName")}
-            required
-          />
-          <TextField
-            label="Team Name:"
-            type="text"
-            name="teamName"
-            value={profile.teamName}
-            onChange={(value) => handleInputChange(value, "teamName")}
             required
           />
           <label>Select an image:</label>
@@ -102,10 +93,9 @@ const EditProfile = () => {
           <Avatar customer name="Farrah" />
           )}
           <p>Full Name : {profile.fullName}</p>
-          <p>Email : {profile.email}</p>
+          <p>Username : {profile.userName}</p>
+          <p>Email Address : {profile.emailAddress}</p>
           <p>Password : {profile.password}</p>
-          <p>Organization Name : {profile.orgName}</p>
-          <p>Team Name : {profile.teamName}</p>          
           <Button onClick={handleEditClick}>Edit</Button>
         </div>
       )}
