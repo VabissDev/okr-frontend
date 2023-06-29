@@ -18,8 +18,8 @@ export const Profile = () => {
     fullName: "John Doe",
     email: "johndoe@gmail.com",
     password: "**********",
-    org_name: "VABISS",
-    team_name: "Developers",
+    orgName: "VABISS",
+    teamName: "Developers",
   };
   const id = 1;
   return (
@@ -34,9 +34,9 @@ export const Profile = () => {
               {user.fullName}
             </Text>
             <Space>
-              <Text>{user.org_name}</Text>
+              <Text>{user.orgName}</Text>
             </Space>
-            <Text>{user.team_name}</Text>
+            <Text>{user.teamName}</Text>
           </div>
           <img
             src="https://srv1.portal.p-cd.net/850p/2022/04/08/177405-1649405499-962966.jpg"
@@ -72,11 +72,11 @@ export const Profile = () => {
         </div>
         <div>
           <Text style="strong">Organization name:</Text>
-          <p>{user.org_name}</p>
+          <p>{user.orgName}</p>
         </div>
         <div>
           <Text style="strong">Team name:</Text>
-          <p>{user.team_name}</p>
+          <p>{user.teamName}</p>
         </div>
       </Display>
     </Card>
