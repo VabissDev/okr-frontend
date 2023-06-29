@@ -28,3 +28,12 @@ export const LoginPageHeader = styled.header`
         border: none;
     }
 `
+
+export const GridLayout = styled.div`
+    display: grid;
+    grid-template-columns:  ${({ columns }) => columns};
+
+    .Polaris-Page {
+        height: calc(100vh - 56px)
+    }
+`
