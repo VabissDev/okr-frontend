@@ -1,5 +1,5 @@
-import { Route, Routes, useNavigate } from "react-router-dom"
-import { useEffect } from "react"
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { Login } from "@/pages/Login";
 import { SignUp } from "@/pages/SignUp";
 import { MainLayout } from "@/components/MainLayout";
@@ -10,8 +10,14 @@ import EditProfile from "@/pages/EditProfile";
 import {UserList} from "../components/Users/UserList"
 
 export const Routing = () => {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  useEffect(() => {
+    const login = true;
+    if (!login) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
     useEffect(() => {
         const login = true;
