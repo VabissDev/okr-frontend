@@ -21,5 +21,11 @@ export const PasswordInputWrapper = styled.div`
             left: 88%;
         }
     }
+`
 
+export const TagWrapper = styled.div`
+    .Polaris-Tag__TagText {
+        display: flex;
+        gap: 5px;
+    }
 `
