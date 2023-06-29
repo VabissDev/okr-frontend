@@ -24,6 +24,7 @@ export const PasswordInputWrapper = styled.div`
 `
 
 export const TagWrapper = styled.div`
+    cursor: pointer;
     .Polaris-Tag__TagText {
         display: flex;
         gap: 5px;

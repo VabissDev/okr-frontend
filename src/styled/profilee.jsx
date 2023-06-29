@@ -14,6 +14,7 @@ export const Btn = styled.div`
 
 export const Space = styled.div`
   display:flex;
+  gap: 2rem;
   justify-content: space-between;
   width: 100%;
   padding: 10px 0;
@@ -22,7 +23,7 @@ export const Space = styled.div`
 export const Display = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 4px;
 `
 
 
