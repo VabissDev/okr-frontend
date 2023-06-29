@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { TopBar, ActionList, Icon, Frame, Text } from "@shopify/polaris";
-import { ArrowLeftMinor } from "@shopify/polaris-icons";
+import { ArrowRightMinor } from "@shopify/polaris-icons";
 import { Link } from "react-router-dom";
 
 export const Header = () => {
@@ -8,7 +8,7 @@ export const Header = () => {
   const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-
+ const id = 1;
   const toggleIsUserMenuOpen = useCallback(() => {
     setIsUserMenuOpen((isUserMenuOpen) => !isUserMenuOpen);
   }, []);
@@ -47,7 +47,7 @@ export const Header = () => {
             {
               content: (
                 <Link
-                  to="/profile"
+                  to={`/profile/${id}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   My profile
@@ -57,7 +57,7 @@ export const Header = () => {
           ],
         },
         {
-          items: [{ content: "Community forums" }],
+          items: [{  icon: ArrowRightMinor,content: "Logout" }],
         },
       ]}
       name="John Doe"
