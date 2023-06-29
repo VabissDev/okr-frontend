@@ -7,7 +7,6 @@ import { NotFound } from "@/pages/NotFound";
 import { WorkspaceManagement } from "@/pages/WorkspaceManagement";
 import { Profile } from "@/pages/Profile";
 import EditProfile from "@/pages/EditProfile";
-import { CreateWorkspace } from "@/components/Workspace/CreateWorkspace";
 import {UserList} from "../components/Users/UserList"
 
 export const Routing = () => {
@@ -27,10 +26,9 @@ export const Routing = () => {
             <Route path='/signup' element={<SignUp />} />
             <Route path="/" element={<MainLayout />}>
             <Route path="/users" element={<UserList />}/>
-                <Route index element={<WorkspaceManagement />} />
                 <Route path='profile/:id' element={<Profile/>} />
                 <Route path='editprofile/:id' element={<EditProfile />} />
-                <Route path='workspace/create' element={<CreateWorkspace />} />
+                <Route path='workspace/create' element={<WorkspaceManagement />} />
             </Route>
             <Route path='*' element={<NotFound />} />
 
