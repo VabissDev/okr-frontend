@@ -73,7 +73,9 @@ const EditProfile = ({ user,onSave }) => {
           name="orgName"
           value={profile.orgName}
           onChange={(value) => handleInputChange(value, "orgName")}
-          readOnly
+
+          required
+
         />
         <TextField
           label="Team Name:"
@@ -81,7 +83,8 @@ const EditProfile = ({ user,onSave }) => {
           name="teamName"
           value={profile.teamName}
           onChange={(value) => handleInputChange(value, "teamName")}
-          readOnly
+          required
+
         />
         {/*
         <label>Select an image:</label>
