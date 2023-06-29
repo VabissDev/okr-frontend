@@ -121,7 +121,7 @@ export const MainLayout = () => {
   const PageContent = () => {
     return (
       <Page>
-        <GridLayout columns="1fr 3fr">
+        <GridLayout columns="1fr 3fr" gap="30px">
           <Navigations />
           <Outlet />
         </GridLayout>
