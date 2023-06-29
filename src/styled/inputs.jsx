@@ -10,8 +10,9 @@ export const PasswordInputWrapper = styled.div`
         min-height: var(--p-font-line-height-4);
         border: none;
         box-shadow: none;
+        background: transparent;
         &:hover {
-            background: var(--p-color-bg);
+            background: transparent;
         }
         @media (min-width: 475px){
             left: 85%;

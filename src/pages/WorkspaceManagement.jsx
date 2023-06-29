@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
-import { Page, Card, Layout, FormLayout, Button, TextField } from '@shopify/polaris';
+import React, { useState } from "react";
+import {
+  Page,
+  Card,
+  Layout,
+  FormLayout,
+  Button,
+  TextField,
+  Banner,
+} from "@shopify/polaris";
+import { MembersModal } from "../components/Workspace/MembersModal";
 
 export const WorkspaceManagement = () => {
-  const [workspaceName, setWorkspaceName] = useState('');
+  const [workspaceName, setWorkspaceName] = useState("");
   const [workspaces, setWorkspaces] = useState([
-    { id: 1, name: 'Example 1' },
-    { id: 2, name: 'Example 2' }
+    { id: 1, name: "Example 1" },
+    { id: 2, name: "Example 2" },
   ]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleNameChange = (value) => {
     setWorkspaceName(value);
@@ -14,12 +24,17 @@ export const WorkspaceManagement = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!workspaceName) {
+      setErrorMessage("Workspace Name not defined.Please add");
+      return;
+    }
     const newWorkspace = {
       id: Date.now(),
       name: workspaceName,
     };
-    setWorkspaces((prevWorkspaces) => [newWorkspace,...prevWorkspaces]);
-    setWorkspaceName('');
+    setWorkspaces((prevWorkspaces) => [newWorkspace, ...prevWorkspaces]);
+    setWorkspaceName("");
+    setErrorMessage("");
   };
 
   return (
@@ -28,6 +43,11 @@ export const WorkspaceManagement = () => {
         <Layout>
           <Card title="Create Workspace">
             <Card>
+              {errorMessage && (
+                <Banner status="critical">
+                  <p>{errorMessage}</p>
+                </Banner>
+              )}
               <form onSubmit={handleSubmit}>
                 <FormLayout>
                   <FormLayout>
@@ -54,6 +74,9 @@ export const WorkspaceManagement = () => {
             </Card>
           </Card>
         </Layout>
+
+        {/* Workspace members */}
+        <MembersModal />
       </Layout>
     </Page>
   );
