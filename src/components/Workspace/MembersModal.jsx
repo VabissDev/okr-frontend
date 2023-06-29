@@ -1,3 +1,4 @@
+import React, { useState, useCallback } from "react";
 import {
   Button,
   Modal,
@@ -7,15 +8,17 @@ import {
   ResourceItem,
   Avatar,
   Text,
+  TextField,
 } from "@shopify/polaris";
-import { useState, useCallback } from "react";
-import { CustomersMajor } from "@shopify/polaris-icons";
+import { CustomersMajor, SearchMinor } from "@shopify/polaris-icons";
 import members from "../../data/members.json";
 
 export const MembersModal = () => {
   const [active, setActive] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   const handleChange = useCallback(() => setActive(!active), [active]);
+  const handleSearchChange = useCallback((value) => setSearchValue(value), []);
 
   const activator = (
     <Button onClick={handleChange} size="slim">
@@ -33,6 +36,10 @@ export const MembersModal = () => {
     </Button>
   );
 
+  const filteredMembers = members.filter((member) =>
+    member.name.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
   return (
     <div style={{ height: "500px" }}>
       <Modal
@@ -42,10 +49,19 @@ export const MembersModal = () => {
         onClose={handleChange}
       >
         <Modal.Section>
+          <div style={{ marginBottom: "15px" }}>
+            <TextField
+              label=""
+              placeholder="Search Members"
+              value={searchValue}
+              onChange={handleSearchChange}
+              prefix={<Icon source={SearchMinor} color="base" />}
+            />
+          </div>
           <LegacyCard>
             <ResourceList
               resourceName={{ singular: "customer", plural: "customers" }}
-              items={members}
+              items={filteredMembers}
               renderItem={(item) => {
                 const { id, avatarSource, name, email } = item;
 
