@@ -8,12 +8,14 @@ import {
   ButtonGroup,
 } from "@shopify/polaris";
 
+import { MembersModal } from "../components/Workspace/MembersModal";
+import members from "../data/members.json";
 
 export const WorkspaceManagement = () => {
   const [workspaceName, setWorkspaceName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleNameChange = (value) => setWorkspaceName(value)
+  const handleNameChange = (value) => setWorkspaceName(value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +33,6 @@ export const WorkspaceManagement = () => {
     // setErrorMessage("");
   };
 
-
   return (
     <Form onSubmit={handleSubmit}>
       <FormLayout>
@@ -41,7 +42,7 @@ export const WorkspaceManagement = () => {
           label="Workspace Name:"
           value={workspaceName}
           onChange={handleNameChange}
-        // error={error && error.includes("email") ? error : ""}
+          // error={error && error.includes("email") ? error : ""}
         />
         <ButtonGroup>
           <RadioButton
@@ -50,21 +51,20 @@ export const WorkspaceManagement = () => {
             // checked={value === 'public'}
             id="public"
             name="visibility"
-          // onChange={handleChange}
+            // onChange={handleChange}
           />
           <RadioButton
             label="Private"
             helpText="Team-specific workspace."
             id="private"
             name="visibility"
-          // checked={value === 'private'}
-          // onChange={handleChange}
+            // checked={value === 'private'}
+            // onChange={handleChange}
           />
         </ButtonGroup>
-        <Button children="Invite User" />
+        <MembersModal members={members} title="Invite User" />
         <Button submit fullWidth primary children="Save" />
       </FormLayout>
     </Form>
-
   );
 };

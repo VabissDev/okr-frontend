@@ -11,9 +11,8 @@ import {
   TextField,
 } from "@shopify/polaris";
 import { CustomersMajor, SearchMinor } from "@shopify/polaris-icons";
-import members from "../../data/members.json";
 
-export const MembersModal = () => {
+export const MembersModal = ({ members, title }) => {
   const [active, setActive] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
@@ -30,8 +29,11 @@ export const MembersModal = () => {
           padding: "5px",
         }}
       >
-        <Icon source={CustomersMajor} color="base" />
-        20
+        {/* <Icon source={CustomersMajor} color="base" />
+        20 */}
+        <Text variant="bodyMd" fontWeight="bold" as="h3">
+          {title}
+        </Text>
       </div>
     </Button>
   );
@@ -41,55 +43,53 @@ export const MembersModal = () => {
   );
 
   return (
-    <div style={{ height: "500px" }}>
-      <Modal
-        activator={activator}
-        open={active}
-        title="frontend-team"
-        onClose={handleChange}
-      >
-        <Modal.Section>
-          <div style={{ marginBottom: "15px" }}>
-            <TextField
-              label=""
-              placeholder="Search Members"
-              value={searchValue}
-              onChange={handleSearchChange}
-              prefix={<Icon source={SearchMinor} color="base" />}
-            />
-          </div>
-          <LegacyCard>
-            <ResourceList
-              resourceName={{ singular: "customer", plural: "customers" }}
-              items={filteredMembers}
-              renderItem={(item) => {
-                const { id, avatarSource, name, email } = item;
+    <Modal
+      activator={activator}
+      open={active}
+      title={title}
+      onClose={handleChange}
+    >
+      <Modal.Section>
+        <div style={{ marginBottom: "15px" }}>
+          <TextField
+            label=""
+            placeholder="Search Members"
+            value={searchValue}
+            onChange={handleSearchChange}
+            prefix={<Icon source={SearchMinor} color="base" />}
+          />
+        </div>
+        <LegacyCard>
+          <ResourceList
+            resourceName={{ singular: "customer", plural: "customers" }}
+            items={filteredMembers}
+            renderItem={(item) => {
+              const { id, avatarSource, name, email } = item;
 
-                return (
-                  <ResourceItem
-                    id={id}
-                    media={
-                      <Avatar
-                        customer
-                        size="medium"
-                        name={name}
-                        source={avatarSource}
-                      />
-                    }
-                    accessibilityLabel={`View details for ${name}`}
-                    name={name}
-                  >
-                    <Text variant="bodyMd" fontWeight="bold" as="h3">
-                      {name}
-                    </Text>
-                    <div>{email}</div>
-                  </ResourceItem>
-                );
-              }}
-            />
-          </LegacyCard>
-        </Modal.Section>
-      </Modal>
-    </div>
+              return (
+                <ResourceItem
+                  id={id}
+                  media={
+                    <Avatar
+                      customer
+                      size="medium"
+                      name={name}
+                      source={avatarSource}
+                    />
+                  }
+                  accessibilityLabel={`View details for ${name}`}
+                  name={name}
+                >
+                  <Text variant="bodyMd" fontWeight="bold" as="h3">
+                    {name}
+                  </Text>
+                  <div>{email}</div>
+                </ResourceItem>
+              );
+            }}
+          />
+        </LegacyCard>
+      </Modal.Section>
+    </Modal>
   );
 };
