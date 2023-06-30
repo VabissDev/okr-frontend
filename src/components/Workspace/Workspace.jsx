@@ -10,10 +10,10 @@ export const Workspace = () => {
     background="bg"
     borderWidth="1"
     borderColor="border-subdued"
-    padding="8"
+    
   >
     <Bleed marginInline="8">
-      <Placeholder label="Organization name" />
+      <Placeholder label="Workspace name" />
     </Bleed>
   </Box>
 );
