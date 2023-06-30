@@ -45,33 +45,31 @@ export const Profile = ({ user, onSave }) => {
         <div>
           <Text style={{ fontWeight: "bold" }}>Full name:</Text>
           <p>
-            {updatedUser && updatedUser.fullName
-              ? updatedUser.fullName
-              : user.fullName}
+            {updatedUser && updatedUser.fullName ? updatedUser.fullName : user.fullName}
           </p>
         </div>
+        <br />
         <div>
           <Text style={{ fontWeight: "bold" }}>Email Address:</Text>
           <p>
             {updatedUser && updatedUser.email ? updatedUser.email : user.email}
           </p>
         </div>
+        <br />
         <div>
           <Text style={{ fontWeight: "bold" }}>Organization name:</Text>
           <p>
-            {updatedUser && updatedUser.orgName
-              ? updatedUser.orgName
-              : user.orgName}
+            {updatedUser && updatedUser.orgName ? updatedUser.orgName : user.orgName}
           </p>
         </div>
+        <br />
         <div>
           <Text style={{ fontWeight: "bold" }}>Team name:</Text>
           <p>
-            {updatedUser && updatedUser.teamName
-              ? updatedUser.teamName
-              : user.teamName}
+            {updatedUser && updatedUser.teamName ? updatedUser.teamName : user.teamName}
           </p>
         </div>
+        <br />
       </VerticalStack>
     </Card>
   );
