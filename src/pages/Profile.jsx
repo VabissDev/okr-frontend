@@ -1,21 +1,20 @@
 import React, { useState } from "react";
-import { Btn, Display } from "../styled/profilee";
-import { Space } from "../styled/profilee";
 import {
+  Button,
   Card,
   Divider,
   Text,
   VerticalStack,
-  HorizontalStack,
+  Box,
+  Icon,
+  Tag,
 } from "@shopify/polaris";
-import { Icon } from "@shopify/polaris";
 import { EditMinor } from "@shopify/polaris-icons";
+import { Space } from "../styled/profilee";
 import { Link } from "react-router-dom";
 
-export const Profile = ({ user, onSave}) => {
-  
+export const Profile = ({ user, onSave }) => {
   const id = 1;
-
   const [updatedUser, setUpdatedUser] = useState(null);
 
   const handleSaveProfile = (updatedProfile) => {
@@ -25,69 +24,86 @@ export const Profile = ({ user, onSave}) => {
 
   return (
     <Card>
-      <Text variant="heading3xl" as="h1">
-        My profile
-      </Text>
-      <HorizontalStack>
-        <Space>
-          {/*
-          {user.image ? (
-            <img
-              src={user.image}
-              alt=""
-              style={{ width: 100, height: 100, borderRadius: "50%" }}
-            />
-          ) : (
-            <img
-              src="https://srv1.portal.p-cd.net/850p/2022/04/08/177405-1649405499-962966.jpg"
-              alt=""
-              style={{ width: 100, height: 100, borderRadius: "50%" }}
-            />
-          )}
-          */}
-         <img
-            src="https://srv1.portal.p-cd.net/850p/2022/04/08/177405-1649405499-962966.jpg"
-            alt=""
-            style={{ width: 100, height: 100, borderRadius: "50%" }}
-          />
-        </Space>
-        <VerticalStack></VerticalStack>
-      </HorizontalStack>
+      <Space>
+        <Box>
+          <Text variant="heading3xl" as="h1">
+            {user.fullName || "John Doe"}
+          </Text>
+          <Space>
+            <Text variant="headingMd" as="p" fontWeight="semibold">
+              Organization:
+            </Text>
+            <Text>{user.orgName || "XX Company"}</Text>
+          </Space>
+
+          <Space>
+            <Text variant="headingMd" as="p" fontWeight="semibold">
+              Email:
+            </Text>
+            <Text>{user.email || "johndoe@gmail.com"}</Text>
+          </Space>
+        </Box>
+        <img
+          src="https://srv1.portal.p-cd.net/850p/2022/04/08/177405-1649405499-962966.jpg"
+          alt=""
+          style={{ width: 100, height: 100, borderRadius: "50%" }}
+        />
+      </Space>
       <Divider />
 
-      <HorizontalStack>
-        <Space>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          paddingTop: "10px",
+        }}
+      >
+        <div>
           <Text variant="heading2xl" as="h3">
             Personal Information
           </Text>
+        </div>
+        <div>
           <Link to={`/editprofile/${id}`}>
-            <Btn>Edit</Btn>
+            <Button primary>
+              <Icon source={EditMinor} color="base" />
+            </Button>
           </Link>
-        </Space>
-      </HorizontalStack>
+        </div>
+      </div>
 
-      <Display>
-        <div>
-          <Text style="strong">Full name:</Text>
-          <p>{updatedUser ? updatedUser.fullName : user.fullName}</p>
+      <VerticalStack spacing="extraTight">
+        {/* <div>
+          <Text style={{ fontWeight: "bold" }}>Full name:</Text>
+          <p>
+            {updatedUser && updatedUser.fullName ? updatedUser.fullName : user.fullName}
+          </p>
         </div>
+        <br />
         <div>
-          <Text style="strong">Email Address:</Text>
-          <p>{updatedUser ? updatedUser.email : user.email}</p>
+          <Text style={{ fontWeight: "bold" }}>Email Address:</Text>
+          <p>
+            {updatedUser && updatedUser.email ? updatedUser.email : user.email}
+          </p>
         </div>
+        <br />
         <div>
-          <Text style="strong">Password:</Text>
-          <p>{updatedUser ? updatedUser.password : user.password}</p>
-        </div>
-        <div>
-          <Text style="strong">Organization name:</Text>
-          <p>{updatedUser ? updatedUser.orgName : user.orgName}</p>
-        </div>
-        <div>
-          <Text style="strong">Team name:</Text>
-          <p>{updatedUser ? updatedUser.teamName : user.teamName}</p>
-        </div>
-      </Display>
+          <Text style={{ fontWeight: "bold" }}>Organization name:</Text>
+          <p>
+            {updatedUser && updatedUser.orgName ? updatedUser.orgName : user.orgName}
+          </p>
+        </div> */}
+        <Space>
+          <Text style={{ fontWeight: "bold" }}>Team name:</Text>
+          <Tag>{user.teamName || "Team number 1"}</Tag>
+
+          {/* <p>
+            {updatedUser && updatedUser.teamName
+              ? updatedUser.teamName
+              : user.teamName}
+          </p> */}
+        </Space>
+      </VerticalStack>
     </Card>
   );
 };
