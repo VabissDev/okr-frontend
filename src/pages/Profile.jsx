@@ -16,9 +16,10 @@ import { Link } from "react-router-dom";
 export const Profile = ({onSave}) => {
   
   const id = 1;
-
   const [updatedUser, setUpdatedUser] = useState(null);
 
+
+  
   const handleSaveProfile = (updatedProfile) => {
     setUpdatedUser(updatedProfile);
     onSave(updatedProfile);
