@@ -44,7 +44,6 @@ export const Login = () => {
 
     const user = users.find(user => user.email === formData.email);
     if(user?.password === formData.password) {
-
       navigate("/")
     }else setError({banner: true})
 
