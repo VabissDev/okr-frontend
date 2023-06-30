@@ -32,6 +32,7 @@ export const LoginPageHeader = styled.header`
 export const GridLayout = styled.div`
     display: grid;
     grid-template-columns:  ${({ columns }) => columns};
+    gap: ${({ gap }) => gap};
 
     .Polaris-Page {
         height: calc(100vh - 56px)

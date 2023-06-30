@@ -1,11 +1,11 @@
 import { useState, useCallback } from "react";
-import { TopBar, ActionList, Frame, Text, Page } from "@shopify/polaris";
+import { TopBar, ActionList, Icon, Frame, Text } from "@shopify/polaris";
 import { ArrowRightMinor } from "@shopify/polaris-icons";
 import { Link, Outlet } from "react-router-dom";
 import { GridLayout } from "../styled/containers";
 import { Navigations } from "./Navigation";
 
-export const MainLayout = () => {
+export const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
@@ -119,20 +119,15 @@ export const MainLayout = () => {
   );
 
   const PageContent = () => {
-    return (
-      <Page>
-        <GridLayout columns="1fr 3fr" gap="30px">
-          <Navigations />
-          <Outlet />
-        </GridLayout>
-      </Page>
-    )
-
+    <GridLayout columns="1fr 3fr">
+      <Navigations />
+      <Outlet />
+    </GridLayout>
   }
 
   return (
     <div style={{ height: "50px" }}>
-      <Frame topBar={topBarMarkup} logo={logo} children={<PageContent />} />
+      <Frame topBar={topBarMarkup} logo={logo} children={<PageContent/>} />
     </div>
   );
 };

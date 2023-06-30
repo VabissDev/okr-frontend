@@ -1,5 +1,5 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Login } from "@/pages/Login";
 import { SignUp } from "@/pages/SignUp";
 import { MainLayout } from "@/components/MainLayout";
@@ -27,19 +27,31 @@ export const Routing = () => {
         }
     }, [navigate])
 
+    //new addition 30-42
+    const [profileData, setProfileData] = useState({
+      fullName: "",
+      email: "",
+      password:"",
+      orgName: "",
+      teamName: "",
+      image: "",
+    });
+  
+    const handleSave = (updatedProfileData) => {
+      setProfileData(updatedProfileData);
+    };
     return (
         <Routes>
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path="/" element={<MainLayout />}>
             <Route path="/users" element={<UserList />}/>
-                <Route path='profile/:id' element={<Profile/>} />
-                <Route path='editprofile/:id' element={<EditProfile />} />
+                <Route path='profile/:id' element={<Profile user={profileData}/>} />
+                <Route path='editprofile/:id' element={<EditProfile onSave={handleSave}  user={profileData} />} />
                 <Route path='workspace/create' element={<WorkspaceManagement />} />
                 <Route path="workspace/:id" element={<Workspace/>} />
             </Route>
             <Route path='*' element={<NotFound />} />
-
         </Routes>
     )
 }
