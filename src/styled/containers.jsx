@@ -4,6 +4,7 @@ export const FormWrapper = styled.div`
     display: grid;
     place-items: center;
     height: calc(100vh - 88px);
+    position: relative;
 
     .Polaris-Box {
         width: 300px;

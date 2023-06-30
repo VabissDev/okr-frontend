@@ -1,4 +1,4 @@
-import { Button, TextField, Text, Divider, Icon, Checkbox } from "@shopify/polaris";
+import { Button, TextField, Text, Divider, Icon, Checkbox, Banner } from "@shopify/polaris";
 import { LoginLayout } from "@/components/LoginLayout";
 import { Link, useNavigate } from "react-router-dom";
 import { ViewMinor, HideMinor } from "@shopify/polaris-icons";
@@ -17,8 +17,10 @@ export const Login = () => {
   const [error, setError] = useState({
     email: "",
     password: "",
-    banner: false
+    checked: false
   });
+
+  const [dataCheckError, setDataCheckError] = useState(false)
 
   const [showPassword, setShowPassword] = useState(false);
   const { users } = useSelector((state) => state.users);
@@ -43,16 +45,23 @@ export const Login = () => {
     setError(errors)
 
     const user = users.find(user => user.email === formData.email);
-    if(user?.password === formData.password) {
-      navigate("/")
-    }else setError({banner: true})
+    // if (user?.password === formData.password) {
+    //   navigate("/")
+    // } else (setError({...error, checked: false}));
 
 
     console.log(user);
   };
 
   return (
-    <LoginLayout title={title} onSubmit={onSubmit} error={error.banner}>
+    <LoginLayout title={title} onSubmit={onSubmit}>
+      {
+        dataCheckError &&
+        <Text color="critical">
+          Email or password is invalid.
+        </Text>
+      }
+
       <TextField
         type="email"
         placeholder="example@site.com"
