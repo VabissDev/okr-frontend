@@ -51,7 +51,13 @@ export const Profile = ({ user, onSave }) => {
       </Space>
       <Divider />
 
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          paddingTop: "10px",
+        }}
+      >
         <div>
           <Text variant="heading2xl" as="h3">
             Personal Information
@@ -59,7 +65,9 @@ export const Profile = ({ user, onSave }) => {
         </div>
         <div>
           <Link to={`/editprofile/${id}`}>
-            <Icon source={EditMinor} color="base" />
+            <Button primary>
+              <Icon source={EditMinor} color="base" />
+            </Button>
           </Link>
         </div>
       </div>
