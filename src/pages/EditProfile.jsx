@@ -45,7 +45,7 @@ const EditProfile = ({ user,onSave }) => {
     <div className="container">
       <FormLayout onSubmit={handleSubmit}>
         <TextField
-          label="Full Name:"
+          label="Full name:"
           type="text"
           value={profile.fullName}
           onChange={(value) => handleInputChange(value, "fullName")}
