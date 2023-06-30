@@ -73,7 +73,6 @@ const EditProfile = ({ user,onSave }) => {
           name="orgName"
           value={profile.orgName}
           onChange={(value) => handleInputChange(value, "orgName")}
-
           required
 
         />
@@ -84,7 +83,6 @@ const EditProfile = ({ user,onSave }) => {
           value={profile.teamName}
           onChange={(value) => handleInputChange(value, "teamName")}
           required
-
         />
         {/*
         <label>Select an image:</label>

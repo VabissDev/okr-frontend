@@ -13,7 +13,7 @@ import { Icon } from "@shopify/polaris";
 import { EditMinor } from "@shopify/polaris-icons";
 import { Link } from "react-router-dom";
 
-export const Profile = ({ user, onSave}) => {
+export const Profile = ({onSave}) => {
   
   const id = 1;
 
@@ -23,6 +23,14 @@ export const Profile = ({ user, onSave}) => {
     setUpdatedUser(updatedProfile);
     onSave(updatedProfile);
   };
+
+  const user = {
+    fullName: "John Doe",
+    email: "john@gmail.com",
+    orgName: "Company #1",
+    password: "",
+    teamName: ["team#1", "team#2"]
+  }
 
   return (
     <Card>
