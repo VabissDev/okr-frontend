@@ -4,11 +4,11 @@ import { Login } from "@/pages/Login";
 import { SignUp } from "@/pages/SignUp";
 import { MainLayout } from "@/components/MainLayout";
 import { NotFound } from "@/pages/NotFound";
-import { WorkspaceManagement } from "@/pages/WorkspaceManagement";
 import { Profile } from "@/pages/Profile";
 import EditProfile from "@/pages/EditProfile";
-import {UserList} from "../components/Users/UserList";
-import { Workspace } from "../components/Workspace/Workspace";
+import { UserList } from "@/components/Users/UserList";
+import { Workspace } from "@/components/Workspace/Workspace";
+import { WorkspaceCreate } from "@/components/Workspace/WorkspaceCreate";
 
 export const Routing = () => {
   const navigate = useNavigate();
@@ -20,38 +20,32 @@ export const Routing = () => {
     }
   }, [navigate]);
 
-    useEffect(() => {
-        const login = true;
-        if (!login) {
-            navigate("/login")
-        }
-    }, [navigate])
 
-    //new addition 30-42
-    const [profileData, setProfileData] = useState({
-      fullName: "",
-      email: "",
-      password:"",
-      orgName: "",
-      teamName: "",
-      image: "",
-    });
-  
-    const handleSave = (updatedProfileData) => {
-      setProfileData(updatedProfileData);
-    };
-    return (
-        <Routes>
-            <Route path='/login' element={<Login />} />
-            <Route path='/signup' element={<SignUp />} />
-            <Route path="/" element={<MainLayout />}>
-            <Route path="/users" element={<UserList />}/>
-                <Route path='profile/:id' element={<Profile user={profileData}/>} />
-                <Route path='editprofile/:id' element={<EditProfile onSave={handleSave}  user={profileData} />} />
-                <Route path='workspace/create' element={<WorkspaceManagement />} />
-                <Route path="workspace/:id" element={<Workspace/>} />
-            </Route>
-            <Route path='*' element={<NotFound />} />
-        </Routes>
-    )
+  //new addition 30-42
+  const [profileData, setProfileData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    orgName: "",
+    teamName: "",
+    image: "",
+  });
+
+  const handleSave = (updatedProfileData) => {
+    setProfileData(updatedProfileData);
+  };
+  return (
+    <Routes>
+      <Route path='/login' element={<Login />} />
+      <Route path='/signup' element={<SignUp />} />
+      <Route path="/" element={<MainLayout />}>
+        <Route path="/users" element={<UserList />} />
+        <Route path='profile/:id' element={<Profile user={profileData} />} />
+        <Route path='editprofile/:id' element={<EditProfile onSave={handleSave} user={profileData} />} />
+        <Route path='workspace/create' element={<WorkspaceCreate />} />
+        <Route path="workspace/:id" element={<Workspace />} />
+      </Route>
+      <Route path='*' element={<NotFound />} />
+    </Routes>
+  )
 }

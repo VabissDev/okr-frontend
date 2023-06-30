@@ -1,16 +1,17 @@
-import { Card, Form, FormLayout, Page, Text, Button, Box, HorizontalGrid, Layout, VerticalStack, Bleed, Thumbnail } from "@shopify/polaris"
+import { Card, Form, FormLayout, Page, Text, Thumbnail, Banner, Frame } from "@shopify/polaris"
 import { FormWrapper } from "@/styled/containers"
-import { HorizontalDotsMinor } from "@shopify/polaris-icons"
 import { LoginPageHeader } from "@/styled/containers"
 
-export const LoginLayout = ({ title, children, onSubmit }) => {
+export const LoginLayout = ({ title, children, onSubmit, error = false }) => {
   return (
-
-    <Box>
+    <Frame>
       <LoginPageHeader>
-        <Thumbnail source="https://www.trplane.com/wp-content/uploads/2021/08/okrs.jpg" alt="okr"/>
+        <Thumbnail source="https://www.trplane.com/wp-content/uploads/2021/08/okrs.jpg" alt="okr" />
       </LoginPageHeader>
       <Page>
+        {
+          error && <Banner status="critical" title="Email or password is incorrect" error />
+        }
         <FormWrapper>
           <Card>
             <Text variant="heading2xl" as="h1" children={title} />
@@ -20,7 +21,7 @@ export const LoginLayout = ({ title, children, onSubmit }) => {
           </Card>
         </FormWrapper>
       </Page>
-    </Box>
+    </Frame>
   )
 }
 

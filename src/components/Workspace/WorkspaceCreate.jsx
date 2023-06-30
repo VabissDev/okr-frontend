@@ -8,10 +8,10 @@ import {
   ButtonGroup,
 } from "@shopify/polaris";
 
-import { MembersModal } from "../components/Workspace/MembersModal";
-import members from "../data/members.json";
+import { MembersModal } from "@/components/Workspace/MembersModal";
+import members from "@/data/members.json";
 
-export const WorkspaceManagement = () => {
+export const WorkspaceCreate = () => {
   const [workspaceName, setWorkspaceName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 

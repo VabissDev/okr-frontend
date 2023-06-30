@@ -1,65 +1,76 @@
 import { Button, TextField, Text, Divider, Icon, Checkbox } from "@shopify/polaris";
 import { LoginLayout } from "@/components/LoginLayout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ViewMinor, HideMinor } from "@shopify/polaris-icons";
 import { useState } from "react";
 import { PasswordInputWrapper } from "../styled/inputs";
+import { useSelector } from "react-redux";
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    isOrganization: false
+  })
+  const [error, setError] = useState({
+    email: "",
+    password: "",
+    banner: false
+  });
+
   const [showPassword, setShowPassword] = useState(false);
-  const [isOrganization, setIsOrganization] = useState(false);
-  const [error, setError] = useState("");
+  const { users } = useSelector((state) => state.users);
+  const navigate = useNavigate();
   const title = "Log in";
 
-  const handleEmailChange = (value) => {
-    setEmail(value);
+
+  console.log(users)
+
+  const handleChange = key => value => {
+    setFormData({ ...formData, [key]: typeof value === 'string' ? value.trim() : value });
+    console.log(formData)
   };
 
-  const handlePasswordChange = (value) => {
-    setPassword(value);
-  };
 
-  const handleCheckbox = () => {
-    setIsOrganization(!isOrganization);
-  };
+  const onSubmit = (event) => {
+    event.preventDefault();
 
-  const onSubmit = () => {
-    if (!email.trim()) {
-      setError("Please enter your email address.");
-      return;
-    } else if (!password.trim()) {
-      setError("Please enter a password.");
-      return;
-    } else if (password.trim().length < 8) {
-      setError("Password should be at least 8 characters long.");
-      return;
-    }
+    const errors = {};
+    !formData.email && (errors.email = 'Email field is required');
+    !formData.password && (errors.password = 'Please, enter your password.');
+    setError(errors)
 
-    setError("");
-    console.log("submitted");
+    const user = users.find(user => user.email === formData.email);
+    if(user?.password === formData.password) {
+
+      navigate("/")
+    }else setError({banner: true})
+
+
+    console.log(user);
   };
 
   return (
-    <LoginLayout title={title} onSubmit={onSubmit}>
+    <LoginLayout title={title} onSubmit={onSubmit} error={error.banner}>
       <TextField
         type="email"
         placeholder="example@site.com"
         label="Email:"
-        value={email}
-        onChange={handleEmailChange}
+        value={formData.email || ""}
+        onChange={handleChange("email")}
         autoComplete="email"
-        error={error && error.includes("email") ? error : ""}
+        error={error.email || ""}
       />
       <PasswordInputWrapper>
         <TextField
           label="Password:"
           type={showPassword ? "text" : "password"}
           placeholder="*********"
-          value={password}
-          onChange={handlePasswordChange}
-          error={error && error.toLowerCase().includes("password") ? error : ""}
+          value={formData.password || ""}
+          onChange={handleChange("password")}
+          error={error.password || ""}
         />
         <Button
           className="show-password-btn"
@@ -70,8 +81,8 @@ export const Login = () => {
       </PasswordInputWrapper>
       <Checkbox
         label="Organization"
-        checked={isOrganization}
-        onChange={handleCheckbox}
+        checked={formData.isOrganization || false}
+        onChange={handleChange("isOrganization")}
       />
       <Button submit fullWidth primary children="Log In" />
       <Divider />
