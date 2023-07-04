@@ -4,6 +4,7 @@
             "id": 32,
             "name": "Project Alpha",
             "owner": 151,
+            "visibility": "public",
             "status": "active",
             "members": [
                 148,
@@ -20,6 +21,7 @@
             "id": 33,
             "name": "Project Beta",
             "owner": 1,
+            "visibility": "public",
             "status": "active",
             "members": [
                 148,
@@ -36,6 +38,7 @@
             "id": 34,
             "name": "Project Gamma",
             "owner": 1,
+            "visibility": "public",
             "status": "active",
             "members": [
                 148,
@@ -52,6 +55,7 @@
             "id": 35,
             "name": "Project Delta",
             "owner": 1,
+            "visibility": "public",
             "status": "active",
             "members": [
                 148,
@@ -68,6 +72,7 @@
             "id": 36,
             "name": "Project Epsilon",
             "owner": 1,
+            "visibility": "public",
             "status": "active",
             "members": [
                 148,
@@ -84,6 +89,7 @@
             "id": 37,
             "name": "Project Zeta",
             "owner": 146,
+            "visibility": "public",
             "status": "active",
             "members": [
                 148,
@@ -100,6 +106,7 @@
             "id": 38,
             "name": "Project Eta",
             "owner": 146,
+            "visibility": "public",
             "status": "active",
             "members": [
                 148,
@@ -116,6 +123,7 @@
             "id": 39,
             "name": "Project Theta",
             "owner": 146,
+            "visibility": "private",
             "status": "active",
             "members": [
                 148,
@@ -132,6 +140,7 @@
             "id": 40,
             "name": "Project Iota",
             "owner": 146,
+            "visibility": "private",
             "status": "archived",
             "members": [
                 148,
@@ -148,6 +157,7 @@
             "id": 41,
             "name": "Project Kappa",
             "owner": 146,
+            "visibility": "private",
             "status": "active",
             "members": [
                 148,
@@ -164,6 +174,7 @@
             "id": 42,
             "name": "Project Lambda",
             "owner": 146,
+            "visibility": "private",
             "status": "active",
             "members": [
                 148,
@@ -180,6 +191,7 @@
             "id": 43,
             "name": "Project Mu",
             "owner": 150,
+            "visibility": "private",
             "status": "inactive",
             "members": [
                 148,
@@ -196,6 +208,7 @@
             "id": 44,
             "name": "Project Nu",
             "owner": 150,
+            "visibility": "private",
             "status": "archived",
             "members": [
                 148,
@@ -212,6 +225,7 @@
             "id": 45,
             "name": "Project Xi",
             "owner": 150,
+            "visibility": "private",
             "status": "inactive",
             "members": [
                 148,
@@ -228,6 +242,7 @@
             "id": 46,
             "name": "Project Omicron",
             "owner": 150,
+            "visibility": "private",
             "status": "active",
             "members": [
                 148,
@@ -244,6 +259,7 @@
             "id": 47,
             "name": "Project Pi",
             "owner": 150,
+            "visibility": "private",
             "status": "inactive",
             "members": [
                 148,
@@ -260,6 +276,7 @@
             "id": 48,
             "name": "Project Rho",
             "owner": 150,
+            "visibility": "private",
             "status": "archived",
             "members": [
                 148,
@@ -276,6 +293,7 @@
             "id": 49,
             "name": "Project Sigma",
             "owner": 150,
+            "visibility": "private",
             "status": "active",
             "members": [
                 148,
@@ -292,6 +310,7 @@
             "id": 50,
             "name": "Project Tau",
             "owner": 150,
+            "visibility": "private",
             "status": "inactive",
             "members": [
                 148,
@@ -308,6 +327,7 @@
             "id": 51,
             "name": "Project Upsilon",
             "owner": 152,
+            "visibility": "private",
             "status": "archived",
             "members": [
                 148,
@@ -324,6 +344,7 @@
             "id": 52,
             "name": "Project Phi",
             "owner": 152,
+            "visibility": "private",
             "status": "inactive",
             "members": [
                 148,
