@@ -28,18 +28,19 @@ export const Login = () => {
   const navigate = useNavigate();
   const title = "Welcome Back";
 
-
-  console.log(users)
-
   const handleChange = key => value => {
     setFormData({ ...formData, [key]: typeof value === 'string' ? value.trim() : value });
-    console.log(formData)
   };
 
 
   const onSubmit = (event) => {
     event.preventDefault();
-
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailPattern.test(formData.email) && formData.password.length > 8) {
+      window.location.href = "/";
+    } else {
+      setDataCheckError(1);
+    }
     const errors = {};
     !formData.email && (errors.email = 'Email field is required');
     !formData.password && (errors.password = 'Please, enter your password.');
@@ -49,9 +50,6 @@ export const Login = () => {
     // if (user?.password === formData.password) {
     //   navigate("/")
     // } else (setError({...error, checked: false}));
-
-
-    console.log(user);
   };
 
   return (
