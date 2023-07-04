@@ -26,7 +26,7 @@ export const FormWrapper = styled.div`
 `
 
 export const LoginPageHeader = styled.header`
-    background-color: white;
+    background-color: var(--p-color-bg);
     padding-inline: 20px;
     box-shadow: var(--p-shadow-md);
     .Polaris-Thumbnail {
