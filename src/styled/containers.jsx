@@ -19,6 +19,10 @@ export const FormWrapper = styled.div`
     .Polaris-FormLayout {
         margin-top: 30px;
     }
+
+    .Polaris-Checkbox__Backdrop::before {
+        background-color: var(--p-color-bg-primary);
+    }
 `
 
 export const LoginPageHeader = styled.header`

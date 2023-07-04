@@ -5,6 +5,7 @@ import { ViewMinor, HideMinor } from "@shopify/polaris-icons";
 import { useState } from "react";
 import { PasswordInputWrapper } from "../styled/inputs";
 import { useSelector } from "react-redux";
+import { Space } from "../styled/profilee";
 
 export const Login = () => {
 
@@ -25,7 +26,7 @@ export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { users } = useSelector((state) => state.users);
   const navigate = useNavigate();
-  const title = "Log in";
+  const title = "Welcome Back";
 
 
   console.log(users)
@@ -87,15 +88,18 @@ export const Login = () => {
           <Icon source={showPassword ? ViewMinor : HideMinor} color="base" />
         </Button>
       </PasswordInputWrapper>
+      <Space>
       <Checkbox
         label="Organization"
         checked={formData.isOrganization || false}
         onChange={handleChange("isOrganization")}
       />
+      <Link to="#">Forgot Password?</Link>
+      </Space>
       <Button submit fullWidth primary children="Log In" />
       <Divider />
       <Text alignment="center" variant="headingSm" as="p" color="subdued">
-        Or <Link to="/signup"> Join Us</Link>
+        Don't have an account? <Link to="/signup"> Join Us</Link>
       </Text>
     </LoginLayout>
   );

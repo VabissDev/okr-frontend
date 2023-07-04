@@ -11,7 +11,7 @@ export const LoginLayout = ({ title, children, onSubmit }) => {
       <Page>
         <FormWrapper>
           <Card>
-            <Text variant="heading2xl" as="h1" children={title} />
+            <Text variant="heading2xl" as="h1" alignment="center" children={title} />
             <Form onSubmit={onSubmit}>
               <FormLayout children={children} />
             </Form>
