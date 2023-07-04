@@ -9,7 +9,6 @@ import { Space } from "../styled/profilee";
 
 export const Login = () => {
 
-
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,12 +16,10 @@ export const Login = () => {
   })
   const [error, setError] = useState({
     email: "",
-    password: "",
-    checked: false
+    password: ""
   });
 
   const [dataCheckError, setDataCheckError] = useState(false)
-
   const [showPassword, setShowPassword] = useState(false);
   const { users } = useSelector((state) => state.users);
   const navigate = useNavigate();
@@ -32,43 +29,43 @@ export const Login = () => {
     setFormData({ ...formData, [key]: typeof value === 'string' ? value.trim() : value });
   };
 
+  const onSubmit = () => {
 
-  const onSubmit = (event) => {
-    event.preventDefault();
+    console.log("submit")
+
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (emailPattern.test(formData.email) && formData.password.length > 8) {
-      window.location.href = "/";
-    } else {
-      setDataCheckError(1);
-    }
+
     const errors = {};
+    (formData.email && !emailPattern.test(formData.email)) && (errors.email = 'Invalid Email Format');
     !formData.email && (errors.email = 'Email field is required');
     !formData.password && (errors.password = 'Please, enter your password.');
+
     setError(errors)
 
-    const user = users.find(user => user.email === formData.email);
-    // if (user?.password === formData.password) {
-    //   navigate("/")
-    // } else (setError({...error, checked: false}));
+    if (formData.email && formData.password) {
+      const user  = users.find(user => user.email === formData.email);
+      console.log("login",user)
+      console.log("error",error)
+      if (user && user.password === formData.password){
+        navigate("/")
+      } else setDataCheckError(true)
+    }else setDataCheckError(false)
+    
   };
 
   return (
     <LoginLayout title={title} onSubmit={onSubmit}>
       {
-        dataCheckError &&
-        <Text color="critical">
-          Email or password is invalid.
-        </Text>
+        dataCheckError && <Text color="critical" children="Email or password is invalid"/>
       }
-
       <TextField
-        type="email"
+        type="text"
         placeholder="example@site.com"
         label="Email:"
         value={formData.email || ""}
         onChange={handleChange("email")}
         autoComplete="email"
-        error={error.email || ""}
+        error={error.email}
       />
       <PasswordInputWrapper>
         <TextField
@@ -77,7 +74,7 @@ export const Login = () => {
           placeholder="*********"
           value={formData.password || ""}
           onChange={handleChange("password")}
-          error={error.password || ""}
+          error={error.password}
         />
         <Button
           className="show-password-btn"
@@ -87,13 +84,14 @@ export const Login = () => {
         </Button>
       </PasswordInputWrapper>
       <Space>
-      <Checkbox
-        label="Organization"
-        checked={formData.isOrganization || false}
-        onChange={handleChange("isOrganization")}
-      />
-      <Link to="#">Forgot Password?</Link>
+        <Checkbox
+          label="Organization"
+          checked={formData.isOrganization || false}
+          onChange={handleChange("isOrganization")}
+        />
+        <Link to="#">Forgot Password?</Link>
       </Space>
+
       <Button submit fullWidth primary children="Log In" />
       <Divider />
       <Text alignment="center" variant="headingSm" as="p" color="subdued">
