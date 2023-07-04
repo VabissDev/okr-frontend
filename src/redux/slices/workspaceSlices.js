@@ -1,9 +1,9 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
-import workspaces from "@/data/members.json";
+import workspaces from "@/data/workspaces.json";
 
 
 const initialState = {
-    data: workspaces
+    data: workspaces.data
 }
 
 const workspaceSlice = createSlice({
