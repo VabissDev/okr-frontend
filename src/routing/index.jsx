@@ -9,6 +9,7 @@ import EditProfile from "@/pages/EditProfile";
 import { UserList } from "@/components/Users/UserList";
 import { Workspace } from "@/components/Workspace/Workspace";
 import { WorkspaceCreate } from "@/components/Workspace/WorkspaceCreate";
+import { Organization } from "../pages/Organization";
 
 export const Routing = () => {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ export const Routing = () => {
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<SignUp />} />
       <Route path="/" element={<MainLayout />}>
+        <Route index element={<Organization />} />
         <Route path="/users" element={<UserList />} />
         <Route path='profile/:id' element={<Profile user={profileData} />} />
         <Route path='editprofile/:id' element={<EditProfile onSave={handleSave} user={profileData} />} />
