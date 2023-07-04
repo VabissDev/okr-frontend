@@ -7,44 +7,23 @@ export const Btn = styled.div`
     padding: 5px;
     text-align: center;
     cursor: pointer;
+    text-decoration: none;
+    list-style: none;
+    text-underline-offset: none;
 `
 
-export const First = styled.div`
-  display: flex;
-  align-items: center;
+export const Space = styled.div`
+  display:flex;
+  gap: 2rem;
   justify-content: space-between;
-  border: 1px solid black;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-
+  width: 100%;
+  padding: 10px 0;
 `
 
-export const Second = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
-  padding: 20px;
-  border-radius: 10px;
-  height: 150px;
-`;
-
-export const Left = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 30px;
+export const Display = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
 `
 
 
-export const Edit = styled.div`
-  display: flex;
-  gap: 20px;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const Item = styled.div`
-  display: flex;
-  gap: 3px;
-  flex-direction: column;
-`

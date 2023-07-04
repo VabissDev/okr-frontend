@@ -1,14 +1,16 @@
 import { useState, useCallback } from "react";
 import { TopBar, ActionList, Icon, Frame, Text } from "@shopify/polaris";
-import { ArrowLeftMinor } from "@shopify/polaris-icons";
-import { Link } from "react-router-dom";
+import { ArrowRightMinor } from "@shopify/polaris-icons";
+import { Link, Outlet } from "react-router-dom";
+import { GridLayout } from "../styled/containers";
+import { Navigations } from "./Navigation";
 
 export const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-
+  const id = 1;
   const toggleIsUserMenuOpen = useCallback(() => {
     setIsUserMenuOpen((isUserMenuOpen) => !isUserMenuOpen);
   }, []);
@@ -47,7 +49,7 @@ export const Header = () => {
             {
               content: (
                 <Link
-                  to="/profile"
+                  to={`/profile/${id}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   My profile
@@ -57,12 +59,12 @@ export const Header = () => {
           ],
         },
         {
-          items: [{ content: "Community forums" }],
+          items: [{ icon: ArrowRightMinor, content: "Logout" }],
         },
       ]}
       name="John Doe"
       detail="VABISS"
-      initials="A"
+      initials="D"
       open={isUserMenuOpen}
       onToggle={toggleIsUserMenuOpen}
     />
@@ -97,7 +99,7 @@ export const Header = () => {
       onClose={toggleIsSecondaryMenuOpen}
       actions={[
         {
-          items: [{ content: "Edit profile" }],
+          items: [{ content: "Log Out" }],
         },
       ]}
     />
@@ -116,9 +118,16 @@ export const Header = () => {
     />
   );
 
+  const PageContent = () => {
+    <GridLayout columns="1fr 3fr">
+      <Navigations />
+      <Outlet />
+    </GridLayout>
+  }
+
   return (
     <div style={{ height: "50px" }}>
-      <Frame topBar={topBarMarkup} logo={logo} />
+      <Frame topBar={topBarMarkup} logo={logo} children={<PageContent/>} />
     </div>
   );
 };

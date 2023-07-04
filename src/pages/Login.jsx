@@ -1,65 +1,85 @@
-import { Button, TextField, Text, Divider, Icon, Checkbox } from "@shopify/polaris";
+import { Button, TextField, Text, Divider, Icon, Checkbox, Banner } from "@shopify/polaris";
 import { LoginLayout } from "@/components/LoginLayout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ViewMinor, HideMinor } from "@shopify/polaris-icons";
 import { useState } from "react";
 import { PasswordInputWrapper } from "../styled/inputs";
+import { useSelector } from "react-redux";
+import { Space } from "../styled/profilee";
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    isOrganization: false
+  })
+  const [error, setError] = useState({
+    email: "",
+    password: "",
+    checked: false
+  });
+
+  const [dataCheckError, setDataCheckError] = useState(false)
+
   const [showPassword, setShowPassword] = useState(false);
-  const [isOrganization, setIsOrganization] = useState(false);
-  const [error, setError] = useState("");
-  const title = "Log in";
+  const { users } = useSelector((state) => state.users);
+  const navigate = useNavigate();
+  const title = "Welcome Back";
 
-  const handleEmailChange = (value) => {
-    setEmail(value);
+
+  console.log(users)
+
+  const handleChange = key => value => {
+    setFormData({ ...formData, [key]: typeof value === 'string' ? value.trim() : value });
+    console.log(formData)
   };
 
-  const handlePasswordChange = (value) => {
-    setPassword(value);
-  };
 
-  const handleCheckbox = () => {
-    setIsOrganization(!isOrganization);
-  };
+  const onSubmit = (event) => {
+    event.preventDefault();
 
-  const onSubmit = () => {
-    if (!email.trim()) {
-      setError("Please enter your email address.");
-      return;
-    } else if (!password.trim()) {
-      setError("Please enter a password.");
-      return;
-    } else if (password.trim().length < 8) {
-      setError("Password should be at least 8 characters long.");
-      return;
-    }
+    const errors = {};
+    !formData.email && (errors.email = 'Email field is required');
+    !formData.password && (errors.password = 'Please, enter your password.');
+    setError(errors)
 
-    setError("");
-    console.log("submitted");
+    const user = users.find(user => user.email === formData.email);
+    // if (user?.password === formData.password) {
+    //   navigate("/")
+    // } else (setError({...error, checked: false}));
+
+
+    console.log(user);
   };
 
   return (
     <LoginLayout title={title} onSubmit={onSubmit}>
+      {
+        dataCheckError &&
+        <Text color="critical">
+          Email or password is invalid.
+        </Text>
+      }
+
       <TextField
         type="email"
         placeholder="example@site.com"
         label="Email:"
-        value={email}
-        onChange={handleEmailChange}
+        value={formData.email || ""}
+        onChange={handleChange("email")}
         autoComplete="email"
-        error={error && error.includes("email") ? error : ""}
+        error={error.email || ""}
       />
       <PasswordInputWrapper>
         <TextField
           label="Password:"
           type={showPassword ? "text" : "password"}
           placeholder="*********"
-          value={password}
-          onChange={handlePasswordChange}
-          error={error && error.toLowerCase().includes("password") ? error : ""}
+          value={formData.password || ""}
+          onChange={handleChange("password")}
+          error={error.password || ""}
         />
         <Button
           className="show-password-btn"
@@ -68,15 +88,18 @@ export const Login = () => {
           <Icon source={showPassword ? ViewMinor : HideMinor} color="base" />
         </Button>
       </PasswordInputWrapper>
+      <Space>
       <Checkbox
         label="Organization"
-        checked={isOrganization}
-        onChange={handleCheckbox}
+        checked={formData.isOrganization || false}
+        onChange={handleChange("isOrganization")}
       />
+      <Link to="#">Forgot Password?</Link>
+      </Space>
       <Button submit fullWidth primary children="Log In" />
       <Divider />
       <Text alignment="center" variant="headingSm" as="p" color="subdued">
-        Or <Link to="/signup"> Join Us</Link>
+        Don't have an account? <Link to="/signup"> Join Us</Link>
       </Text>
     </LoginLayout>
   );

@@ -4,6 +4,7 @@ export const FormWrapper = styled.div`
     display: grid;
     place-items: center;
     height: calc(100vh - 88px);
+    position: relative;
 
     .Polaris-Box {
         width: 300px;
@@ -18,6 +19,10 @@ export const FormWrapper = styled.div`
     .Polaris-FormLayout {
         margin-top: 30px;
     }
+
+    .Polaris-Checkbox__Backdrop::before {
+        background-color: var(--p-color-bg-primary);
+    }
 `
 
 export const LoginPageHeader = styled.header`
@@ -26,5 +31,15 @@ export const LoginPageHeader = styled.header`
     box-shadow: var(--p-shadow-md);
     .Polaris-Thumbnail {
         border: none;
+    }
+`
+
+export const GridLayout = styled.div`
+    display: grid;
+    grid-template-columns:  ${({ columns }) => columns};
+    gap: ${({ gap }) => gap};
+
+    .Polaris-Page {
+        height: calc(100vh - 56px)
     }
 `
