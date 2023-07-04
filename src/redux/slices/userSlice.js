@@ -15,21 +15,6 @@ export const userSlice = createSlice({
     signup: (state, action) => {
       state.users.push(action.payload);
     },
-    account: {
-      reducer(state, action) {
-          state.account= action.payload;
-      },
-      prepare(id) {
-
-        const account = users.find(user => user.id === id)
-        console.log(account)
-          return {
-              payload: {
-                  id
-              }
-          }
-      }
-  }, 
     
   },
 });
