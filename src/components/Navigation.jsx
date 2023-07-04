@@ -7,7 +7,7 @@ export const Navigations = () => {
       <Navigation.Section
         items={[
           {
-            url: "/",
+            url: "/login",
             label: "Workspace Management",
             icon: HomeMinor,
           },
