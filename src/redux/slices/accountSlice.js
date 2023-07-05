@@ -2,7 +2,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    account: null,
+    account:   {
+        id: "146",
+        avatarSource: "https://randomuser.me/api/portraits/med/men/1.jpg",
+        name: "John Doe",
+        email: "johndoe@example.com",
+        password: "12345689",
+        org_name: "ABC Company",
+        teams: ["Team 1", "Team 2", "Team 3"],
+        role: "member"
+      },
     permissions: null,
 }
 

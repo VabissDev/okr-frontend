@@ -13,7 +13,6 @@ export const MainLayout = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const account = useSelector(getAccountData);
-  const id = 1;
   const toggleIsUserMenuOpen = useCallback(() => {
     setIsUserMenuOpen((isUserMenuOpen) => !isUserMenuOpen);
   }, []);
@@ -52,7 +51,7 @@ export const MainLayout = () => {
             {
               content: (
                 <Link
-                  to={`/profile/${id}`}
+                  to={`/profile/${account.id}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   My profile
