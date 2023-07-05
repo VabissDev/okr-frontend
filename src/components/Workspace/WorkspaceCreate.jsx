@@ -46,12 +46,25 @@ export const WorkspaceCreate = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log();
     if (!workspaceName.trim()) {
       setErrorMessage("Workspace name not defined. Please add workspace name.");
       return;
-    } else if (!description.trim()) {
+    } else if (
+      workspaceName.trim().length < 3 ||
+      workspaceName.trim().length > 20
+    ) {
+      setErrorMessage("Workspace name must be between 3 to 20 characters.");
+      return;
+    }
+    if (!description.trim()) {
       setErrorMessage("Description not defined. Please add description.");
+      return;
+    } else if (
+      description.trim().length < 10 ||
+      description.trim().length > 100
+    ) {
+      setErrorMessage("Description must be between 10 to 100 characters.");
+      return;
     }
     setErrorMessage("");
 
