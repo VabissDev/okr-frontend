@@ -15,8 +15,11 @@ import {
 
 import { MembersModal } from "@/components/Workspace/MembersModal";
 import members from "@/data/members.json";
+import { useDispatch } from "react-redux";
+import { createWorkspace } from "../../redux/slices/workspaceSlices";
 
 export const WorkspaceCreate = () => {
+  const dispatch = useDispatch();
   const [workspaceName, setWorkspaceName] = useState("");
   const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState("public");
@@ -43,6 +46,7 @@ export const WorkspaceCreate = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log();
     if (!workspaceName.trim()) {
       setErrorMessage("Workspace name not defined. Please add workspace name.");
       return;
@@ -50,16 +54,22 @@ export const WorkspaceCreate = () => {
       setErrorMessage("Description not defined. Please add description.");
     }
     setErrorMessage("");
+
+    const newWorkspace = {
+      id: Date.now(),
+      name: workspaceName,
+      owner: Date.now() + 1, // owner id
+      visibility,
+      status,
+      members: [45, 12, 13], // members id
+      org_name: "ABC",
+    };
+
+    dispatch(createWorkspace(newWorkspace));
+
+    console.log(newWorkspace);
     setDescription("");
     setWorkspaceName("");
-    // const newWorkspace = {
-    //   id: Date.now(),
-    //   name: workspaceName,
-    // };
-    // setWorkspaces((prevWorkspaces) => [newWorkspace, ...prevWorkspaces]);
-    // setWorkspaceName("");
-    // setErrorMessage("");
-    console.log("submitted", visibility, status);
   };
 
   return (
@@ -93,6 +103,7 @@ export const WorkspaceCreate = () => {
             }
           />
           <TextField
+            type="text"
             label="Description:"
             placeholder="Enter description"
             value={description}
