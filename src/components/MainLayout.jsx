@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { TopBar, ActionList, Frame, Text, Page } from "@shopify/polaris";
+import { TopBar, ActionList, Frame, Text, Page, Box } from "@shopify/polaris";
 import { ArrowRightMinor } from "@shopify/polaris-icons";
 import { Link, Outlet } from "react-router-dom";
 import { GridLayout } from "../styled/containers";
@@ -43,6 +43,11 @@ export const MainLayout = () => {
     accessibilityLabel: "Jaded Pixel",
   };
 
+  const detail = <Box>
+    <Text as="h3" children={account.org_name}/>
+    <Text as="p" children={account.role}/>
+  </Box>
+
   const userMenuMarkup = (
     <TopBar.UserMenu
       actions={[
@@ -65,8 +70,8 @@ export const MainLayout = () => {
         },
       ]}
       name={account.name}
-      detail={account.org_name}
-      initials={account.name.slice(0,1)}
+      detail={detail}
+      avatar ={account.avatarSource}
       open={isUserMenuOpen}
       onToggle={toggleIsUserMenuOpen}
     />
