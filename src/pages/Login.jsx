@@ -16,10 +16,10 @@ export const Login = () => {
   })
   const [error, setError] = useState({
     email: "",
-    password: ""
+    password: "",
+    checked: false
   });
 
-  const [dataCheckError, setDataCheckError] = useState(false)
   const [showPassword, setShowPassword] = useState(false);
   const { users } = useSelector((state) => state.users);
   const navigate = useNavigate();
@@ -39,24 +39,21 @@ export const Login = () => {
     (formData.email && !emailPattern.test(formData.email)) && (errors.email = 'Invalid Email Format');
     !formData.email && (errors.email = 'Email field is required');
     !formData.password && (errors.password = 'Please, enter your password.');
-
     setError(errors)
 
-    if (formData.email && formData.password) {
-      const user  = users.find(user => user.email === formData.email);
-      console.log("login",user)
-      console.log("error",error)
-      if (user && user.password === formData.password){
-        navigate("/")
-      } else setDataCheckError(true)
-    }else setDataCheckError(false)
-    
+    if (formData.email && emailPattern.test(formData.email) && formData.password) {
+      const user = users.find(user => user.email === formData.email)
+      console.log(user)
+      user?.password === formData.password
+        ? navigate("/")
+        : setError({ checked: true })
+    }
   };
 
   return (
     <LoginLayout title={title} onSubmit={onSubmit}>
       {
-        dataCheckError && <Text color="critical" children="Email or password is invalid"/>
+        error.checked && <Text color="critical" children="Email or password is invalid" />
       }
       <TextField
         type="text"
