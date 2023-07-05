@@ -4,12 +4,15 @@ import { ArrowRightMinor } from "@shopify/polaris-icons";
 import { Link, Outlet } from "react-router-dom";
 import { GridLayout } from "../styled/containers";
 import { Navigations } from "./Navigation";
+import { useSelector } from "react-redux";
+import { getAccountData } from "../redux/slices/accountSlice";
 
 export const MainLayout = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const account = useSelector(getAccountData);
   const id = 1;
   const toggleIsUserMenuOpen = useCallback(() => {
     setIsUserMenuOpen((isUserMenuOpen) => !isUserMenuOpen);
@@ -62,9 +65,9 @@ export const MainLayout = () => {
           items: [{ icon: ArrowRightMinor, content: "Logout" }],
         },
       ]}
-      name="John Doe"
-      detail="VABISS"
-      initials="D"
+      name={account.name}
+      detail={account.org_name}
+      initials={account.name.slice(0,1)}
       open={isUserMenuOpen}
       onToggle={toggleIsUserMenuOpen}
     />

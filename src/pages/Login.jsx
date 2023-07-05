@@ -4,8 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { ViewMinor, HideMinor } from "@shopify/polaris-icons";
 import { useState } from "react";
 import { PasswordInputWrapper } from "../styled/inputs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Space } from "../styled/profilee";
+import { login } from "../redux/slices/accountSlice";
 
 export const Login = () => {
 
@@ -23,6 +24,7 @@ export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { users } = useSelector((state) => state.users);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const title = "Welcome Back";
 
   const handleChange = key => value => {
@@ -41,9 +43,10 @@ export const Login = () => {
 
     if (formData.email && emailPattern.test(formData.email) && formData.password) {
       const user = users.find(user => user.email === formData.email)
-      user?.password === formData.password
-        ? navigate("/")
-        : setError({ checked: true })
+      if (user?.password === formData.password) {
+        navigate("/");
+        dispatch(login(user))
+      } else setError({ checked: true })
     }
   };
 
