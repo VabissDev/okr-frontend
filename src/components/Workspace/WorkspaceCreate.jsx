@@ -21,27 +21,23 @@ export const WorkspaceCreate = () => {
   const [visibility, setVisibility] = useState("public");
   const [status, setStatus] = useState("active");
   const user = {
-    fullName: "John Doe"
-  }
+    fullName: "John Doe",
+  };
 
   const [errorMessage, setErrorMessage] = useState("");
 
   const statusOptions = [
-    { label: 'Active', value: 'active' },
-    { label: 'Inactive', value: 'inactive' },
-    { label: 'Archived', value: 'archived' }
+    { label: "Active", value: "active" },
+    { label: "Inactive", value: "inactive" },
+    { label: "Archived", value: "archived" },
   ];
 
   const handleNameChange = (value) => setWorkspaceName(value);
   const handleVisibilityChange = useCallback(
     (_, newValue) => setVisibility(newValue),
-    [],
+    []
   );
-  const handleStatusChange = useCallback(
-    (value) => setStatus(value),
-    [],
-  );
-
+  const handleStatusChange = useCallback((value) => setStatus(value), []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,11 +57,15 @@ export const WorkspaceCreate = () => {
 
   return (
     <div>
-      <Box paddingBlockEnd="8">
-        <Text variant="headingXl" as="h2" children="Create Your Workspace" alignment="center" />
+      <Box padding="8">
+        <Text
+          variant="headingXl"
+          as="h2"
+          children="Create Your Workspace"
+          alignment="center"
+        />
       </Box>
       <Form onSubmit={handleSubmit}>
-
         <FormLayout>
           <TextField
             type="text"
@@ -73,7 +73,7 @@ export const WorkspaceCreate = () => {
             label="Workspace Name:"
             value={workspaceName}
             onChange={handleNameChange}
-          // error={error && error.includes("email") ? error : ""}
+            // error={error && error.includes("email") ? error : ""}
           />
           <TextField
             type="text"
@@ -86,7 +86,7 @@ export const WorkspaceCreate = () => {
             <RadioButton
               label="Public"
               helpText="Company-wide workspace."
-              checked={visibility === 'public'}
+              checked={visibility === "public"}
               value="public"
               id="public"
               name="visibility"
@@ -97,7 +97,7 @@ export const WorkspaceCreate = () => {
               helpText="Team-specific workspace."
               id="private"
               name="visibility"
-              checked={visibility === 'private'}
+              checked={visibility === "private"}
               value="private"
               onChange={handleVisibilityChange}
             />
