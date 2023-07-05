@@ -2,18 +2,21 @@ import { Navigation, Text } from "@shopify/polaris";
 import { HomeMinor, HashtagMinor, LockMinor } from '@shopify/polaris-icons';
 import { useSelector } from "react-redux";
 import { getAllWorkspaces } from "../redux/slices/workspaceSlices";
+import { getAccountData } from "../redux/slices/accountSlice";
+
 
 export const Navigations = () => {
 
 
   const workspaces = useSelector(getAllWorkspaces)
+  const account = useSelector(getAccountData);
 
   const navlinks = [{
-    label: <Text variant="headingXl" as="h3" color="subdued" children="ABC Company" /> ,
+    label: <Text variant="headingXl" as="h3" color="subdued" children={account.org_name} /> ,
     icon: HomeMinor,
   }]
 
-  const filtered = workspaces.filter(workspace => workspace.org_name === "ABC Company");
+  const filtered = workspaces.filter(workspace => workspace.org_name === account.org_name);
 
   filtered.map(item => {
 
