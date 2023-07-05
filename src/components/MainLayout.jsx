@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { TopBar, ActionList, Frame, Text, Page, Box, Thumbnail } from "@shopify/polaris";
 import { ArrowRightMinor } from "@shopify/polaris-icons";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { GridLayout } from "../styled/containers";
 import { Navigations } from "./Navigation";
 import { useSelector } from "react-redux";
@@ -16,6 +16,9 @@ export const MainLayout = () => {
   const toggleIsUserMenuOpen = useCallback(() => {
     setIsUserMenuOpen((isUserMenuOpen) => !isUserMenuOpen);
   }, []);
+
+  const location = useLocation();
+  console.log(location)
 
   const toggleIsSecondaryMenuOpen = useCallback(() => {
     setIsSecondaryMenuOpen((isSecondaryMenuOpen) => !isSecondaryMenuOpen);
@@ -135,10 +138,15 @@ export const MainLayout = () => {
   const PageContent = () => {
     return (
       <Page>
-        <GridLayout columns="1fr 3fr" gap="30px">
-          <Navigations />
-          <Outlet />
-        </GridLayout>
+        {
+          location.pathname !== "/"
+            ? <GridLayout columns="1fr 3fr" gap="30px">
+              <Navigations />
+              <Outlet />
+            </GridLayout>
+            : <Outlet />
+        }
+
       </Page>
     )
 
