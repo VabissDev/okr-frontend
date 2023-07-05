@@ -8,7 +8,8 @@ const initialState = {
         name: "John Doe",
         email: "johndoe@example.com",
         password: "12345689",
-        org_name: "ABC Company",
+       // org_name: "ABC Company",
+        org_name: "XYZ Corporation",
         teams: ["Team 1", "Team 2", "Team 3"],
         role: "member"
       },

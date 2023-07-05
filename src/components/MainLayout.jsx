@@ -35,35 +35,25 @@ export const MainLayout = () => {
     console.log("toggle navigation visibility");
   }, []);
 
-  
+
   const organizations = [
     {
-    name: "ABC Company",
-    url: "https://www.abc-company.no/wp-content/uploads/2015/10/new-logo.png"
-  },
-  {
-    name: "XYZ Corporation",
-    url: "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/v1426153313/mhjnac5ht2mrpualdvko.jpg"
-  }
-]
-
-  const logoUrl = <Thumbnail source="https://t4.ftcdn.net/jpg/03/74/02/61/360_F_374026103_LoLZY8uNJM4YAC8oVK8Pr42ftlKidmOo.jpg"/>
-  //organizations.find(org => org.name === account.org_name).url
-  console.log(logoUrl)
+      name: "ABC Company",
+      url: "https://www.abc-company.no/wp-content/uploads/2015/10/new-logo.png"
+    },
+    {
+      name: "XYZ Corporation",
+      url: "https://www.xyzcomms.com/wp-content/uploads/2017/10/XYZ.png"
+    }
+  ]
 
   const logo = {
     width: 100,
-    height: 30,
-    topBarSource: `${organizations.find(org => org.name === account.org_name).url || ""}`,
+    height: 50,
+    topBarSource: `${organizations.find(org => org.name === account.org_name).url || "https://www.trplane.com/wp-content/uploads/2021/08/okrs.jpg"}`,
     url: "/",
     accessibilityLabel: "Jaded Pixel",
   };
-
-  const detail = <Box>
-    <Text as="h3" children={account.org_name} />
-    <Text as="p" children={account.role} />
-  </Box>
-
 
   const userMenuMarkup = (
     <TopBar.UserMenu
@@ -86,8 +76,8 @@ export const MainLayout = () => {
           items: [{ icon: ArrowRightMinor, content: "Logout" }],
         },
       ]}
-      // name={account.name}
-      // detail={detail}
+      name={account.name}
+      detail={account.role}
       avatar={account.avatarSource}
       open={isUserMenuOpen}
       onToggle={toggleIsUserMenuOpen}

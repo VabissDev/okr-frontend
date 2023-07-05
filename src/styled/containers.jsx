@@ -36,7 +36,8 @@ export const LoginPageHeader = styled.header`
 
 export const GridLayout = styled.div`
     display: grid;
-    grid-template-columns:  ${({ columns }) => columns};
+    grid-template-columns:  ${({ columns }) => columns || "auto"};
+    grid-template-rows:  ${({ rows }) => rows || "auto"};
     gap: ${({ gap }) => gap};
 
     .Polaris-Page {

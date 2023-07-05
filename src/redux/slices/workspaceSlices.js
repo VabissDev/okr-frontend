@@ -9,7 +9,9 @@ const initialState = {
 const workspaceSlice = createSlice({
     name: "workspaces",
     initialState,
-    reducers: {}
+    reducers: {
+       
+    }
 })
 
 export const getAllWorkspaces = state => state.workspaces.data;
