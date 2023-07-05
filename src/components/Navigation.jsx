@@ -11,6 +11,7 @@ export const Navigations = () => {
   const navlinks = [
     {
       key: account.id,
+      url: "/ ",
       label: (
         <Text
           variant="headingXl"
