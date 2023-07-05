@@ -43,11 +43,15 @@ export const WorkspaceCreate = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submitted", visibility, status);
-    // if (!workspaceName) {
-    //   setErrorMessage("Workspace Name not defined.Please add");
-    //   return;
-    // }
+    if (!workspaceName.trim()) {
+      setErrorMessage("Workspace name not defined. Please add workspace name.");
+      return;
+    } else if (!description.trim()) {
+      setErrorMessage("Description not defined. Please add description.");
+    }
+    setErrorMessage("");
+    setDescription("");
+    setWorkspaceName("");
     // const newWorkspace = {
     //   id: Date.now(),
     //   name: workspaceName,
@@ -55,6 +59,7 @@ export const WorkspaceCreate = () => {
     // setWorkspaces((prevWorkspaces) => [newWorkspace, ...prevWorkspaces]);
     // setWorkspaceName("");
     // setErrorMessage("");
+    console.log("submitted", visibility, status);
   };
 
   return (
@@ -81,7 +86,11 @@ export const WorkspaceCreate = () => {
             label="Workspace Name:"
             value={workspaceName}
             onChange={handleNameChange}
-            // error={error && error.includes("email") ? error : ""}
+            error={
+              errorMessage && errorMessage.toLowerCase().includes("workspace")
+                ? errorMessage
+                : ""
+            }
           />
           <TextField
             label="Description:"
@@ -90,6 +99,11 @@ export const WorkspaceCreate = () => {
             onChange={handleDescriptionChange}
             multiline={4}
             autoComplete="off"
+            error={
+              errorMessage && errorMessage.toLowerCase().includes("description")
+                ? errorMessage
+                : ""
+            }
           />
           <Label>Visibility:</Label>
           <ButtonGroup>
