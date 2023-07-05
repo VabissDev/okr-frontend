@@ -18,6 +18,7 @@ import members from "@/data/members.json";
 
 export const WorkspaceCreate = () => {
   const [workspaceName, setWorkspaceName] = useState("");
+  const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState("public");
   const [status, setStatus] = useState("active");
   const user = {
@@ -33,6 +34,7 @@ export const WorkspaceCreate = () => {
   ];
 
   const handleNameChange = (value) => setWorkspaceName(value);
+  const handleDescriptionChange = (value) => setDescription(value);
   const handleVisibilityChange = useCallback(
     (_, newValue) => setVisibility(newValue),
     []
@@ -69,6 +71,12 @@ export const WorkspaceCreate = () => {
         <FormLayout>
           <TextField
             type="text"
+            label="Owner:"
+            value={user.fullName}
+            disabled
+          />
+          <TextField
+            type="text"
             placeholder="Enter workspace name"
             label="Workspace Name:"
             value={workspaceName}
@@ -76,10 +84,12 @@ export const WorkspaceCreate = () => {
             // error={error && error.includes("email") ? error : ""}
           />
           <TextField
-            type="text"
-            label="Owner:"
-            value={user.fullName}
-            disabled
+            label="Description:"
+            placeholder="Enter description"
+            value={description}
+            onChange={handleDescriptionChange}
+            multiline={4}
+            autoComplete="off"
           />
           <Label>Visibility:</Label>
           <ButtonGroup>
