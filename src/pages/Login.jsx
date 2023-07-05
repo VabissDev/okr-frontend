@@ -1,4 +1,4 @@
-import { Button, TextField, Text, Divider, Icon, Checkbox, Banner } from "@shopify/polaris";
+import { Button, TextField, Text, Divider, Icon, Checkbox } from "@shopify/polaris";
 import { LoginLayout } from "@/components/LoginLayout";
 import { Link, useNavigate } from "react-router-dom";
 import { ViewMinor, HideMinor } from "@shopify/polaris-icons";
@@ -31,8 +31,6 @@ export const Login = () => {
 
   const onSubmit = () => {
 
-    console.log("submit")
-
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const errors = {};
@@ -43,7 +41,6 @@ export const Login = () => {
 
     if (formData.email && emailPattern.test(formData.email) && formData.password) {
       const user = users.find(user => user.email === formData.email)
-      console.log(user)
       user?.password === formData.password
         ? navigate("/")
         : setError({ checked: true })
