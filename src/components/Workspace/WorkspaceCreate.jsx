@@ -15,8 +15,9 @@ import {
 
 import { MembersModal } from "@/components/Workspace/MembersModal";
 import members from "@/data/members.json";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createWorkspace } from "../../redux/slices/workspaceSlices";
+import { getAccountData } from "../../redux/slices/accountSlice";
 
 export const WorkspaceCreate = () => {
   const dispatch = useDispatch();
@@ -24,9 +25,7 @@ export const WorkspaceCreate = () => {
   const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState("public");
   const [status, setStatus] = useState("active");
-  const user = {
-    fullName: "John Doe",
-  };
+  const user = useSelector(getAccountData);
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -71,10 +70,11 @@ export const WorkspaceCreate = () => {
     const newWorkspace = {
       id: Date.now(),
       name: workspaceName,
-      owner: Date.now() + 1, // owner id
+      description,
+      owner: user.id,
       visibility,
       status,
-      members: [45, 12, 13], // members id
+      members: [45, 12, 13], // members id - progress...
       org_name: "ABC",
     };
 
@@ -97,12 +97,7 @@ export const WorkspaceCreate = () => {
       </Box>
       <Form onSubmit={handleSubmit}>
         <FormLayout>
-          <TextField
-            type="text"
-            label="Owner:"
-            value={user.fullName}
-            disabled
-          />
+          <TextField type="text" label="Owner:" value={user.name} disabled />
           <TextField
             type="text"
             placeholder="Enter workspace name"
