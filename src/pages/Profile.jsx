@@ -11,36 +11,41 @@ import {
 } from "@shopify/polaris";
 import { EditMinor } from "@shopify/polaris-icons";
 import { Space } from "../styled/profilee";
-import { Link } from "react-router-dom";
-
-export const Profile = ({ user, onSave }) => {
-  const id = 1;
+import { Link, useParams } from "react-router-dom";
+import { getAccountData } from "../redux/slices/accountSlice";
+import { useSelector } from "react-redux";
+import { getAllUsers } from "../redux/slices/userSlice";
+export const Profile = ({ istifadeci, onSave }) => {
   const [updatedUser, setUpdatedUser] = useState(null);
-
   const handleSaveProfile = (updatedProfile) => {
     setUpdatedUser(updatedProfile);
     onSave(updatedProfile);
   };
+
+  const { id } = useParams();
+  const account = useSelector(getAccountData);
+  const users = useSelector((state) => state.users.users);
+  const profile = users.find((user) => user.id === id);
 
   return (
     <Card>
       <Space>
         <Box>
           <Text variant="heading3xl" as="h1">
-            {user.fullName || "John Doe"}
+            {profile.name}
           </Text>
           <Space>
             <Text variant="headingMd" as="p" fontWeight="semibold">
               Organization:
             </Text>
-            <Text>{user.orgName || "XX Company"}</Text>
+            <Text>{profile.org_name}</Text>
           </Space>
 
           <Space>
             <Text variant="headingMd" as="p" fontWeight="semibold">
               Email:
             </Text>
-            <Text>{user.email || "johndoe@gmail.com"}</Text>
+            <Text>{profile.email}</Text>
           </Space>
         </Box>
         <img
@@ -49,59 +54,42 @@ export const Profile = ({ user, onSave }) => {
           style={{ width: 100, height: 100, borderRadius: "50%" }}
         />
       </Space>
-      <Divider />
 
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
-          paddingTop: "10px",
+          paddingTop: "15px",
         }}
       >
         <div>
           <Text variant="heading2xl" as="h3">
-            Personal Information
+            Personal information
           </Text>
         </div>
         <div>
           <Link to={`/editprofile/${id}`}>
-            <Button primary>
-              <Icon source={EditMinor} color="base" />
-            </Button>
+            {/* {isProfileIdInUsers ? (
+              <Button primary>
+                <Icon source={EditMinor} color="base" />
+              </Button>
+            ) : (
+              <p></p>
+            )} */}
           </Link>
         </div>
       </div>
 
       <VerticalStack spacing="extraTight">
-        {/* <div>
-          <Text style={{ fontWeight: "bold" }}>Full name:</Text>
-          <p>
-            {updatedUser && updatedUser.fullName ? updatedUser.fullName : user.fullName}
-          </p>
-        </div>
-        <br />
-        <div>
-          <Text style={{ fontWeight: "bold" }}>Email Address:</Text>
-          <p>
-            {updatedUser && updatedUser.email ? updatedUser.email : user.email}
-          </p>
-        </div>
-        <br />
-        <div>
-          <Text style={{ fontWeight: "bold" }}>Organization name:</Text>
-          <p>
-            {updatedUser && updatedUser.orgName ? updatedUser.orgName : user.orgName}
-          </p>
-        </div> */}
         <Space>
           <Text style={{ fontWeight: "bold" }}>Team name:</Text>
-          <Tag>{user.teamName || "Team number 1"}</Tag>
-
-          {/* <p>
-            {updatedUser && updatedUser.teamName
-              ? updatedUser.teamName
-              : user.teamName}
-          </p> */}
+          {
+            profile.teams.map((team)=>{
+              return (
+                <Tag>{team}</Tag>
+              )
+            })
+          }
         </Space>
       </VerticalStack>
     </Card>
