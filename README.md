@@ -119,3 +119,34 @@ Button: Triggers the handleSaveClick event handler when clicked. It receives the
 The EditProfile component relies on other components, dependencies, and custom styles that should be imported and available in your project for proper usage.
 Custom styling and additional functionality may be implemented through the imported dependencies, components, and hooks used in the EditProfile component.
 
+## Profile Component Documentation
+The Profile component displays the profile information of a user. It provides a user interface for viewing and editing the user's personal information, such as name, organization, email, team name, and avatar. The component is built using the React framework and utilizes various dependencies and custom components.
+
+### Props
+The Profile component accepts the following props:
+
+user (required): An object representing the user's profile information. It should include properties such as name, org_name, email, teams, and avatarSource.
+onSave (required): A callback function that will be called when the user clicks the "Save" button. It should handle the saving of any updated profile information.
+
+### State
+The Profile component maintains the following state:
+
+updatedUser: An object representing the updated user profile information. It is initially set to null and gets updated when the user saves any changes.
+Event Handlers
+The Profile component defines the following event handler:
+
+handleSaveProfile: A function that receives the updated profile information and calls the onSave callback function with the updated profile. It also updates the updatedUser state.
+
+### Rendering
+The Profile component renders the following elements:
+
+Card: A container component that displays the user's profile information.
+Space: A layout component that arranges the profile information and avatar side by side.
+Box: A layout component that contains the user's name, organization, and email information.
+Text: Displays the user's name, organization, and email.
+img: Displays the user's avatar image.
+Divider: Renders a horizontal divider line.
+VerticalStack: A layout component that stacks the user's team name and team tags vertically.
+Top: A styled component that positions the team name and team tags at the top.
+Tag: Displays the user's team names as tags.
+PageActions: Displays the primary action button for editing the profile and secondary action buttons, such as deleting the profile.
