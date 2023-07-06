@@ -14,12 +14,11 @@ export const Routing = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const login = true;
+    const login = false;
     if (!login) {
       navigate("/login");
     }
   }, [navigate]);
-
 
   //new addition 30-42
   const [profileData, setProfileData] = useState({
@@ -36,16 +35,19 @@ export const Routing = () => {
   };
   return (
     <Routes>
-      <Route path='/login' element={<Login />} />
-      <Route path='/signup' element={<SignUp />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Organization />} />
         <Route path="/users" element={<UserList />} />
-        <Route path='profile/:id' element={<Profile user={profileData} />} />
-        <Route path='editprofile/:id' element={<EditProfile onSave={handleSave} user={profileData} />} />
+        <Route path="profile/:id" element={<Profile user={profileData} />} />
+        <Route
+          path="editprofile/:id"
+          element={<EditProfile onSave={handleSave} user={profileData} />}
+        />
         <Route path="workspace/:id" element={<Workspace />} />
       </Route>
-      <Route path='*' element={<NotFound />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
-  )
-}
+  );
+};
