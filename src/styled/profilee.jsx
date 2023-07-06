@@ -20,6 +20,10 @@ export const Space = styled.div`
   padding: 10px 0;
 `
 
+export const Top = styled.div`
+  padding-top: 10px;
+`
+
 export const Display = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
