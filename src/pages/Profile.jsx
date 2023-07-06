@@ -8,7 +8,7 @@ import {
   Box,
   Icon,
   Tag,
-  PageActions
+  PageActions,
 } from "@shopify/polaris";
 import { Top } from "../styled/profilee";
 import { EditMinor } from "@shopify/polaris-icons";
@@ -84,28 +84,28 @@ export const Profile = ({ istifadeci, onSave }) => {
       </div>
 
       <VerticalStack spacing="extraTight">
-          <Top>
-        <Space>
-            
-          
-          <Text style={{ fontWeight: "bold" }}>Team name:</Text>
-          {profile.teams.map((team) => {
-            return <Tag>{team}</Tag>;
-          })}
-        </Space>
+        <Top>
+          <Space>
+            <Text style={{ fontWeight: "bold" }}>Team name:</Text>
+            <div style={{ display: "flex", gap: "5px" }}>
+              {profile.teams.map((team) => {
+                return <Tag>{team}</Tag>;
+              })}
+            </div>
+          </Space>
         </Top>
       </VerticalStack>
-        <PageActions
-          primaryAction={{
-            content: "Save",
-          }}
-          secondaryActions={[
-            {
-              content: "Delete",
-              destructive: true,
-            },
-          ]}
-        />
+      <PageActions
+        primaryAction={{
+          content: "Save",
+        }}
+        secondaryActions={isAdmin && [
+          {
+            content: "Delete",
+            destructive: true,
+          },
+        ]}
+      />
     </Card>
   );
 };
