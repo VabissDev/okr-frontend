@@ -87,5 +87,35 @@ Text: Displays a message with a link to the login page.
 Link: Provides a link to the login page.
 
 
+## EditProfile Component Documentation
 
+EditProfile Component Documentation
+The EditProfile component is a form-based component that allows users to edit their profile information. It provides a user interface for modifying the user's full name, email, password, organization name, and team name. The component is built using the React framework and utilizes various dependencies and custom components.
+
+### Props
+The EditProfile component accepts the following props:
+
+user (required): An object representing the user's profile information. It should include the properties fullName, email, password, orgName, and teamName.
+onSave (required): A callback function that will be called when the user clicks the "Save" button. It should handle the saving of the updated profile information.
+
+### State
+The EditProfile component maintains the following state:
+
+profile: An object that stores the edited profile information, including fullName, email, password, orgName, and teamName.
+Event Handlers
+The EditProfile component defines the following event handlers:
+
+handleInputChange: A function that updates the profile state based on the input value and name.
+handleSaveClick: A function that calls the onSave callback function with the updated profile object and navigates to the user's profile page.
+
+### Rendering
+The EditProfile component renders the following elements:
+
+FormLayout: The main layout component for the form, which wraps the form fields.
+TextField: Input fields for editing the user's full name, email, password, organization name, and team name. They receive the respective label, type, value, onChange, and required props.
+Button: Triggers the handleSaveClick event handler when clicked. It receives the primary and onClick props.
+
+### Additional Notes
+The EditProfile component relies on other components, dependencies, and custom styles that should be imported and available in your project for proper usage.
+Custom styling and additional functionality may be implemented through the imported dependencies, components, and hooks used in the EditProfile component.
 
