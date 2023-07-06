@@ -54,17 +54,18 @@ export const Profile = ({ istifadeci, onSave }) => {
           style={{ width: 100, height: 100, borderRadius: "50%" }}
         />
       </Space>
+      <Divider />
 
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
-          paddingTop: "15px",
+          paddingTop: "10px",
         }}
       >
         <div>
           <Text variant="heading2xl" as="h3">
-            Personal information
+            Personal Information
           </Text>
         </div>
         <div>
