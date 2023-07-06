@@ -8,7 +8,9 @@ import {
   Box,
   Icon,
   Tag,
+  PageActions
 } from "@shopify/polaris";
+import { Top } from "../styled/profilee";
 import { EditMinor } from "@shopify/polaris-icons";
 import { Space } from "../styled/profilee";
 import { Link, useParams } from "react-router-dom";
@@ -26,7 +28,7 @@ export const Profile = ({ istifadeci, onSave }) => {
   const account = useSelector(getAccountData);
   const users = useSelector((state) => state.users.users);
   const profile = users.find((user) => user.id === id);
-
+  const isAdmin = users.some((user) => account.id === profile.id);
   return (
     <Card>
       <Space>
@@ -70,29 +72,40 @@ export const Profile = ({ istifadeci, onSave }) => {
         </div>
         <div>
           <Link to={`/editprofile/${id}`}>
-            {/* {isProfileIdInUsers ? (
+            {isAdmin ? (
               <Button primary>
                 <Icon source={EditMinor} color="base" />
               </Button>
             ) : (
               <p></p>
-            )} */}
+            )}
           </Link>
         </div>
       </div>
 
       <VerticalStack spacing="extraTight">
+          <Top>
         <Space>
+            
+          
           <Text style={{ fontWeight: "bold" }}>Team name:</Text>
-          {
-            profile.teams.map((team)=>{
-              return (
-                <Tag>{team}</Tag>
-              )
-            })
-          }
+          {profile.teams.map((team) => {
+            return <Tag>{team}</Tag>;
+          })}
         </Space>
+        </Top>
       </VerticalStack>
+        <PageActions
+          primaryAction={{
+            content: "Save",
+          }}
+          secondaryActions={[
+            {
+              content: "Delete",
+              destructive: true,
+            },
+          ]}
+        />
     </Card>
   );
 };
