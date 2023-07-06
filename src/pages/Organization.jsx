@@ -3,8 +3,10 @@ import { useSelector } from "react-redux";
 import { Button, Card, VerticalStack } from "@shopify/polaris";
 import { getAllWorkspaces } from "@/redux/slices/workspaceSlices";
 import { getAccountData } from "@/redux/slices/accountSlice";
-import { WorkspaceCreate } from "@/pages/Workspace/WorkspaceCreate";
+import { WorkspaceCreate } from "./Workspace/WorkspaceCreate";
 import { WorkspaceCard } from "./Workspace/WorkspaceCard";
+
+// illustartions
 import illustration1 from "../assets/illustration/illustration1.jpg";
 import illustration2 from "../assets/illustration/illustration2.png";
 import illustration3 from "../assets/illustration/illustration3.jpg";
