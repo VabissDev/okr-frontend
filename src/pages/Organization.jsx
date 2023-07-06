@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { getAllWorkspaces } from "../redux/slices/workspaceSlices";
-import { getAccountData } from "../redux/slices/accountSlice";
-import { WorkspaceCreate } from "../components/Workspace/WorkspaceCreate";
 import { Button, Card } from "@shopify/polaris";
+import { getAllWorkspaces } from "@/redux/slices/workspaceSlices";
+import { getAccountData } from "@/redux/slices/accountSlice";
+import { WorkspaceCreate } from "@/pages/Workspace/WorkspaceCreate";
 
 export const Organization = () => {
   const workspaces = useSelector(getAllWorkspaces);

@@ -11,7 +11,7 @@ import {
   TextField,
 } from "@shopify/polaris";
 import { CustomersMajor, SearchMinor } from "@shopify/polaris-icons";
-import { FlexText } from "../../styled/inputs";
+import { FlexText } from "@/styled/inputs";
 
 export const MembersModal = ({ members, title }) => {
   const [active, setActive] = useState(false);
@@ -74,6 +74,7 @@ export const MembersModal = ({ members, title }) => {
               return (
                 <ResourceItem
                   id={id}
+                  url={`/profile/${id}`}
                   media={
                     <Avatar
                       customer

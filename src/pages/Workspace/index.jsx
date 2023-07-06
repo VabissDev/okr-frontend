@@ -1,12 +1,12 @@
 import { Box, Card, Divider, HorizontalGrid, HorizontalStack, Icon, Text, VerticalStack } from '@shopify/polaris';
 import { useParams } from 'react-router-dom';
-import { getAllWorkspaces } from '../../redux/slices/workspaceSlices';
+import { getAllWorkspaces } from '@/redux/slices/workspaceSlices';
 import { useSelector } from 'react-redux';
-import { Space } from '../../styled/profilee';
-import { MembersModal } from './MembersModal';
+import { Space } from '@/styled/profilee';
 import { CustomersMinor } from '@shopify/polaris-icons';
-import { GridLayout } from '../../styled/containers';
-import { Navigations } from '../Navigation';
+import { GridLayout } from '@/styled/containers';
+import { Navigations } from '@/components/Navigation';
+import { MembersModal } from '@/components/MembersModal';
 
 
 export const Workspace = () => {

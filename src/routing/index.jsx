@@ -7,9 +7,8 @@ import { NotFound } from "@/pages/NotFound";
 import { Profile } from "@/pages/Profile";
 import EditProfile from "@/pages/EditProfile";
 import { UserList } from "@/components/Users/UserList";
-import { Workspace } from "@/components/Workspace/Workspace";
-import { WorkspaceCreate } from "@/components/Workspace/WorkspaceCreate";
-import { Organization } from "../pages/Organization";
+import { Organization } from "@/pages/Organization";
+import { Workspace } from "@/pages/Workspace";
 
 export const Routing = () => {
   const navigate = useNavigate();
@@ -44,7 +43,6 @@ export const Routing = () => {
         <Route path="/users" element={<UserList />} />
         <Route path='profile/:id' element={<Profile user={profileData} />} />
         <Route path='editprofile/:id' element={<EditProfile onSave={handleSave} user={profileData} />} />
-        <Route path='workspace/create' element={<WorkspaceCreate />} />
         <Route path="workspace/:id" element={<Workspace />} />
       </Route>
       <Route path='*' element={<NotFound />} />
