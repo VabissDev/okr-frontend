@@ -9,6 +9,7 @@ import EditProfile from "@/pages/EditProfile";
 import { UserList } from "@/components/Users/UserList";
 import { Organization } from "@/pages/Organization";
 import { Workspace } from "@/pages/Workspace";
+import { Home } from "../pages/Home";
 
 export const Routing = () => {
   const navigate = useNavigate();
@@ -37,8 +38,9 @@ export const Routing = () => {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route path="/" element={<Home />} />
       <Route path="/" element={<MainLayout />}>
-        <Route index element={<Organization />} />
+        <Route path="/workspacelist" element={<Organization />} />
         <Route path="/users" element={<UserList />} />
         <Route path="profile/:id" element={<Profile user={profileData} />} />
         <Route

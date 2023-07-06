@@ -8,7 +8,7 @@ import {
   Box,
   Icon,
   Tag,
-  PageActions,
+  PageActions
 } from "@shopify/polaris";
 import { Top } from "../styled/profilee";
 import { EditMinor } from "@shopify/polaris-icons";
@@ -29,8 +29,6 @@ export const Profile = ({ istifadeci, onSave }) => {
   const users = useSelector((state) => state.users.users);
   const profile = users.find((user) => user.id === id);
   const isAdmin = users.some((user) => account.id === profile.id);
-    const avatarSource = profile.avatarSource || "https://srv1.portal.p-cd.net/850p/2022/04/08/177405-1649405499-962966.jpg";
-
   return (
     <Card>
       <Space>
@@ -53,9 +51,9 @@ export const Profile = ({ istifadeci, onSave }) => {
           </Space>
         </Box>
         <img
-          src={avatarSource}
+          src="https://srv1.portal.p-cd.net/850p/2022/04/08/177405-1649405499-962966.jpg"
           alt=""
-          style={{ width: 99, height: 99, borderRadius: "50%" }}
+          style={{ width: 100, height: 100, borderRadius: "50%" }}
         />
       </Space>
       <Divider />
@@ -72,37 +70,42 @@ export const Profile = ({ istifadeci, onSave }) => {
             Personal Information
           </Text>
         </div>
+        <div>
+          <Link to={`/editprofile/${id}`}>
+            {isAdmin ? (
+              <Button primary>
+                <Icon source={EditMinor} color="base" />
+              </Button>
+            ) : (
+              <p></p>
+            )}
+          </Link>
+        </div>
       </div>
 
       <VerticalStack spacing="extraTight">
-        <Top>
-          <Space>
-            <Text style={{ fontWeight: "bold" }}>Team name:</Text>
-            <div style={{ display: "flex", gap: "5px" }}>
-              {profile.teams.map((team, index) => {
-                return <Tag key={index}>{team}</Tag>;
-              })}
-            </div>
-          </Space>
+          <Top>
+        <Space>
+            
+          
+          <Text style={{ fontWeight: "bold" }}>Team name:</Text>
+          {profile.teams.map((team,i) => {
+            return <Tag key={i}>{team}</Tag>;
+          })}
+        </Space>
         </Top>
       </VerticalStack>
-      <PageActions
-        primaryAction={
-          <Link to={`/editprofile/${id}`}>
-            <Button primary onClick={() => {}}>
-              <Icon source={EditMinor} color="base" />
-            </Button>
-          </Link>
-        }
-        secondaryActions={
-          isAdmin && [
+        <PageActions
+          primaryAction={{
+            content: "Save",
+          }}
+          secondaryActions={[
             {
               content: "Delete",
               destructive: true,
             },
-          ]
-        }
-      />
+          ]}
+        />
     </Card>
   );
 };
