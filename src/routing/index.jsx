@@ -14,7 +14,7 @@ export const Routing = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const login = false;
+    const login = true;
     if (!login) {
       navigate("/login");
     }
