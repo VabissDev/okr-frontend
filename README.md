@@ -43,6 +43,8 @@ The component uses Redux for managing the state and dispatching actions. Make su
 The component utilizes React Router for navigation. Ensure that you have set up your routes and have the necessary dependencies installed.
 Custom styling and additional functionality may be implemented through the imported dependencies, components, and hooks used in the Login component.
 
+![Login picture](login.png)
+
 
 ## SignUp Component Documentation
 The SignUp component is a form-based component that allows users to sign up for an account. It provides a user interface for entering name, email, password, and organization details. The component is built using the React framework and utilizes various dependencies and custom components.
@@ -87,7 +89,7 @@ Text: Displays a message with a link to the login page.
 Link: Provides a link to the login page.
 
 
-![Alt text](signup.png)
+![SignUp picture](signup.png)
 
 
 ## EditProfile Component Documentation
