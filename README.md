@@ -87,6 +87,9 @@ Text: Displays a message with a link to the login page.
 Link: Provides a link to the login page.
 
 
+![Alt text](signup.png)
+
+
 ## EditProfile Component Documentation
 
 EditProfile Component Documentation
