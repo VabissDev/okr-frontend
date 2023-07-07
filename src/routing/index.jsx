@@ -36,9 +36,9 @@ export const Routing = () => {
   };
   return (
     <Routes>
+      <Route index element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/" element={<Home />}/>
       <Route path="/" element={<MainLayout />}>
         <Route path="/organization" element={<Organization />} />
         <Route path="/users" element={<UserList />} />
