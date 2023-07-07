@@ -56,3 +56,12 @@ export const HomeLayout = styled.div`
     min-height: 100vh;
 
 `
+export const EmptyDataWrapper = styled.div`
+.Polaris-VerticalStack img {
+    width: 200px;
+    aspect-ratio: 1/1;
+    margin-block: 26px;
+    border: 1px solid var(--p-color-bg-inverse-active);
+    border-radius: 8px;
+}
+`
