@@ -44,7 +44,7 @@ export const Login = () => {
     if (formData.email && emailPattern.test(formData.email) && formData.password) {
       const user = users.find(user => user.email === formData.email)
       if (user?.password === formData.password) {
-        navigate("/workspacelist");
+        navigate("/organization");
         dispatch(login(user))
       } else setError({ checked: true })
     }

@@ -15,7 +15,7 @@ export const NotFound = () => {
         <NotFoundText variant="headingXl" as="p" alignment="center">
           Page not found
         </NotFoundText>
-        <Link to="/">
+        <Link to="/organization">
           <Button fullWidth primary>
             Go home
           </Button>

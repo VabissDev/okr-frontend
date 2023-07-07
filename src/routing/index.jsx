@@ -38,9 +38,9 @@ export const Routing = () => {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Home />}/>
       <Route path="/" element={<MainLayout />}>
-        <Route path="/workspacelist" element={<Organization />} />
+        <Route path="/organization" element={<Organization />} />
         <Route path="/users" element={<UserList />} />
         <Route path="profile/:id" element={<Profile user={profileData} />} />
         <Route

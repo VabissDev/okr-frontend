@@ -18,7 +18,6 @@ export const MainLayout = () => {
   }, []);
 
   const location = useLocation();
-  console.log(location)
 
   const toggleIsSecondaryMenuOpen = useCallback(() => {
     setIsSecondaryMenuOpen((isSecondaryMenuOpen) => !isSecondaryMenuOpen);
@@ -54,7 +53,7 @@ export const MainLayout = () => {
     width: 100,
     height: 50,
     topBarSource: `${organizations.find(org => org.name === account.org_name).url || "https://www.trplane.com/wp-content/uploads/2021/08/okrs.jpg"}`,
-    url: "/",
+    url: "/organization",
     accessibilityLabel: "Jaded Pixel",
   };
 
@@ -122,24 +121,29 @@ export const MainLayout = () => {
     />
   );
 
-  const topBarMarkup = (
-    <TopBar
-      showNavigationToggle
-      userMenu={userMenuMarkup}
-      secondaryMenu={secondaryMenuMarkup}
-      //searchResultsVisible={isSearchActive}
-      //searchField={searchFieldMarkup}
-      // searchResults={searchResultsMarkup}
-      //onSearchResultsDismiss={handleSearchResultsDismiss}
-      onNavigationToggle={handleNavigationToggle}
-    />
-  );
+  const topBarMarkup = 
+    
+    
+(
+      <TopBar
+        showNavigationToggle
+        userMenu={userMenuMarkup}
+        secondaryMenu={secondaryMenuMarkup}
+        //searchResultsVisible={isSearchActive}
+        //searchField={searchFieldMarkup}
+        // searchResults={searchResultsMarkup}
+        //onSearchResultsDismiss={handleSearchResultsDismiss}
+        onNavigationToggle={handleNavigationToggle}
+      />
+)
+  
+ ;
 
   const PageContent = () => {
     return (
       <Page>
         {
-          location.pathname !== "/"
+          location.pathname !== "/organization"
             ? <GridLayout columns="1fr 3fr" gap="30px">
               <Navigations />
               <Outlet />
