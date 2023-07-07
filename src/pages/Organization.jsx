@@ -37,8 +37,8 @@ export const Organization = () => {
   return (
     <div>
       <div style={{ marginBottom: "var(--p-space-5)" }}>
-        <Card padding="3">
-          {(account.role === "admin" || account.role === "teamlead") && (
+        {(account.role === "admin" || account.role === "teamlead") && (
+          <Card padding="3">
             <Button
               onClick={toggleCreateWorkspace}
               textAlign="left"
@@ -48,9 +48,9 @@ export const Organization = () => {
             >
               Create new workspace
             </Button>
-          )}
-          {active && <WorkspaceCreate />}
-        </Card>
+            {active && <WorkspaceCreate />}
+          </Card>
+        )}
       </div>
 
       {/* Workspaces */}
