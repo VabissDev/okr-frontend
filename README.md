@@ -150,3 +150,20 @@ VerticalStack: A layout component that stacks the user's team name and team tags
 Top: A styled component that positions the team name and team tags at the top.
 Tag: Displays the user's team names as tags.
 PageActions: Displays the primary action button for editing the profile and secondary action buttons, such as deleting the profile.
+
+
+## Organization Component Documentation
+The Organization component is responsible for displaying the organization view. Here's a breakdown of its functionality:
+
+It imports necessary modules and components for rendering.
+The workspaces and account variables are assigned values retrieved from the Redux store using useSelector.
+The active state variable and setActive function are created using the useState hook to manage the visibility of the workspace creation form.
+An array named illustrations is created, which holds references to various illustration assets.
+The accountWorkspaces variable is assigned the filtered list of workspaces that match the organization name of the logged-in account.
+The toggleCreateWorkspace function is defined to toggle the visibility of the workspace creation form when the create workspace button is clicked.
+The component returns the JSX markup, which consists of:
+A card containing the create workspace button, which is displayed only for admin and team lead roles.
+The workspace creation form, rendered conditionally based on the active state.
+A vertical stack container that renders workspace cards for each workspace in the accountWorkspaces list.
+Each workspace card includes workspace details and a randomly selected illustration from the illustrations array.
+This component provides a user interface for managing workspaces within an organization.
