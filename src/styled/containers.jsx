@@ -1,10 +1,14 @@
 import { styled } from 'styled-components'
 
-export const FormWrapper = styled.div`
+
+export const Centralizer = styled.div` 
     display: grid;
     place-items: center;
-    height: calc(100vh - 88px);
+    height: ${({ height }) => height || "calc(100vh - 88px)"};
     position: relative;
+`
+
+export const FormWrapper = styled(Centralizer)`
 
     .Polaris-Box {
         width: 300px;
@@ -43,4 +47,12 @@ export const GridLayout = styled.div`
     .Polaris-Page {
         height: calc(100vh - 56px)
     }
+`
+
+export const HomeLayout = styled.div`
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT4NIklqJTxjEGIrZNcTemhKuCYKUdn-R_sILlEPhkOdkor9IXI-JrvdD0baIbdy0F4Wc&usqp=CAU");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+
 `
