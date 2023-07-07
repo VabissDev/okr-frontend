@@ -36,7 +36,7 @@ export const Routing = () => {
   };
   return (
     <Routes>
-      <Route index element={<Home />} />
+      <Route index element={<Home />}/>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/" element={<MainLayout />}>
