@@ -41,7 +41,8 @@ export const Organization = () => {
   return (
     <div>
       <FlexContainer>
-        {(account.role === "admin" || account.role === "teamlead") && (
+        {(account.role.toLowerCase() === "admin" ||
+          account.role.toLowerCase() === "teamlead") && (
           <div style={{ flex: 1 }}>
             <Card padding="3">
               <Button
@@ -58,7 +59,7 @@ export const Organization = () => {
           </div>
         )}
 
-        {account.role === "admin" && (
+        {account.role.toLowerCase() === "admin" && (
           <div style={{ margin: "3px 10px" }}>
             <Link to="/users">
               <Button primary>
