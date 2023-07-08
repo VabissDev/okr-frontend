@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { Button, FormLayout, TextField } from "@shopify/polaris";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useParams } from "react-router-dom";
+import { getAccountData } from "../redux/slices/accountSlice";
+import { useSelector } from "react-redux";
 const EditProfile = ({ user, onSave }) => {
   const navigate = useNavigate();
-
+  const { id } = useParams();
+  const account = useSelector(getAccountData);
+  const users = useSelector((state) => state.users.users);
+  const istifadeci = users.find((user) => user.id === id);
   const [profile, setProfile] = useState({
     fullName: user.fullName,
     email: user.email,
@@ -22,7 +26,7 @@ const EditProfile = ({ user, onSave }) => {
 
   const handleSaveClick = () => {
     onSave(profile);
-    navigate(`/profile/1`);
+    navigate(`/profile/${istifadeci.id}`);
   };
 
   return (
