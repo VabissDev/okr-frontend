@@ -16,7 +16,6 @@ import { Space } from "../styled/profilee";
 import { Link, useParams } from "react-router-dom";
 import { getAccountData } from "../redux/slices/accountSlice";
 import { useSelector } from "react-redux";
-import { getAllUsers } from "../redux/slices/userSlice";
 import { EmptyData } from "../components/EmptyData";
 export const Profile = ({ istifadeci, onSave }) => {
   const [updatedUser, setUpdatedUser] = useState(null);
@@ -76,11 +75,7 @@ export const Profile = ({ istifadeci, onSave }) => {
               </Text>
             </div>
             <div>
-              <Link to={`/editprofile/${id}`}>
-                <Button primary>
-                  <Icon source={EditMinor} color="base" />
-                </Button>
-              </Link>
+             
             </div>
           </div>
 
@@ -95,9 +90,11 @@ export const Profile = ({ istifadeci, onSave }) => {
             </Top>
           </VerticalStack>
           <PageActions
-            primaryAction={{
-              content: "Save",
-            }}
+            primaryAction={ <Link to={`/editprofile/${id}`}>
+                <Button primary>
+                  <Icon source={EditMinor} color="base" />
+                </Button>
+              </Link> }
             secondaryActions={
               isAdmin && [
                 {
