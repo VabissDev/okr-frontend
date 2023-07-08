@@ -76,11 +76,7 @@ export const Profile = ({ istifadeci, onSave }) => {
               </Text>
             </div>
             <div>
-              <Link to={`/editprofile/${id}`}>
-                <Button primary>
-                  <Icon source={EditMinor} color="base" />
-                </Button>
-              </Link>
+             
             </div>
           </div>
 
@@ -95,9 +91,11 @@ export const Profile = ({ istifadeci, onSave }) => {
             </Top>
           </VerticalStack>
           <PageActions
-            primaryAction={{
-              content: "Save",
-            }}
+            primaryAction={ <Link to={`/editprofile/${id}`}>
+                <Button primary>
+                  <Icon source={EditMinor} color="base" />
+                </Button>
+              </Link> }
             secondaryActions={
               isAdmin && [
                 {
