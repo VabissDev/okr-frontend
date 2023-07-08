@@ -30,7 +30,9 @@ export const Profile = ({ istifadeci, onSave }) => {
   const profile = users.find((user) => user.id === id);
   const isAdmin = users.some((user) => account.id === profile?.id);
   console.log(profile);
-
+  const avatarSource =
+    profile.avatarSource ||
+    "https://srv1.portal.p-cd.net/850p/2022/04/08/177405-1649405499-962966.jpg";
   return (
     <>
       {profile ? (
@@ -55,7 +57,7 @@ export const Profile = ({ istifadeci, onSave }) => {
               </Space>
             </Box>
             <img
-              src="https://srv1.portal.p-cd.net/850p/2022/04/08/177405-1649405499-962966.jpg"
+              src={avatarSource}
               alt=""
               style={{ width: 100, height: 100, borderRadius: "50%" }}
             />
@@ -74,27 +76,29 @@ export const Profile = ({ istifadeci, onSave }) => {
                 Personal Information
               </Text>
             </div>
-            <div>
-             
-            </div>
+            <div></div>
           </div>
 
           <VerticalStack spacing="extraTight">
             <Top>
               <Space>
                 <Text style={{ fontWeight: "bold" }}>Team name:</Text>
-                {profile?.teams.map((team, i) => {
-                  return <Tag key={i}>{team}</Tag>;
-                })}
+                <div style={{ display: "flex", gap: "5px" }}>
+                  {profile.teams.map((team) => {
+                    return <Tag>{team}</Tag>;
+                  })}
+                </div>
               </Space>
             </Top>
           </VerticalStack>
           <PageActions
-            primaryAction={ <Link to={`/editprofile/${id}`}>
+            primaryAction={
+              <Link to={`/editprofile/${id}`}>
                 <Button primary>
                   <Icon source={EditMinor} color="base" />
                 </Button>
-              </Link> }
+              </Link>
+            }
             secondaryActions={
               isAdmin && [
                 {
