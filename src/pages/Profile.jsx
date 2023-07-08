@@ -8,7 +8,7 @@ import {
   Box,
   Icon,
   Tag,
-  PageActions
+  PageActions,
 } from "@shopify/polaris";
 import { Top } from "../styled/profilee";
 import { EditMinor } from "@shopify/polaris-icons";
@@ -30,13 +30,12 @@ export const Profile = ({ istifadeci, onSave }) => {
   const users = useSelector((state) => state.users.users);
   const profile = users.find((user) => user.id === id);
   const isAdmin = users.some((user) => account.id === profile?.id);
-  console.log(profile)
+  console.log(profile);
 
   return (
     <>
-      {
-        profile
-          ?  <Card>
+      {profile ? (
+        <Card>
           <Space>
             <Box>
               <Text variant="heading3xl" as="h1">
@@ -48,7 +47,7 @@ export const Profile = ({ istifadeci, onSave }) => {
                 </Text>
                 <Text>{profile?.org_name}</Text>
               </Space>
-      
+
               <Space>
                 <Text variant="headingMd" as="p" fontWeight="semibold">
                   Email:
@@ -63,7 +62,7 @@ export const Profile = ({ istifadeci, onSave }) => {
             />
           </Space>
           <Divider />
-      
+
           <div
             style={{
               display: "flex",
@@ -78,22 +77,16 @@ export const Profile = ({ istifadeci, onSave }) => {
             </div>
             <div>
               <Link to={`/editprofile/${id}`}>
-                {isAdmin ? (
-                  <Button primary>
-                    <Icon source={EditMinor} color="base" />
-                  </Button>
-                ) : (
-                  <p></p>
-                )}
+                <Button primary>
+                  <Icon source={EditMinor} color="base" />
+                </Button>
               </Link>
             </div>
           </div>
-      
+
           <VerticalStack spacing="extraTight">
             <Top>
               <Space>
-      
-      
                 <Text style={{ fontWeight: "bold" }}>Team name:</Text>
                 {profile?.teams.map((team, i) => {
                   return <Tag key={i}>{team}</Tag>;
@@ -105,22 +98,23 @@ export const Profile = ({ istifadeci, onSave }) => {
             primaryAction={{
               content: "Save",
             }}
-            secondaryActions={[
-              {
-                content: "Delete",
-                destructive: true,
-              },
-            ]}
+            secondaryActions={
+              isAdmin && [
+                {
+                  content: "Delete",
+                  destructive: true,
+                },
+              ]
+            }
           />
         </Card>
-          : <EmptyData
-            heading="Sorry, user cannot be found."
-            actionTitle="Back To Workspaces"
-            actionPath="/organization"
-          />
-      }
+      ) : (
+        <EmptyData
+          heading="Sorry, user cannot be found."
+          actionTitle="Back To Workspaces"
+          actionPath="/organization"
+        />
+      )}
     </>
   );
 };
-
-
