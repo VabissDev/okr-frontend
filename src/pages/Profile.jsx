@@ -16,7 +16,6 @@ import { Space } from "../styled/profilee";
 import { Link, useParams } from "react-router-dom";
 import { getAccountData } from "../redux/slices/accountSlice";
 import { useSelector } from "react-redux";
-import { getAllUsers } from "../redux/slices/userSlice";
 import { EmptyData } from "../components/EmptyData";
 export const Profile = ({ istifadeci, onSave }) => {
   const [updatedUser, setUpdatedUser] = useState(null);
