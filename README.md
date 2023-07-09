@@ -1,5 +1,8 @@
 # okr-frontend
 
+## Home Component Documentation
+This component provides a visually appealing and informative layout for the home page, displaying a header with a logo and buttons for logging in and signing up. The content section introduces the concept of an OKR system, its benefits, and encourages users to get started by clicking the "Get Started" button that links to the signup page.
+
 ## Login Component Documentation
 The Login component is a form-based component that allows users to log in to an application. It provides a user interface for entering email and password credentials, as well as an option for selecting organization login and a link for password recovery. The component is built using the React framework and utilizes various dependencies and custom components.
 
