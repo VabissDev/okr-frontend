@@ -1,44 +1,37 @@
-<<<<<<< HEAD
-import { Button, TextField, Text, Divider, Icon } from "@shopify/polaris";
-import { LoginLayout } from "@/components/LoginLayout";
-import { Link } from "react-router-dom";
-import { ViewMinor, HideMinor } from "@shopify/polaris-icons";
-=======
 import { Button, TextField, Text, Divider, Icon, Checkbox, Box, Banner } from "@shopify/polaris";
 import { LoginLayout } from "@/components/LoginLayout";
 import { Link, useNavigate } from "react-router-dom";
 import { ViewMinor, HideMinor, CircleAlertMajor } from "@shopify/polaris-icons";
->>>>>>> origin/master
 import { useState } from "react";
 import { PasswordInputWrapper } from "../styled/inputs";
+import { useDispatch, useSelector } from "react-redux";
+import { Space } from "../styled/profilee";
+import { login } from "../redux/slices/accountSlice";
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    isOrganization: false
+  })
+  const [error, setError] = useState({
+    email: "",
+    password: "",
+    checked: false
+  });
+
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
-  const title = "Log in";
+  const { users } = useSelector((state) => state.users);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const title = "Welcome Back";
 
-  const handleEmailChange = (value) => {
-    setEmail(value);
-  };
-
-  const handlePasswordChange = (value) => {
-    setPassword(value);
+  const handleChange = key => value => {
+    setFormData({ ...formData, [key]: typeof value === 'string' ? value.trim() : value });
   };
 
   const onSubmit = () => {
-<<<<<<< HEAD
-    if (!email.trim()) {
-      setError("Please enter your email address.");
-      return;
-    } else if (!password.trim()) {
-      setError("Please enter a password.");
-      return;
-    } else if (password.trim().length < 8) {
-      setError("Password should be at least 8 characters long.");
-      return;
-=======
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -55,41 +48,34 @@ export const Login = () => {
         dispatch(login(user))
         console.log(user, "login")
       } else setError({ checked: true })
->>>>>>> origin/master
     }
-
-    setError("");
-    console.log("submitted");
   };
 
   return (
     <LoginLayout title={title} onSubmit={onSubmit}>
-<<<<<<< HEAD
-=======
       {
         error.checked &&
         <Banner status="critical">
           <Text color="critical" children="Email or password is invalid" />
         </Banner>
       }
->>>>>>> origin/master
       <TextField
-        type="email"
+        type="text"
         placeholder="example@site.com"
-        label="Username / Email:"
-        value={email}
-        onChange={handleEmailChange}
+        label="Email:"
+        value={formData.email || ""}
+        onChange={handleChange("email")}
         autoComplete="email"
-        error={error && error.includes("email") ? error : ""}
+        error={error.email}
       />
       <PasswordInputWrapper>
         <TextField
           label="Password:"
           type={showPassword ? "text" : "password"}
           placeholder="*********"
-          value={password}
-          onChange={handlePasswordChange}
-          error={error && error.toLowerCase().includes("password") ? error : ""}
+          value={formData.password || ""}
+          onChange={handleChange("password")}
+          error={error.password}
         />
         <Button
           className="show-password-btn"
@@ -98,10 +84,19 @@ export const Login = () => {
           <Icon source={showPassword ? ViewMinor : HideMinor} color="base" />
         </Button>
       </PasswordInputWrapper>
+      <Space>
+        <Checkbox
+          label="Organization"
+          checked={formData.isOrganization || false}
+          onChange={handleChange("isOrganization")}
+        />
+        <Link to="#">Forgot Password?</Link>
+      </Space>
+
       <Button submit fullWidth primary children="Log In" />
       <Divider />
       <Text alignment="center" variant="headingSm" as="p" color="subdued">
-        Or <Link to="/signup"> Sign Up</Link>
+        Don't have an account? <Link to="/signup"> Join Us</Link>
       </Text>
     </LoginLayout>
   );
