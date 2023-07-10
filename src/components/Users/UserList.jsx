@@ -28,6 +28,7 @@ export const UserList = () => {
     };
 
     return [
+     
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div style={{ display: "flex", gap: "20px" }}>
           <Avatar
@@ -51,5 +52,6 @@ export const UserList = () => {
       headings={["Users"]}
       rows={rows}
     />
+    
   );
 };

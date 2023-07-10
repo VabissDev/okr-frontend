@@ -10,7 +10,6 @@ import { UserList } from "@/components/Users/UserList";
 import { Organization } from "@/pages/Organization";
 import { Workspace } from "@/pages/Workspace";
 import { Home } from "../pages/Home";
-
 export const Routing = () => {
   const navigate = useNavigate();
 
