@@ -1,7 +1,7 @@
-import { Button, TextField, Text, Divider, Icon, Checkbox } from "@shopify/polaris";
+import { Button, TextField, Text, Divider, Icon, Checkbox, Box, Banner } from "@shopify/polaris";
 import { LoginLayout } from "@/components/LoginLayout";
 import { Link, useNavigate } from "react-router-dom";
-import { ViewMinor, HideMinor } from "@shopify/polaris-icons";
+import { ViewMinor, HideMinor, CircleAlertMajor } from "@shopify/polaris-icons";
 import { useState } from "react";
 import { PasswordInputWrapper } from "../styled/inputs";
 import { useDispatch, useSelector } from "react-redux";
@@ -53,7 +53,10 @@ export const Login = () => {
   return (
     <LoginLayout title={title} onSubmit={onSubmit}>
       {
-        error.checked && <Text color="critical" children="Email or password is invalid" />
+        error.checked &&
+        <Banner status="critical">
+          <Text color="critical" children="Email or password is invalid" />
+        </Banner>
       }
       <TextField
         type="text"
