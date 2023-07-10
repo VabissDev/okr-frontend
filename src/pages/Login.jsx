@@ -46,6 +46,7 @@ export const Login = () => {
       if (user?.password === formData.password) {
         navigate("/organization");
         dispatch(login(user))
+        console.log(user, "login")
       } else setError({ checked: true })
     }
   };

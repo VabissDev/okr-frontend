@@ -21,6 +21,7 @@ export const Organization = () => {
   const workspaces = useSelector(getAllWorkspaces);
   const account = useSelector(getAccountData);
   const [active, setActive] = useState(false);
+  console.log(account, "org page")
 
   const illustrations = [
     illustration1,
@@ -41,8 +42,8 @@ export const Organization = () => {
   return (
     <div>
       <FlexContainer>
-        {(account.role.toLowerCase() === "admin" ||
-          account.role.toLowerCase() === "teamlead") && (
+        {(account.role?.toLowerCase() === "admin" ||
+          account.role?.toLowerCase() === "teamlead") && (
           <div style={{ flex: 1 }}>
             <Card padding="3">
               <Button
@@ -59,7 +60,7 @@ export const Organization = () => {
           </div>
         )}
 
-        {account.role.toLowerCase() === "admin" && (
+        {account.role?.toLowerCase() === "admin" && (
           <div style={{ margin: "3px 10px" }}>
             <Link to="/users">
               <Button primary>

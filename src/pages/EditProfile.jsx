@@ -4,17 +4,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getAccountData } from "../redux/slices/accountSlice";
 import { useSelector } from "react-redux";
 
-const EditProfile = ({ user, onSave }) => {
+const EditProfile = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const users = useSelector((state) => state.users.users);
-  const istifadeci = users.find((user) => user.id === id);
+  const user = users.find((user) => user.id === id);
+  const account = useSelector(getAccountData);
   const [profile, setProfile] = useState({
-    fullName: user.fullName,
+    fullName: user.name,
     email: user.email,
-    password: user.password,
-    orgName: user.orgName,
-    //teamName: user.teamName,
+    password: '',
+    orgName: user.org_name,
   });
 
   const handleInputChange = (value, name) => {
@@ -28,8 +28,6 @@ const EditProfile = ({ user, onSave }) => {
     onSave(profile);
     navigate(`/profile/${istifadeci.id}`);
   };
-
-  const account = useSelector(getAccountData);
 
   return (
     <div className="container">
