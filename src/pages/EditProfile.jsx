@@ -54,7 +54,7 @@ const EditProfile = ({ user, onSave }) => {
           type="text"
           value={profile.orgName}
           onChange={(value) => handleInputChange(value, "orgName")}
-          required
+          readOnly
         />
         <TextField
           label="Team Name:"
