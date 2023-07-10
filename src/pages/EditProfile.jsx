@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Button, FormLayout, TextField } from "@shopify/polaris";
+import { useNavigate } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import { getAccountData } from "../redux/slices/accountSlice";
 import { useSelector } from "react-redux";
+
 const EditProfile = ({ user, onSave }) => {
   const navigate = useNavigate();
   const { id } = useParams();
