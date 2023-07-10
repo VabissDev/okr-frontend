@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+import React from "react";
+import { Page, Layout, Card, Text } from "@shopify/polaris";
+import { VerticalStack } from "@shopify/polaris";
+
+export const Profile = () => {
+=======
 import React, { useState } from "react";
 import {
   Button,
@@ -37,22 +44,37 @@ export const Profile = () => {
   const avatarSource =
     profile.avatarSource ||
     "https://srv1.portal.p-cd.net/850p/2022/04/08/177405-1649405499-962966.jpg";
+>>>>>>> origin/master
   return (
-    <>
-      {profile ? (
-        <Card>
-          <Space>
-            <Box>
-              <Text variant="heading3xl" as="h1">
-                {profile?.name}
-              </Text>
-              <Space>
-                <Text variant="headingMd" as="p" fontWeight="semibold">
-                  Organization:
-                </Text>
-                <Text>{profile?.org_name}</Text>
-              </Space>
+    <Page>
+      <Layout>
+        <Layout.Section>
+          <Card sectioned>
+            <VerticalStack>
+              <Text>Name: John Doe</Text>
+              <Text>Email: johndoe@example.com</Text>
+              <Text>Company: ABC Company</Text>
+              <Text>Position: Frontend Developer</Text>
+            </VerticalStack>
+          </Card>
+        </Layout.Section>
 
+<<<<<<< HEAD
+        <Layout.Section>
+          <Card sectioned>
+            <Text>Progress of My Objectives</Text>
+            <ul>
+              <li>Objective 1</li>
+              <li>Objective 2</li>
+              <li>Objective 3</li>
+            </ul>
+          </Card>
+        </Layout.Section>
+      </Layout>
+    </Page>
+  );
+}
+=======
               <Space>
                 <Text variant="headingMd" as="p" fontWeight="semibold">
                   Email:
@@ -129,4 +151,5 @@ export const Profile = () => {
   );
 };
 
+>>>>>>> origin/master
 
