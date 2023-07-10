@@ -10,7 +10,7 @@ const EditProfile = ({ user, onSave }) => {
     email: user.email,
     password: user.password,
     orgName: user.orgName,
-    teamName: user.teamName,
+    //teamName: user.teamName,
   });
 
   const handleInputChange = (value, name) => {
@@ -55,13 +55,6 @@ const EditProfile = ({ user, onSave }) => {
           value={profile.orgName}
           onChange={(value) => handleInputChange(value, "orgName")}
           readOnly
-        />
-        <TextField
-          label="Team Name:"
-          type="text"
-          value={profile.teamName}
-          onChange={(value) => handleInputChange(value, "teamName")}
-          required
         />
         <Button primary onClick={handleSaveClick}>
           Save
