@@ -10,9 +10,8 @@ export const PasswordInputWrapper = styled.div`
         min-height: var(--p-font-line-height-4);
         border: none;
         box-shadow: none;
-        background: transparent;
         &:hover {
-            background: transparent;
+            background: var(--p-color-bg);
         }
         @media (min-width: 475px){
             left: 85%;
@@ -21,19 +20,5 @@ export const PasswordInputWrapper = styled.div`
             left: 88%;
         }
     }
-`
 
-export const TagWrapper = styled.div`
-    cursor: pointer;
-    .Polaris-Tag__TagText {
-        display: flex;
-        gap: 5px;
-    }
-`
-export const FlexText = styled.div`
-cursor: pointer;
-.Polaris-Text--root {
-    display: flex;
-    gap: 5px;
-}
 `

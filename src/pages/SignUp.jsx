@@ -27,7 +27,7 @@ export const SignUp = () => {
     password: false,
     confirm: false,
   });
-  const title = "Create Account";
+  const title = "Sign Up";
 
   const handleNameChange = (value) => {
     setName(value);
@@ -89,7 +89,7 @@ export const SignUp = () => {
   return (
     <LoginLayout title={title} onSubmit={handleSubmit}>
       <TextField
-        label="Full Name / Organization Name:"
+        label="Full Name"
         type="text"
         placeholder="John Doe"
         value={name}
@@ -97,7 +97,7 @@ export const SignUp = () => {
         error={error && error.includes("name") ? error : ""}
       />
       <TextField
-        label="Email:"
+        label="Email"
         type="email"
         placeholder="example@site.com"
         value={email}
@@ -122,7 +122,7 @@ export const SignUp = () => {
             })
           }
         >
-          <Icon source={showPassword.password ? ViewMinor : HideMinor} color="base" />
+          <Icon source={showPassword ? ViewMinor : HideMinor} color="base" />
         </Button>
       </PasswordInputWrapper>
       <PasswordInputWrapper>
@@ -142,7 +142,7 @@ export const SignUp = () => {
             setShowPassword({ ...showPassword, confirm: !showPassword.confirm })
           }
         >
-          <Icon source={showPassword.confirm ? ViewMinor : HideMinor} color="base" />
+          <Icon source={showPassword ? ViewMinor : HideMinor} color="base" />
         </Button>
       </PasswordInputWrapper>
 
@@ -157,7 +157,7 @@ export const SignUp = () => {
       </Button>
       <Divider />
       <Text alignment="center" variant="headingSm" as="p" color="subdued">
-        Already have an account, <Link to="/login"> Log In</Link>
+        If you already have an account <Link to="/login"> Log In</Link>
       </Text>
     </LoginLayout>
   );
