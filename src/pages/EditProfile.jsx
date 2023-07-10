@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, FormLayout, TextField } from "@shopify/polaris";
-import { useNavigate } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import { getAccountData } from "../redux/slices/accountSlice";
 import { useSelector } from "react-redux";
@@ -8,7 +7,6 @@ import { useSelector } from "react-redux";
 const EditProfile = ({ user, onSave }) => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const account = useSelector(getAccountData);
   const users = useSelector((state) => state.users.users);
   const istifadeci = users.find((user) => user.id === id);
   const [profile, setProfile] = useState({
@@ -31,7 +29,7 @@ const EditProfile = ({ user, onSave }) => {
     navigate(`/profile/${istifadeci.id}`);
   };
 
-  //const account = useSelector(getAccountData);
+  const account = useSelector(getAccountData);
 
   return (
     <div className="container">
@@ -42,6 +40,7 @@ const EditProfile = ({ user, onSave }) => {
           value={profile.fullName}
           onChange={(value) => handleInputChange(value, "fullName")}
           required
+          placeholder={account.name}
         />
         <TextField
           label="Email:"
@@ -49,11 +48,11 @@ const EditProfile = ({ user, onSave }) => {
           value={profile.email}
           onChange={(value) => handleInputChange(value, "email")}
           readOnly
+          placeholder={account.email}
         />
         <TextField
           label="Password:"
           type="password"
-          value={profile.password}
           onChange={(value) => handleInputChange(value, "password")}
           required
         />
@@ -63,6 +62,7 @@ const EditProfile = ({ user, onSave }) => {
           value={profile.orgName}
           onChange={(value) => handleInputChange(value, "orgName")}
           readOnly
+          placeholder={account.org_name}
         />
         <Button primary onClick={handleSaveClick}>
           Save
