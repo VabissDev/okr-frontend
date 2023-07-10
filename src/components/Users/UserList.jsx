@@ -1,60 +1,55 @@
-import { useState } from "react";
-import { DataTable } from "@shopify/polaris";
-
+import { useSelector } from "react-redux";
+import { DataTable, Avatar, Button } from "@shopify/polaris";
+import { getAllUsers } from "../../redux/slices/userSlice";
+import { getAccountData } from "../../redux/slices/accountSlice";
+import { useDispatch } from "react-redux";
+import { removeUser } from "../../redux/slices/userSlice";
 export const UserList = () => {
-  const [users, setUsers] = useState([
-    { id: 1, name: "Agha", email: "agha@gmail.com", dateJoined: "2023-29-06" },
-    { id: 1, name: "Rock", email: "rock@gmail.com", dateJoined: "2023-30-06" },
-    { id: 1, name: "Cr", email: "cr@gmail.com", dateJoined: "2023-28-06" },
-  ]);
-  const [sort, setSort] = useState("name");
-  const [sortDirection, setSortDirection] = useState("asc");
+  const users = useSelector(getAllUsers);
+  console.log(users);
+  const account = useSelector(getAccountData);
+  const dispatch = useDispatch();
 
-  const handleSort = (e) => {
-    if (e === sort) {
-      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
-    } else {
-      setSort(e);
-      setSortDirection("asc");
-    }
+  const handleDeleteUser = (userId) => {
+    dispatch(removeUser(userId));
   };
 
-  const sortedUsers = [...users].sort((a, b) => {
-    const first = a[sort];
-    const second = b[sort];
+  const rows = users.map((user) => {
+    const editBtn = {
+      url: `/editprofile/${user.id}`,
+      primary: true,
+      disabled: account.role !== "admin",
+    };
 
-    if (first < second) {
-      return sortDirection === "asc" ? -1 : 1;
-    }
-    if (first > second) {
-      return sortDirection === "asc" ? 1 : -1;
-    }
-    return 0;
+    const deleteBtn = {
+      destructive: true,
+      disabled: account.role !== "admin",
+      onClick: () => handleDeleteUser(user.id),
+    };
+
+    return [
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", gap: "20px" }}>
+          <Avatar
+            customer
+            size="medium"
+            name={user.name}
+            source={user.avatarSource}
+          />
+          {user.name}
+        </div>
+        <div style={{ display: "flex", gap: "10px" }}>
+          <Button {...editBtn}>Edit</Button>
+          <Button {...deleteBtn}>Delete</Button>
+        </div>
+      </div>,
+    ];
   });
-
-  const rows = sortedUsers.map((user) => [
-    user.name,
-    user.email,
-    user.dateJoined,
-  ]);
-
-  const colContentType = ["text", "text", "text"];
-  const sortableColumns = [true, true, true];
-
-  const handleSortClick = (columnIndex) => {
-    const field = ["name", "email", "dateJoined"][columnIndex];
-    handleSort(field);
-  };
-
   return (
     <DataTable
-      columnContentTypes={colContentType}
-      headings={["Name", "Email", "Date Joined"]}
+      columnContentTypes={["", "text", "text", "text"]}
+      headings={["Users"]}
       rows={rows}
-      sortable={[...sortableColumns]}
-      defaultSortDirection={sortDirection}
-      initialSortColumnIndex={0}
-      onSort={handleSortClick}
     />
   );
 };

@@ -27,7 +27,7 @@ export const SignUp = () => {
     password: false,
     confirm: false,
   });
-  const title = "Sign Up";
+  const title = "Create Account";
 
   const handleNameChange = (value) => {
     setName(value);
@@ -157,7 +157,7 @@ export const SignUp = () => {
       </Button>
       <Divider />
       <Text alignment="center" variant="headingSm" as="p" color="subdued">
-        If you already have an account <Link to="/login"> Log In</Link>
+        Already have an account, <Link to="/login"> Log In</Link>
       </Text>
     </LoginLayout>
   );

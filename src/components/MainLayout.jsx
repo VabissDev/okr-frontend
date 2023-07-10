@@ -1,19 +1,23 @@
 import { useState, useCallback } from "react";
-import { TopBar, ActionList, Frame, Text, Page } from "@shopify/polaris";
+import { TopBar, ActionList, Frame, Text, Page, Box, Thumbnail } from "@shopify/polaris";
 import { ArrowRightMinor } from "@shopify/polaris-icons";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { GridLayout } from "../styled/containers";
 import { Navigations } from "./Navigation";
+import { useSelector } from "react-redux";
+import { getAccountData } from "../redux/slices/accountSlice";
 
 export const MainLayout = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const id = 1;
+  const account = useSelector(getAccountData);
   const toggleIsUserMenuOpen = useCallback(() => {
     setIsUserMenuOpen((isUserMenuOpen) => !isUserMenuOpen);
   }, []);
+
+  const location = useLocation();
 
   const toggleIsSecondaryMenuOpen = useCallback(() => {
     setIsSecondaryMenuOpen((isSecondaryMenuOpen) => !isSecondaryMenuOpen);
@@ -33,11 +37,23 @@ export const MainLayout = () => {
     console.log("toggle navigation visibility");
   }, []);
 
+
+  const organizations = [
+    {
+      name: "ABC Company",
+      url: "https://www.abc-company.no/wp-content/uploads/2015/10/new-logo.png"
+    },
+    {
+      name: "XYZ Corporation",
+      url: "https://www.xyzcomms.com/wp-content/uploads/2017/10/XYZ.png"
+    }
+  ]
+
   const logo = {
     width: 100,
-    height: 30,
-    topBarSource: "https://www.trplane.com/wp-content/uploads/2021/08/okrs.jpg",
-    url: "/",
+    height: 50,
+    topBarSource: `${organizations.find(org => org.name === account.org_name).url || "https://www.trplane.com/wp-content/uploads/2021/08/okrs.jpg"}`,
+    url: "/organization",
     accessibilityLabel: "Jaded Pixel",
   };
 
@@ -49,7 +65,7 @@ export const MainLayout = () => {
             {
               content: (
                 <Link
-                  to={`/profile/${id}`}
+                  to={`/profile/${account.id}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   My profile
@@ -62,9 +78,9 @@ export const MainLayout = () => {
           items: [{ icon: ArrowRightMinor, content: "Logout" }],
         },
       ]}
-      name="John Doe"
-      detail="VABISS"
-      initials="D"
+      name={account.name}
+      detail={account.role}
+      avatar={account.avatarSource}
       open={isUserMenuOpen}
       onToggle={toggleIsUserMenuOpen}
     />
@@ -105,26 +121,36 @@ export const MainLayout = () => {
     />
   );
 
-  const topBarMarkup = (
-    <TopBar
-      showNavigationToggle
-      userMenu={userMenuMarkup}
-      secondaryMenu={secondaryMenuMarkup}
-      searchResultsVisible={isSearchActive}
-      searchField={searchFieldMarkup}
-      searchResults={searchResultsMarkup}
-      onSearchResultsDismiss={handleSearchResultsDismiss}
-      onNavigationToggle={handleNavigationToggle}
-    />
-  );
+  const topBarMarkup = 
+    
+    
+(
+      <TopBar
+        showNavigationToggle
+        userMenu={userMenuMarkup}
+        secondaryMenu={secondaryMenuMarkup}
+        //searchResultsVisible={isSearchActive}
+        //searchField={searchFieldMarkup}
+        // searchResults={searchResultsMarkup}
+        //onSearchResultsDismiss={handleSearchResultsDismiss}
+        onNavigationToggle={handleNavigationToggle}
+      />
+)
+  
+ ;
 
   const PageContent = () => {
     return (
       <Page>
-        <GridLayout columns="1fr 3fr" gap="30px">
-          <Navigations />
-          <Outlet />
-        </GridLayout>
+        {
+          location.pathname !== "/organization"
+            ? <GridLayout columns="1fr 3fr" gap="30px">
+              <Navigations />
+              <Outlet />
+            </GridLayout>
+            : <Outlet />
+        }
+
       </Page>
     )
 

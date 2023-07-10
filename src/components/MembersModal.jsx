@@ -11,6 +11,7 @@ import {
   TextField,
 } from "@shopify/polaris";
 import { CustomersMajor, SearchMinor } from "@shopify/polaris-icons";
+import { FlexText } from "@/styled/inputs";
 
 export const MembersModal = ({ members, title }) => {
   const [active, setActive] = useState(false);
@@ -19,23 +20,27 @@ export const MembersModal = ({ members, title }) => {
   const handleChange = useCallback(() => setActive(!active), [active]);
   const handleSearchChange = useCallback((value) => setSearchValue(value), []);
 
+    
+    const modalTitle = <FlexText>{title}</FlexText>
+
   const activator = (
-    <Button onClick={handleChange} size="slim">
-      <div
+    
+      <Button onClick={handleChange} size="slim">
+        {/* <div
         style={{
           display: "flex",
           alignItems: "center",
           gap: "5px",
           padding: "5px",
         }}
-      >
+      > */}
         {/* <Icon source={CustomersMajor} color="base" />
         20 */}
         <Text variant="bodyMd" fontWeight="bold" as="h3">
-          {title}
+          {modalTitle}
         </Text>
-      </div>
-    </Button>
+        {/* </div> */}
+      </Button>
   );
 
   const filteredMembers = members.filter((member) =>
@@ -46,7 +51,7 @@ export const MembersModal = ({ members, title }) => {
     <Modal
       activator={activator}
       open={active}
-      title={title}
+      title={modalTitle}
       onClose={handleChange}
     >
       <Modal.Section>
@@ -69,6 +74,7 @@ export const MembersModal = ({ members, title }) => {
               return (
                 <ResourceItem
                   id={id}
+                  url={`/profile/${id}`}
                   media={
                     <Avatar
                       customer

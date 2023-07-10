@@ -6,16 +6,22 @@ const initialState = {
 };
 
 export const userSlice = createSlice({
-  name: "user",
+  name: "users",
   initialState,
   reducers: {
     signup: (state, action) => {
       state.users.push(action.payload);
     },
-    // login: (state, action) => {},
+    removeUser: (state, action) => {
+      const userId = action.payload;
+      state.users = state.users.filter(user => user.id !== userId);
+    },
+    
   },
 });
 
-export const { signup } = userSlice.actions;
+export const { signup,removeUser } = userSlice.actions;
+
+export const getAllUsers = state => state.users.users
 
 export default userSlice.reducer;

@@ -1,65 +1,80 @@
-import { Button, TextField, Text, Divider, Icon, Checkbox } from "@shopify/polaris";
+import { Button, TextField, Text, Divider, Icon, Checkbox, Box, Banner } from "@shopify/polaris";
 import { LoginLayout } from "@/components/LoginLayout";
-import { Link } from "react-router-dom";
-import { ViewMinor, HideMinor } from "@shopify/polaris-icons";
+import { Link, useNavigate } from "react-router-dom";
+import { ViewMinor, HideMinor, CircleAlertMajor } from "@shopify/polaris-icons";
 import { useState } from "react";
 import { PasswordInputWrapper } from "../styled/inputs";
+import { useDispatch, useSelector } from "react-redux";
+import { Space } from "../styled/profilee";
+import { login } from "../redux/slices/accountSlice";
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    isOrganization: false
+  })
+  const [error, setError] = useState({
+    email: "",
+    password: "",
+    checked: false
+  });
+
   const [showPassword, setShowPassword] = useState(false);
-  const [isOrganization, setIsOrganization] = useState(false);
-  const [error, setError] = useState("");
-  const title = "Log in";
+  const { users } = useSelector((state) => state.users);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const title = "Welcome Back";
 
-  const handleEmailChange = (value) => {
-    setEmail(value);
-  };
-
-  const handlePasswordChange = (value) => {
-    setPassword(value);
-  };
-
-  const handleCheckbox = () => {
-    setIsOrganization(!isOrganization);
+  const handleChange = key => value => {
+    setFormData({ ...formData, [key]: typeof value === 'string' ? value.trim() : value });
   };
 
   const onSubmit = () => {
-    if (!email.trim()) {
-      setError("Please enter your email address.");
-      return;
-    } else if (!password.trim()) {
-      setError("Please enter a password.");
-      return;
-    } else if (password.trim().length < 8) {
-      setError("Password should be at least 8 characters long.");
-      return;
-    }
 
-    setError("");
-    console.log("submitted");
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const errors = {};
+    (formData.email && !emailPattern.test(formData.email)) && (errors.email = 'Invalid Email Format');
+    !formData.email && (errors.email = 'Email field is required');
+    !formData.password && (errors.password = 'Please, enter your password.');
+    setError(errors)
+
+    if (formData.email && emailPattern.test(formData.email) && formData.password) {
+      const user = users.find(user => user.email === formData.email)
+      if (user?.password === formData.password) {
+        navigate("/organization");
+        dispatch(login(user))
+      } else setError({ checked: true })
+    }
   };
 
   return (
     <LoginLayout title={title} onSubmit={onSubmit}>
+      {
+        error.checked &&
+        <Banner status="critical">
+          <Text color="critical" children="Email or password is invalid" />
+        </Banner>
+      }
       <TextField
-        type="email"
+        type="text"
         placeholder="example@site.com"
         label="Email:"
-        value={email}
-        onChange={handleEmailChange}
+        value={formData.email || ""}
+        onChange={handleChange("email")}
         autoComplete="email"
-        error={error && error.includes("email") ? error : ""}
+        error={error.email}
       />
       <PasswordInputWrapper>
         <TextField
           label="Password:"
           type={showPassword ? "text" : "password"}
           placeholder="*********"
-          value={password}
-          onChange={handlePasswordChange}
-          error={error && error.toLowerCase().includes("password") ? error : ""}
+          value={formData.password || ""}
+          onChange={handleChange("password")}
+          error={error.password}
         />
         <Button
           className="show-password-btn"
@@ -68,15 +83,19 @@ export const Login = () => {
           <Icon source={showPassword ? ViewMinor : HideMinor} color="base" />
         </Button>
       </PasswordInputWrapper>
-      <Checkbox
-        label="Organization"
-        checked={isOrganization}
-        onChange={handleCheckbox}
-      />
+      <Space>
+        <Checkbox
+          label="Organization"
+          checked={formData.isOrganization || false}
+          onChange={handleChange("isOrganization")}
+        />
+        <Link to="#">Forgot Password?</Link>
+      </Space>
+
       <Button submit fullWidth primary children="Log In" />
       <Divider />
       <Text alignment="center" variant="headingSm" as="p" color="subdued">
-        Or <Link to="/signup"> Join Us</Link>
+        Don't have an account? <Link to="/signup"> Join Us</Link>
       </Text>
     </LoginLayout>
   );
