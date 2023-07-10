@@ -9,7 +9,7 @@ const initialState = {
     "password": "12345689",
     "org_name": "ABC Company",
     "teams": ["Team 1", "Team 2", "Team 3"],
-    "role": "member"
+    "role": "admin"
   },
   isLoggedIn: true,
   permissions: null,

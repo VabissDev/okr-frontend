@@ -66,27 +66,26 @@ export const Profile = () => {
               style={{ width: 100, height: 100, borderRadius: "50%" }}
             />
           </Space>
+          <Divider />
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              paddingTop: "10px",
+            }}
+          >
+            <div>
+              <Text variant="heading2xl" as="h3">
+                Personal Information
+              </Text>
+            </div>
+            <div></div>
+          </div>
 
           {
-            canEdit &&
+            (canEdit || isAdmin) &&
             <>
-              <Divider />
-
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  paddingTop: "10px",
-                }}
-              >
-                <div>
-                  <Text variant="heading2xl" as="h3">
-                    Personal Information
-                  </Text>
-                </div>
-                <div></div>
-              </div>
-
               <VerticalStack spacing="extraTight">
                 <Top>
                   <Space>
