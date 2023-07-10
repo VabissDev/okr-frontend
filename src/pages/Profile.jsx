@@ -54,7 +54,7 @@ export const Profile = ({ user, onSave }) => {
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
           <Text variant="heading2xl" as="h3">
-            Personal Info
+            Personal Information
           </Text>
         </div>
         <div>

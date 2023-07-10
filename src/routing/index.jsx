@@ -33,7 +33,7 @@ export const Routing = () => {
       email: "",
       password:"",
       orgName: "",
-      teamName: "",
+      //teamName: "",
       image: "",
     });
   

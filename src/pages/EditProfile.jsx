@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Button, FormLayout, TextField } from "@shopify/polaris";
 import { useNavigate } from "react-router-dom";
 
+//import { getAccountData } from "../redux/slices/accountSlice";
+
 const EditProfile = ({ user, onSave }) => {
   const navigate = useNavigate();
 
@@ -24,6 +26,8 @@ const EditProfile = ({ user, onSave }) => {
     onSave(profile);
     navigate(`/profile/1`);
   };
+
+  //const account = useSelector(getAccountData);
 
   return (
     <div className="container">
