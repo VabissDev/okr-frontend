@@ -1,23 +1,31 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { TopBar, ActionList, Frame, Text, Page, Box, Thumbnail } from "@shopify/polaris";
 import { ArrowRightMinor } from "@shopify/polaris-icons";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { GridLayout } from "../styled/containers";
 import { Navigations } from "./Navigation";
 import { useSelector } from "react-redux";
-import { getAccountData } from "../redux/slices/accountSlice";
+import { getAccountData, isLoggedIn } from "../redux/slices/accountSlice";
 
 export const MainLayout = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const login = useSelector(isLoggedIn)
   const account = useSelector(getAccountData);
+  console.log(account, "main")
   const toggleIsUserMenuOpen = useCallback(() => {
     setIsUserMenuOpen((isUserMenuOpen) => !isUserMenuOpen);
   }, []);
 
   const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    !login && navigate('/login')
+  }, [])
+
 
   const toggleIsSecondaryMenuOpen = useCallback(() => {
     setIsSecondaryMenuOpen((isSecondaryMenuOpen) => !isSecondaryMenuOpen);
@@ -52,7 +60,7 @@ export const MainLayout = () => {
   const logo = {
     width: 100,
     height: 50,
-    topBarSource: `${organizations.find(org => org.name === account.org_name).url || "https://www.trplane.com/wp-content/uploads/2021/08/okrs.jpg"}`,
+    topBarSource: `${organizations.find(org => org.name === account.org_name)?.url || "https://www.trplane.com/wp-content/uploads/2021/08/okrs.jpg"}`,
     url: "/organization",
     accessibilityLabel: "Jaded Pixel",
   };
@@ -121,10 +129,10 @@ export const MainLayout = () => {
     />
   );
 
-  const topBarMarkup = 
-    
-    
-(
+  const topBarMarkup =
+
+
+    (
       <TopBar
         showNavigationToggle
         userMenu={userMenuMarkup}
@@ -135,9 +143,9 @@ export const MainLayout = () => {
         //onSearchResultsDismiss={handleSearchResultsDismiss}
         onNavigationToggle={handleNavigationToggle}
       />
-)
-  
- ;
+    )
+
+    ;
 
   const PageContent = () => {
     return (

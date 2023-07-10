@@ -12,10 +12,14 @@ import {
 } from "@shopify/polaris";
 import { CustomersMajor, SearchMinor } from "@shopify/polaris-icons";
 import { FlexText } from "@/styled/inputs";
+import PaginationComponent from './PaginationComponent'; // Import the PaginationComponent
 
 export const MembersModal = ({ members, title }) => {
   const [active, setActive] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+
 
   const handleChange = useCallback(() => setActive(!active), [active]);
   const handleSearchChange = useCallback((value) => setSearchValue(value), []);
@@ -23,8 +27,23 @@ export const MembersModal = ({ members, title }) => {
     
     const modalTitle = <FlexText>{title}</FlexText>
 
-  const activator = (
-    
+    const filteredMembers = members.filter((member) =>
+    member.name.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
+  const itemsPerPage = 5; // Number of items per page
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedMembers = filteredMembers.slice(startIndex, endIndex);
+
+  const handlePageChange = useCallback((selectedPage) => {
+    setCurrentPage(selectedPage);
+    // Perform any actions you want when the page changes
+  }, []);
+
+
+  return(
+    <>
       <Button onClick={handleChange} size="slim">
         {/* <div
         style={{
@@ -41,15 +60,9 @@ export const MembersModal = ({ members, title }) => {
         </Text>
         {/* </div> */}
       </Button>
-  );
-
-  const filteredMembers = members.filter((member) =>
-    member.name.toLowerCase().includes(searchValue.toLowerCase())
-  );
-
-  return (
+ 
     <Modal
-      activator={activator}
+     
       open={active}
       title={modalTitle}
       onClose={handleChange}
@@ -67,35 +80,38 @@ export const MembersModal = ({ members, title }) => {
         <LegacyCard>
           <ResourceList
             resourceName={{ singular: "customer", plural: "customers" }}
-            items={filteredMembers}
+            items={paginatedMembers}
             renderItem={(item) => {
               const { id, avatarSource, name, email } = item;
 
               return (
                 <ResourceItem
-                  id={id}
-                  url={`/profile/${id}`}
-                  media={
-                    <Avatar
-                      customer
-                      size="medium"
-                      name={name}
-                      source={avatarSource}
-                    />
-                  }
-                  accessibilityLabel={`View details for ${name}`}
-                  name={name}
-                >
-                  <Text variant="bodyMd" fontWeight="bold" as="h3">
-                    {name}
-                  </Text>
-                  <div>{email}</div>
+                id={id}
+                url={`/profile/${id}`}
+                media={<Avatar customer size="medium" name={name} source={avatarSource} />}
+                accessibilityLabel={`View details for ${name}`}
+                name={name}
+              >
+                <Text variant="bodyMd" fontWeight="bold" as="h3">
+                  {name}
+                </Text>
+                <div>{email}</div>
                 </ResourceItem>
               );
             }}
           />
         </LegacyCard>
       </Modal.Section>
+
+      <PaginationComponent
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+
+        totalItems={filteredMembers.length}
+        itemsPerPage={itemsPerPage}
+      />
+
     </Modal>
+    </>
   );
 };

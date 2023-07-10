@@ -3,18 +3,18 @@ import { Button, FormLayout, TextField } from "@shopify/polaris";
 import { useNavigate, useParams } from "react-router-dom";
 import { getAccountData } from "../redux/slices/accountSlice";
 import { useSelector } from "react-redux";
-const EditProfile = ({ user, onSave }) => {
+
+const EditProfile = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const account = useSelector(getAccountData);
   const users = useSelector((state) => state.users.users);
-  const istifadeci = users.find((user) => user.id === id);
+  const user = users.find((user) => user.id === id);
+  const account = useSelector(getAccountData);
   const [profile, setProfile] = useState({
-    fullName: user.fullName,
+    fullName: user.name,
     email: user.email,
-    password: user.password,
-    orgName: user.orgName,
-    teamName: user.teamName,
+    password: '',
+    orgName: user.org_name,
   });
 
   const handleInputChange = (value, name) => {
@@ -38,6 +38,7 @@ const EditProfile = ({ user, onSave }) => {
           value={profile.fullName}
           onChange={(value) => handleInputChange(value, "fullName")}
           required
+          placeholder={account.name}
         />
         <TextField
           label="Email:"
@@ -45,6 +46,7 @@ const EditProfile = ({ user, onSave }) => {
           value={profile.email}
           onChange={(value) => handleInputChange(value, "email")}
           readOnly
+          placeholder={account.email}
         />
         <TextField
           label="Password:"
@@ -58,14 +60,8 @@ const EditProfile = ({ user, onSave }) => {
           type="text"
           value={profile.orgName}
           onChange={(value) => handleInputChange(value, "orgName")}
-          required
-        />
-        <TextField
-          label="Team Name:"
-          type="text"
-          value={profile.teamName}
-          onChange={(value) => handleInputChange(value, "teamName")}
-          required
+          readOnly
+          placeholder={account.org_name}
         />
         <Button primary onClick={handleSaveClick}>
           Save
