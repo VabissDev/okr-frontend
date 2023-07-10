@@ -1,20 +1,36 @@
+import React, { useState, useCallback } from 'react';
+
 import { useSelector } from "react-redux";
-import { DataTable, Avatar, Button } from "@shopify/polaris";
+import { DataTable, Avatar, Button, EmptyState } from "@shopify/polaris";
 import { getAllUsers } from "../../redux/slices/userSlice";
 import { getAccountData } from "../../redux/slices/accountSlice";
 import { useDispatch } from "react-redux";
 import { removeUser } from "../../redux/slices/userSlice";
+
+import PaginationComponent from '../PaginationComponent'; // Import the PaginationComponent
+
 export const UserList = () => {
   const users = useSelector(getAllUsers);
   console.log(users);
   const account = useSelector(getAccountData);
   const dispatch = useDispatch();
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5; // Number of items per page
+
   const handleDeleteUser = (userId) => {
     dispatch(removeUser(userId));
   };
 
-  const rows = users.map((user) => {
+  const handlePageChange = useCallback((selectedPage) => {
+    setCurrentPage(selectedPage);
+  }, []);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedUsers = users.slice(startIndex, endIndex);
+
+  const rows = paginatedUsers.map((user) => {
     const editBtn = {
       url: `/editprofile/${user.id}`,
       primary: true,
@@ -46,12 +62,34 @@ export const UserList = () => {
       </div>,
     ];
   });
+
+  const totalItems = users.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
   return (
-    <DataTable
-      columnContentTypes={["", "text", "text", "text"]}
-      headings={["Users"]}
-      rows={rows}
-    />
-    
+    <>
+      {paginatedUsers.length > 0 ? (
+        <>
+          <DataTable
+            columnContentTypes={['', 'text', 'text', 'text']}
+            headings={['Users']}
+            rows={rows}
+          />
+          {totalPages > 1 && (
+            <PaginationComponent
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+              totalItems={totalItems}
+              itemsPerPage={itemsPerPage}
+            />
+          )}
+        </>
+      ) : (
+        <EmptyState
+          heading="No users found"
+          action={{ content: 'Refresh', onAction: () => window.location.reload() }}
+        />
+      )}
+    </>
   );
 };
