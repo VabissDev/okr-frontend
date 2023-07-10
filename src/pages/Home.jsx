@@ -18,8 +18,8 @@ const Header = () => {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <Thumbnail source="https://www.trplane.com/wp-content/uploads/2021/08/okrs.jpg" alt="okr" />
         <div style={{ display: "flex", gap: "10px" }}>
-          <Button url="/login">Log In</Button>
-          <Button url="/signup" primary>Sign Up</Button>
+         <Link to="/login"> <Button>Log In</Button></Link>
+         <Link to="/signup"> <Button primary>Sign Up</Button></Link>
         </div>
       </div>
     </LoginPageHeader>
