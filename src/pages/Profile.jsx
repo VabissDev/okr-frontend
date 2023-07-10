@@ -82,13 +82,13 @@ export const Profile = ({ istifadeci, onSave }) => {
           <VerticalStack spacing="extraTight">
             <Top>
               <Space>
-            <Text style={{ fontWeight: "bold" }}>Team name:</Text>
-            <div style={{ display: "flex", gap: "5px" }}>
-              {profile.teams.map((team) => {
-                return <Tag>{team}</Tag>;
-              })}
-            </div>
-          </Space>
+                <Text style={{ fontWeight: "bold" }}>Team name:</Text>
+                <div style={{ display: "flex", gap: "5px" }}>
+                  {profile.teams.map((team, index) => {
+                    return <Tag key={index}>{team}</Tag>;
+                  })}
+                </div>
+              </Space>
             </Top>
           </VerticalStack>
           <PageActions
