@@ -53,6 +53,7 @@ const EditProfile = ({ user, onSave }) => {
         <TextField
           label="Password:"
           type="password"
+          value={profile.password}
           onChange={(value) => handleInputChange(value, "password")}
           required
         />
