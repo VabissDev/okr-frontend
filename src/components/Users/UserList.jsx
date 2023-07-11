@@ -1,10 +1,9 @@
 import React, { useState, useCallback } from 'react';
 
-import { useSelector } from "react-redux";
-import { DataTable, Avatar, Button, EmptyState } from "@shopify/polaris";
+import { useSelector, useDispatch } from "react-redux";
+import { DataTable, Avatar, Button, Pagination } from "@shopify/polaris";
 import { getAllUsers } from "../../redux/slices/userSlice";
 import { getAccountData } from "../../redux/slices/accountSlice";
-import { useDispatch } from "react-redux";
 import { removeUser } from "../../redux/slices/userSlice";
 
 import PaginationComponent from '../PaginationComponent'; // Import the PaginationComponent
@@ -14,6 +13,7 @@ export const UserList = () => {
   console.log(users);
   const account = useSelector(getAccountData);
   const dispatch = useDispatch();
+
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5; // Number of items per page
@@ -64,31 +64,23 @@ export const UserList = () => {
   });
 
   const totalItems = users.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   return (
     <>
-      {paginatedUsers.length > 0 ? (
-        <>
-          <DataTable
-            columnContentTypes={['', 'text', 'text', 'text']}
-            headings={['Users']}
-            rows={rows}
-          />
-          {totalPages > 1 && (
-            <PaginationComponent
-              currentPage={currentPage}
-              onPageChange={handlePageChange}
-              totalItems={totalItems}
-              itemsPerPage={itemsPerPage}
-            />
-          )}
-        </>
-      ) : (
-        <EmptyState
-          heading="No users found"
-          action={{ content: 'Refresh', onAction: () => window.location.reload() }}
+      <DataTable
+        columnContentTypes={['', 'text', 'text', 'text']}
+        headings={['Users']}
+        rows={rows}
+      />
+      {totalItems > itemsPerPage && (
+         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem', marginLeft: "200px" }}>
+        <PaginationComponent 
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
         />
+        </div>
       )}
     </>
   );
