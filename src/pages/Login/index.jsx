@@ -3,9 +3,10 @@ import { LoginLayout } from "@/components/LoginLayout";
 import { Link, useNavigate } from "react-router-dom";
 import { ViewMinor, HideMinor } from "@shopify/polaris-icons";
 import { useState } from "react";
-import { PasswordInputWrapper } from "../styled/inputs";
+import { PasswordInputWrapper } from "@/styled/inputs";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../redux/slices/accountSlice";
+import { login } from "@/redux/slices/accountSlice";
+
 
 export const Login = () => {
 
