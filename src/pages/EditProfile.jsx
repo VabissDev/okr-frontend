@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, FormLayout, TextField } from "@shopify/polaris";
 import { useNavigate, useParams } from "react-router-dom";
-import { getAccountData } from "../redux/slices/accountSlice";
+import { getAccountData } from "@/redux/slices/accountSlice";
 import { useSelector } from "react-redux";
 
 const EditProfile = () => {

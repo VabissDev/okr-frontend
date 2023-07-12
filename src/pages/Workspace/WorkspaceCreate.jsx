@@ -9,7 +9,6 @@ import {
   Select,
   Label,
   Text,
-  Bleed,
   Box,
 } from "@shopify/polaris";
 
@@ -79,8 +78,6 @@ export const WorkspaceCreate = () => {
     };
 
     dispatch(createWorkspace(newWorkspace));
-
-    console.log(newWorkspace);
     setDescription("");
     setWorkspaceName("");
   };

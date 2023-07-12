@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   Button,
   Card,
@@ -10,32 +9,25 @@ import {
   Tag,
   PageActions,
 } from "@shopify/polaris";
-import { Top } from "../styled/profilee";
+import { Top, Space} from "@/styled/profilee";
 import { EditMinor } from "@shopify/polaris-icons";
-import { Space } from "../styled/profilee";
 import { Link, useParams } from "react-router-dom";
-import { getAccountData } from "../redux/slices/accountSlice";
+import { getAccountData } from "@/redux/slices/accountSlice";
 import { useSelector } from "react-redux";
-import { EmptyData } from "../components/EmptyData";
+import { EmptyData } from "@/components/EmptyData";
 
 
 
 export const Profile = () => {
 
-  // const [updatedUser, setUpdatedUser] = useState(null);
-  // const handleSaveProfile = (updatedProfile) => {
-  //   setUpdatedUser(updatedProfile);
-  //   onSave(updatedProfile);
-  // };
-
   const { id } = useParams();
   const account = useSelector(getAccountData);
   const users = useSelector((state) => state.users.users);
   const profile = users.find((user) => user.id === id);
-  const canEdit = account.id === profile.id;
+  const canEdit = account.id === profile?.id;
   const isAdmin = account.role === 'admin'
   const avatarSource =
-    profile.avatarSource ||
+    profile?.avatarSource ||
     "https://srv1.portal.p-cd.net/850p/2022/04/08/177405-1649405499-962966.jpg";
   return (
     <>
