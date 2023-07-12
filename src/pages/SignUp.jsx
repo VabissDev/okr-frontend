@@ -17,6 +17,7 @@ export const SignUp = () => {
   const dispatch = useDispatch();
   const { users } = useSelector((state) => state.users);
   const [name, setName] = useState("");
+  const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -32,6 +33,10 @@ export const SignUp = () => {
     setName(value);
   };
 
+  const handleCompanyChange = (value) => {
+    setCompany(value);
+  };
+
   const handleEmailChange = (value) => {
     setEmail(value);
   };
@@ -42,10 +47,6 @@ export const SignUp = () => {
 
   const handlePasswordConfirmChange = (value) => {
     setPasswordConfirm(value);
-  };
-
-  const handleCheckbox = () => {
-    setIsOrganization(!isOrganization);
   };
 
   const handleSubmit = (e) => {
@@ -70,15 +71,22 @@ export const SignUp = () => {
 
     // Proceed with form submission
     setError("");
-    dispatch(
-      signup({
-        id: Date.now(),
-        organization: isOrganization,
-        name,
-        email,
-        password,
-      })
-    );
+    const data = {
+      name, 
+      company,
+      email,
+      password
+    }
+    console.log(data)
+    // dispatch(
+    //   signup({
+    //     id: Date.now(),
+    //     organization: isOrganization,
+    //     name,
+    //     email,
+    //     password,
+    //   })
+    // );
     setName("");
     setEmail("");
     setPassword("");
@@ -93,6 +101,14 @@ export const SignUp = () => {
         placeholder="John Doe"
         value={name}
         onChange={handleNameChange}
+        error={error && error.includes("name") ? error : ""}
+      />
+      <TextField
+        label="Company Name:"
+        type="text"
+        placeholder="ABC Company"
+        value={company}
+        onChange={handleCompanyChange}
         error={error && error.includes("name") ? error : ""}
       />
       <TextField
