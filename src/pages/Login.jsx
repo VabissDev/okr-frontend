@@ -1,11 +1,10 @@
-import { Button, TextField, Text, Divider, Icon, Checkbox, Box, Banner } from "@shopify/polaris";
+import { Button, TextField, Text, Divider, Icon, Banner } from "@shopify/polaris";
 import { LoginLayout } from "@/components/LoginLayout";
 import { Link, useNavigate } from "react-router-dom";
-import { ViewMinor, HideMinor, CircleAlertMajor } from "@shopify/polaris-icons";
+import { ViewMinor, HideMinor } from "@shopify/polaris-icons";
 import { useState } from "react";
 import { PasswordInputWrapper } from "../styled/inputs";
 import { useDispatch, useSelector } from "react-redux";
-import { Space } from "../styled/profilee";
 import { login } from "../redux/slices/accountSlice";
 
 export const Login = () => {
@@ -84,14 +83,7 @@ export const Login = () => {
           <Icon source={showPassword ? ViewMinor : HideMinor} color="base" />
         </Button>
       </PasswordInputWrapper>
-      <Space>
-        <Checkbox
-          label="Organization"
-          checked={formData.isOrganization || false}
-          onChange={handleChange("isOrganization")}
-        />
-        <Link to="#">Forgot Password?</Link>
-      </Space>
+      <Link to="#">Forgot Password?</Link>
 
       <Button submit fullWidth primary children="Log In" />
       <Divider />
