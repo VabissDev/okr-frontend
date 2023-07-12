@@ -10,9 +10,9 @@ import {
   Text,
   TextField,
 } from "@shopify/polaris";
-import { CustomersMajor, SearchMinor } from "@shopify/polaris-icons";
+import { SearchMinor } from "@shopify/polaris-icons";
 import { FlexText } from "@/styled/inputs";
-import PaginationComponent from './PaginationComponent'; // Import the PaginationComponent
+import PaginationComponent from '@/components/PaginationComponent'; 
 
 export const MembersModal = ({ members, title }) => {
   const [active, setActive] = useState(false);

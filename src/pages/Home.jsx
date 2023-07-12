@@ -3,15 +3,6 @@ import { Page, Layout, Text, Button, Thumbnail } from "@shopify/polaris";
 import { Centralizer, GridLayout, HomeLayout, LoginPageHeader } from "@/styled/containers";
 
 
-export const Home = () => {
-  return (
-    <HomeLayout>
-      <Header />
-      <Content />
-    </HomeLayout>
-  );
-};
-
 const Header = () => {
   return (
     <LoginPageHeader>
@@ -52,5 +43,14 @@ const Content = () => {
         </Layout.Section>
       </Layout>
     </Page>
+  );
+};
+
+export const Home = () => {
+  return (
+    <HomeLayout>
+      <Header />
+      <Content />
+    </HomeLayout>
   );
 };

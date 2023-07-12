@@ -1,8 +1,8 @@
 import { Navigation, Text } from "@shopify/polaris";
 import { HomeMinor, HashtagMinor, LockMinor } from "@shopify/polaris-icons";
 import { useSelector } from "react-redux";
-import { getAllWorkspaces } from "../redux/slices/workspaceSlices";
-import { getAccountData } from "../redux/slices/accountSlice";
+import { getAllWorkspaces } from "@/redux/slices/workspaceSlices";
+import { getAccountData } from "@/redux/slices/accountSlice";
 
 export const Navigations = () => {
   const workspaces = useSelector(getAllWorkspaces);
@@ -45,28 +45,6 @@ export const Navigations = () => {
     <Navigation location="/">
       <Navigation.Section
         items={navlinks}
-        // items={[
-        //   {
-        //     url: "/",
-        //     label: "Workspace Management",
-        //     icon: HomeMinor,
-        //   },
-        //   {
-        //     url: "/profile/:id",
-        //     excludePaths: ["/"],
-        //     label: "Profile",
-        //   },
-        //   {
-        //     url: "/editprofile/:id",
-        //     excludePaths: ["/"],
-        //     label: "Edit Profile",
-        //   },
-        //   {
-        //     url: "/workspace/create",
-        //     excludePaths: ["/"],
-        //     label: "Create Workspace",
-        //   },
-        // ]}
       />
     </Navigation>
   );

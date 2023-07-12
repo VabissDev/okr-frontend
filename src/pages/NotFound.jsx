@@ -1,10 +1,9 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import {
   NotFoundContainer,
   NotFoundHeading,
   NotFoundText,
-} from "../styled/notFound";
+} from "@/styled/notFound";
 import { Button, Card } from "@shopify/polaris";
 
 export const NotFound = () => {

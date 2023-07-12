@@ -8,7 +8,7 @@ import EditProfile from "@/pages/EditProfile";
 import { UserList } from "@/components/Users/UserList";
 import { Organization } from "@/pages/Organization";
 import { Workspace } from "@/pages/Workspace";
-import { Home } from "../pages/Home";
+import { Home } from "@/pages/Home";
 
 export const Routing = () => {
 
@@ -23,8 +23,8 @@ export const Routing = () => {
         <Route path="profile/:id" element={<Profile  />} />
         <Route path="editprofile/:id" element={<EditProfile />} />
         <Route path="workspace/:id" element={<Workspace />} />
-        <Route path="*" element={<NotFound />} />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

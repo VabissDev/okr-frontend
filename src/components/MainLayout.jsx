@@ -1,24 +1,17 @@
 import { useState, useCallback, useEffect } from "react";
-import { TopBar, ActionList, Frame, Text, Page, Box, Thumbnail } from "@shopify/polaris";
+import { TopBar, Frame, Text, Page } from "@shopify/polaris";
 import { ArrowRightMinor } from "@shopify/polaris-icons";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { GridLayout } from "../styled/containers";
+import { GridLayout } from "@/styled/containers";
 import { Navigations } from "./Navigation";
 import { useSelector } from "react-redux";
-import { getAccountData, isLoggedIn } from "../redux/slices/accountSlice";
+import { getAccountData, isLoggedIn } from "@/redux/slices/accountSlice";
 
 export const MainLayout = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false);
-  const [isSearchActive, setIsSearchActive] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
   const login = useSelector(isLoggedIn)
   const account = useSelector(getAccountData);
-  console.log(account, "main")
-  const toggleIsUserMenuOpen = useCallback(() => {
-    setIsUserMenuOpen((isUserMenuOpen) => !isUserMenuOpen);
-  }, []);
-
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -26,20 +19,14 @@ export const MainLayout = () => {
     !login && navigate('/login')
   }, [])
 
+  const toggleIsUserMenuOpen = useCallback(() => {
+    setIsUserMenuOpen((isUserMenuOpen) => !isUserMenuOpen);
+  }, []);
 
   const toggleIsSecondaryMenuOpen = useCallback(() => {
     setIsSecondaryMenuOpen((isSecondaryMenuOpen) => !isSecondaryMenuOpen);
   }, []);
 
-  const handleSearchResultsDismiss = useCallback(() => {
-    setIsSearchActive(false);
-    setSearchValue("");
-  }, []);
-
-  const handleSearchChange = useCallback((value) => {
-    setSearchValue(value);
-    setIsSearchActive(value.length > 0);
-  }, []);
 
   const handleNavigationToggle = useCallback(() => {
     console.log("toggle navigation visibility");
@@ -64,6 +51,7 @@ export const MainLayout = () => {
     url: "/organization",
     accessibilityLabel: "Jaded Pixel",
   };
+
 
   const userMenuMarkup = (
     <TopBar.UserMenu
@@ -94,20 +82,7 @@ export const MainLayout = () => {
     />
   );
 
-  const searchResultsMarkup = (
-    <ActionList
-      items={[{ content: "Shopify help center" }, { content: "Edit Profile" }]}
-    />
-  );
 
-  const searchFieldMarkup = (
-    <TopBar.SearchField
-      onChange={handleSearchChange}
-      value={searchValue}
-      placeholder="Search"
-      showFocusBorder
-    />
-  );
 
   const secondaryMenuMarkup = (
     <TopBar.Menu
@@ -137,10 +112,6 @@ export const MainLayout = () => {
         showNavigationToggle
         userMenu={userMenuMarkup}
         secondaryMenu={secondaryMenuMarkup}
-        //searchResultsVisible={isSearchActive}
-        //searchField={searchFieldMarkup}
-        // searchResults={searchResultsMarkup}
-        //onSearchResultsDismiss={handleSearchResultsDismiss}
         onNavigationToggle={handleNavigationToggle}
       />
     )
@@ -158,7 +129,6 @@ export const MainLayout = () => {
             </GridLayout>
             : <Outlet />
         }
-
       </Page>
     )
 
