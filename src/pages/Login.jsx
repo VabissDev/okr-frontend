@@ -9,51 +9,45 @@ import { login } from "../redux/slices/accountSlice";
 
 export const Login = () => {
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    isOrganization: false
-  })
-  const [error, setError] = useState({
-    email: "",
-    password: "",
-    checked: false
-  });
-
-  const [showPassword, setShowPassword] = useState(false);
-  const { users } = useSelector((state) => state.users);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
   const dispatch = useDispatch();
+  const { users } = useSelector((state) => state.users);
   const title = "Welcome Back";
 
-  const handleChange = key => value => {
-    setFormData({ ...formData, [key]: typeof value === 'string' ? value.trim() : value });
-  };
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const [email, setEmail] = useState("")
+  const [emailError, setEmailError] = useState("")
+  
+  const [pwd, setPwd] = useState("");
+  const [pwdError, setPwdError] = useState("");
 
-  const onSubmit = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [ validFormData, setValidFormData] = useState(false);
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const hanleEmailChange = (value) => setEmail(value.trim())
+  const hanlePwdChange = (value) => setPwd(value.trim())
 
-    const errors = {};
-    (formData.email && !emailPattern.test(formData.email)) && (errors.email = 'Invalid Email Format');
-    !formData.email && (errors.email = 'Email field is required');
-    !formData.password && (errors.password = 'Please, enter your password.');
-    setError(errors)
+  const handleSubmit = () => {
 
-    if (formData.email && emailPattern.test(formData.email) && formData.password) {
-      const user = users.find(user => user.email === formData.email)
-      if (user?.password === formData.password) {
+    const validEmail = EMAIL_REGEX.test(email) 
+
+    setEmailError(!validEmail ? "Invalid Email Format" : "");
+    setPwdError(!pwd ? "Password field is required" : "");
+    !email && setEmailError("Email field is required");
+
+    if (validEmail && pwd) {
+      const user = users.find(user => user.email === email)
+      if (user?.password === pwd) {
         navigate("/organization");
         dispatch(login(user))
-        console.log(user, "login")
-      } else setError({ checked: true })
+      } else setValidFormData(true)
     }
   };
 
   return (
-    <LoginLayout title={title} onSubmit={onSubmit}>
+    <LoginLayout title={title} onSubmit={handleSubmit}>
       {
-        error.checked &&
+        validFormData &&
         <Banner status="critical">
           <Text color="critical" children="Email or password is invalid" />
         </Banner>
@@ -62,19 +56,19 @@ export const Login = () => {
         type="text"
         placeholder="example@site.com"
         label="Email:"
-        value={formData.email || ""}
-        onChange={handleChange("email")}
+        value={email}
+        onChange={hanleEmailChange}
         autoComplete="email"
-        error={error.email}
+        error={emailError}
       />
       <PasswordInputWrapper>
         <TextField
           label="Password:"
           type={showPassword ? "text" : "password"}
           placeholder="*********"
-          value={formData.password || ""}
-          onChange={handleChange("password")}
-          error={error.password}
+          value={pwd}
+          onChange={hanlePwdChange}
+          error={pwdError}
         />
         <Button
           className="show-password-btn"
