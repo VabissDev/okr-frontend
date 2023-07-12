@@ -6,7 +6,6 @@ import {
   Button,
   Text,
   Divider,
-  Checkbox,
   Icon,
 } from "@shopify/polaris";
 import { LoginLayout } from "@/components/LoginLayout";
@@ -89,7 +88,7 @@ export const SignUp = () => {
   return (
     <LoginLayout title={title} onSubmit={handleSubmit}>
       <TextField
-        label="Full Name / Organization Name:"
+        label="Full Name:"
         type="text"
         placeholder="John Doe"
         value={name}
@@ -145,12 +144,6 @@ export const SignUp = () => {
           <Icon source={showPassword.confirm ? ViewMinor : HideMinor} color="base" />
         </Button>
       </PasswordInputWrapper>
-
-      <Checkbox
-        label="Organization"
-        checked={isOrganization}
-        onChange={handleCheckbox}
-      />
 
       <Button primary submit fullWidth>
         Sign Up
