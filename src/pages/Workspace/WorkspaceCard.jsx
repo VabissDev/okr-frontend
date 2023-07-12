@@ -1,5 +1,4 @@
 import { CalloutCard } from "@shopify/polaris";
-import React from "react";
 
 export const WorkspaceCard = ({ name, description, id, illustration }) => {
   return (

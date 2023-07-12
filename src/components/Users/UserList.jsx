@@ -1,12 +1,11 @@
-import React, { useState, useCallback } from 'react';
-
+import { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { DataTable, Avatar, Button, Pagination } from "@shopify/polaris";
-import { getAllUsers } from "../../redux/slices/userSlice";
-import { getAccountData } from "../../redux/slices/accountSlice";
-import { removeUser } from "../../redux/slices/userSlice";
+import { DataTable, Avatar, Button } from "@shopify/polaris";
+import { getAllUsers } from "@/redux/slices/userSlice";
+import { getAccountData } from "@/redux/slices/accountSlice";
+import { removeUser } from "@/redux/slices/userSlice";
+import PaginationComponent from '@/components/PaginationComponent';
 
-import PaginationComponent from '../PaginationComponent'; // Import the PaginationComponent
 
 export const UserList = () => {
   const users = useSelector(getAllUsers);

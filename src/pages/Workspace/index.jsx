@@ -1,23 +1,19 @@
 import {
-  Box,
   Card,
   Divider,
-  HorizontalGrid,
-  HorizontalStack,
   Icon,
   Text,
-  VerticalStack,
 } from "@shopify/polaris";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getAllWorkspaces } from "@/redux/slices/workspaceSlices";
 import { useSelector } from "react-redux";
 import { Space } from "@/styled/profilee";
 import { CustomersMinor } from "@shopify/polaris-icons";
 import { GridLayout } from "@/styled/containers";
-import { Navigations } from "@/components/Navigation";
 import { MembersModal } from "@/components/MembersModal";
 
 export const Workspace = () => {
+
   const { id } = useParams();
   const data = useSelector(getAllWorkspaces);
   const workspace = data.find((item) => item.id === +id);
@@ -74,12 +70,13 @@ export const Workspace = () => {
             as="h5"
             children="Admin:"
           />
-          <Text
-            variant="headingMd"
-            as="p"
-            color="subdued"
-            children={owner?.name || "unknown"}
-          />
+          <Link to={`/profile/${workspace.owner}`}>
+            <Text
+              variant="headingMd"
+              as="p"
+              children={owner?.name || "unknown"}
+            />
+          </Link>
         </GridLayout>
         <Space>
           <Text
