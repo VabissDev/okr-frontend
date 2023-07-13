@@ -4,7 +4,7 @@ import { SignUp } from "@/pages/SignUp";
 import { MainLayout } from "@/components/MainLayout";
 import { NotFound } from "@/pages/NotFound";
 import { Profile } from "@/pages/Profile";
-import EditProfile from "@/pages/EditProfile";
+// import EditProfile from "@/pages/EditProfile";
 import { UserList } from "@/components/Users/UserList";
 import { Organization } from "@/pages/Organization";
 import { Workspace } from "@/pages/Workspace";
@@ -23,7 +23,7 @@ export const Routing = () => {
         <Route path="users" element={<UserList />} />
 
         <Route path="profile/:id" element={<Profile  />} />
-        <Route path="editprofile/:id" element={<EditProfile />} />
+        {/* <Route path="editprofile/:id" element={<EditProfile />} /> */}
         <Route path="workspace/:id" element={<Workspace />} />
 
       </Route>
