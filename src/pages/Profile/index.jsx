@@ -15,9 +15,7 @@ import { Link, useParams } from "react-router-dom";
 import { getAccountData } from "@/redux/slices/accountSlice";
 import { useSelector } from "react-redux";
 import { EmptyData } from "@/components/EmptyData";
-import EditProfile from "./EditProfile";
-
-
+import { EditUserForm } from "@/components/Users";
 
 export const Profile = () => {
 
@@ -96,7 +94,7 @@ export const Profile = () => {
             
                 primaryAction={
 
-                  <EditProfile></EditProfile>
+                  <EditUserForm id={id}/>
                   // <Link to={`/editprofile/${id}`}>
                   //   <Button primary>
                   //     <Icon source={EditMinor} color="base" />

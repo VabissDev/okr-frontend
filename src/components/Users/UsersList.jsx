@@ -5,6 +5,7 @@ import { getAllUsers } from "@/redux/slices/userSlice";
 import { getAccountData } from "@/redux/slices/accountSlice";
 import { removeUser } from "@/redux/slices/userSlice";
 import PaginationComponent from '@/components/PaginationComponent';
+import { EditUserForm } from './EditUserForm';
 
 
 export const UserList = () => {
@@ -43,7 +44,7 @@ export const UserList = () => {
     };
 
     return [
-     
+
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div style={{ display: "flex", gap: "20px" }}>
           <Avatar
@@ -54,16 +55,19 @@ export const UserList = () => {
           />
           {user.name}
         </div>
-        <div style={{ display: "flex", gap: "10px" }}>
-          <Button {...editBtn}>Edit</Button>
-          <Button {...deleteBtn}>Delete</Button>
-        </div>
+        {
+          account.role === 'admin' &&
+          <div style={{ display: "flex", gap: "10px" }}>
+            <EditUserForm id={user.id} />
+            <Button {...deleteBtn}>Delete</Button>
+          </div>
+        }
+
       </div>,
     ];
   });
 
   const totalItems = users.length;
-   
 
   return (
     <>
@@ -71,18 +75,18 @@ export const UserList = () => {
         columnContentTypes={['', 'text', 'text', 'text']}
         headings={['Users']}
         rows={rows}
-        footerContent= {totalItems > itemsPerPage && (
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem',  }}>
-         <PaginationComponent 
-           currentPage={currentPage}
-           onPageChange={handlePageChange}
-           totalItems={totalItems}
-           itemsPerPage={itemsPerPage}
-         />
-         </div>
-       )}
+        footerContent={totalItems > itemsPerPage && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem', }}>
+            <PaginationComponent
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+              totalItems={totalItems}
+              itemsPerPage={itemsPerPage}
+            />
+          </div>
+        )}
       />
-      
+
     </>
   );
 };

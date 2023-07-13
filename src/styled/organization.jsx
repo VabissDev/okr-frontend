@@ -6,7 +6,7 @@ export const FlexButton = styled.div`
   gap: 3px;
 `;
 
-export const FlexContainer = styled.div`
-  margin-bottom: 20px;
-  display: flex;
-`;
+// export const FlexContainer = styled.div`
+//   margin-bottom: 20px;
+//   display: flex;
+// `;

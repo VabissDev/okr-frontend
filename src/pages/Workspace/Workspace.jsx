@@ -11,7 +11,7 @@ import { Space } from "@/styled/profilee";
 import { CustomersMinor } from "@shopify/polaris-icons";
 import { GridLayout } from "@/styled/containers";
 import { MembersModal } from "@/components/Modals";
-import { CustomModal } from "@/components/Modals";
+
 
 export const Workspace = () => {
 
@@ -27,16 +27,6 @@ export const Workspace = () => {
             <Icon source={CustomersMinor} color="base" /> {users.length}
         </Text>
     );
-
-
-    const secondary = {
-        content: 'Learn more',
-        onAction: () => console.log("action"),
-    }
-    const primary = {
-        content: 'Save',
-        onAction: () => console.log("save"),
-    }
 
     return (
         <Card>
@@ -101,8 +91,6 @@ export const Workspace = () => {
                     </Text>
                 </Space>
             </GridLayout>
-            <CustomModal buttonTitle='click' modalTitle='modal' children="this is test modal" secondary={secondary} primary={primary} />
-
         </Card>
     );
 };

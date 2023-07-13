@@ -28,6 +28,8 @@ export const SignUp = () => {
     password: false,
     confirm: false,
   });
+  const [token, setToken] = useState("");
+
   const title = "Create Account";
   const REGISTER_URL = '/auth/save'
 
@@ -84,6 +86,9 @@ export const SignUp = () => {
     try {
       const response = await axios.post(REGISTER_URL, data)
       console.log(response.data)
+      setToken(response.data.token)
+      console.log(token)
+
     } catch (error) {
       console.log(error)
     }
