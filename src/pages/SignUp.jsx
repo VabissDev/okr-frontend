@@ -12,6 +12,7 @@ import { LoginLayout } from "@/components/LoginLayout";
 import { Link } from "react-router-dom";
 import { PasswordInputWrapper } from "@/styled/inputs";
 import { HideMinor, ViewMinor } from "@shopify/polaris-icons";
+import axios from "@/api";
 
 export const SignUp = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export const SignUp = () => {
     confirm: false,
   });
   const title = "Create Account";
+  const REGISTER_URL = '/auth/save'
 
   const handleNameChange = (value) => {
     setName(value);
@@ -49,7 +51,7 @@ export const SignUp = () => {
     setPasswordConfirm(value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!name.trim()) {
@@ -72,12 +74,22 @@ export const SignUp = () => {
     // Proceed with form submission
     setError("");
     const data = {
-      name, 
-      company,
+      fullName: name, 
+      organizationName: company,
       email,
       password
     }
     console.log(data)
+
+    try {
+      const response = await axios.post(REGISTER_URL, data)
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+
+
+
     // dispatch(
     //   signup({
     //     id: Date.now(),
@@ -89,8 +101,8 @@ export const SignUp = () => {
     // );
     setName("");
     setEmail("");
-    setPassword("");
-    setPasswordConfirm("");
+    // setPassword("");
+    // setPasswordConfirm("");
   };
 
   return (

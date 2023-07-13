@@ -3,19 +3,19 @@ import { useSelector } from "react-redux";
 import { Button, Card, Icon, VerticalStack } from "@shopify/polaris";
 import { getAllWorkspaces } from "@/redux/slices/workspaceSlices";
 import { getAccountData } from "@/redux/slices/accountSlice";
-import { WorkspaceCreate } from "./Workspace/WorkspaceCreate";
-import { WorkspaceCard } from "./Workspace/WorkspaceCard";
 import { Link } from "react-router-dom";
 import { CustomersMinor } from "@shopify/polaris-icons";
 import { FlexButton } from "@/styled/organization";
 
 // illustartions
-import illustration1 from "../assets/illustration/illustration1.jpg";
-import illustration2 from "../assets/illustration/illustration2.png";
-import illustration3 from "../assets/illustration/illustration3.jpg";
-import illustration4 from "../assets/illustration/illustration4.png";
-import illustration5 from "../assets/illustration/illustration5.png";
-import { FlexContainer } from "../styled/organization";
+import illustration1 from "@/assets/illustration/illustration1.jpg";
+import illustration2 from "@/assets/illustration/illustration2.png";
+import illustration3 from "@/assets/illustration/illustration3.jpg";
+import illustration4 from "@/assets/illustration/illustration4.png";
+import illustration5 from "@/assets/illustration/illustration5.png";
+import { FlexContainer } from "@/styled/organization";
+import { WorkspaceCard, WorkspaceCreate } from "@/pages/Workspace";
+import { AddUserForm } from "../components/Users/AddUserForm";
 
 export const Organization = () => {
   const workspaces = useSelector(getAllWorkspaces);
@@ -38,6 +38,9 @@ export const Organization = () => {
   const toggleCreateWorkspace = () => {
     setActive(!active);
   };
+
+
+
 
   return (
     <div>
@@ -73,6 +76,8 @@ export const Organization = () => {
           </div>
         )}
       </FlexContainer>
+
+      <AddUserForm></AddUserForm>
 
       {/* Workspaces */}
       <VerticalStack>

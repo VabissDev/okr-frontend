@@ -12,11 +12,11 @@ import {
   Box,
 } from "@shopify/polaris";
 
-import { MembersModal } from "@/components/MembersModal";
 import members from "@/data/members.json";
 import { useDispatch, useSelector } from "react-redux";
 import { getAccountData } from "@/redux/slices/accountSlice";
 import { createWorkspace } from "@/redux/slices/workspaceSlices";
+import { MembersModal } from "@/components/Modals";
 
 export const WorkspaceCreate = () => {
   const dispatch = useDispatch();

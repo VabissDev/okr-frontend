@@ -63,6 +63,7 @@ export const UserList = () => {
   });
 
   const totalItems = users.length;
+   
 
   return (
     <>
@@ -70,17 +71,18 @@ export const UserList = () => {
         columnContentTypes={['', 'text', 'text', 'text']}
         headings={['Users']}
         rows={rows}
+        footerContent= {totalItems > itemsPerPage && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem',  }}>
+         <PaginationComponent 
+           currentPage={currentPage}
+           onPageChange={handlePageChange}
+           totalItems={totalItems}
+           itemsPerPage={itemsPerPage}
+         />
+         </div>
+       )}
       />
-      {totalItems > itemsPerPage && (
-         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem', marginLeft: "200px" }}>
-        <PaginationComponent 
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-        />
-        </div>
-      )}
+      
     </>
   );
 };
