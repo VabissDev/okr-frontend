@@ -17,14 +17,18 @@ export const Routing = () => {
       <Route index element={<Home />}/>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
+
       <Route path="/" element={<MainLayout />}>
         <Route path="organization" element={<Organization />} />
         <Route path="users" element={<UserList />} />
+
         <Route path="profile/:id" element={<Profile  />} />
         <Route path="editprofile/:id" element={<EditProfile />} />
         <Route path="workspace/:id" element={<Workspace />} />
+
       </Route>
-      <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
+
     </Routes>
   );
 };
