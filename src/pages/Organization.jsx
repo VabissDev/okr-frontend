@@ -15,7 +15,6 @@ import illustration4 from "@/assets/illustration/illustration4.png";
 import illustration5 from "@/assets/illustration/illustration5.png";
 import { FlexContainer } from "@/styled/organization";
 import { WorkspaceCard, WorkspaceCreate } from "@/pages/Workspace";
-import { CustomModal } from "../components/Modals/CusmonModel";
 
 export const Organization = () => {
   const workspaces = useSelector(getAllWorkspaces);
@@ -39,9 +38,11 @@ export const Organization = () => {
     setActive(!active);
   };
 
+
+
+
   return (
     <div>
-      <CustomModal buttonTitle='click' modalTitle='modal' children="this is test modal" secondary={true} />
       <FlexContainer>
         {(account.role?.toLowerCase() === "admin" ||
           account.role?.toLowerCase() === "teamlead") && (
