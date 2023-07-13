@@ -81,12 +81,12 @@ export const SignUp = () => {
     }
     console.log(data)
 
-    // try {
-    //   const response = axios.post(REGISTER_URL, JSON.stringify(data),{})
-    //   console.log(response.data)
-    // } catch (error) {
-    //   console.log(error)
-    // }
+    try {
+      const response = await axios.post(REGISTER_URL, data)
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
 
 
 
@@ -101,8 +101,8 @@ export const SignUp = () => {
     // );
     setName("");
     setEmail("");
-    setPassword("");
-    setPasswordConfirm("");
+    // setPassword("");
+    // setPasswordConfirm("");
   };
 
   return (
