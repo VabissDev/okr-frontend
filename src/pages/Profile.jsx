@@ -10,11 +10,12 @@ import {
   PageActions,
 } from "@shopify/polaris";
 import { Top, Space} from "@/styled/profilee";
-import { EditMinor } from "@shopify/polaris-icons";
+import { DeleteMinor, EditMinor } from "@shopify/polaris-icons";
 import { Link, useParams } from "react-router-dom";
 import { getAccountData } from "@/redux/slices/accountSlice";
 import { useSelector } from "react-redux";
 import { EmptyData } from "@/components/EmptyData";
+import EditProfile from "./EditProfile";
 
 
 
@@ -91,15 +92,22 @@ export const Profile = () => {
                 </Top>
               </VerticalStack>
               <PageActions
+
+            
                 primaryAction={
-                  <Link to={`/editprofile/${id}`}>
-                    <Button primary>
-                      <Icon source={EditMinor} color="base" />
-                    </Button>
-                  </Link>
+
+                  <EditProfile></EditProfile>
+                  // <Link to={`/editprofile/${id}`}>
+                  //   <Button primary>
+                  //     <Icon source={EditMinor} color="base" />
+                  //   </Button>
+                  // </Link>
                 }
                 secondaryActions={
-                  isAdmin && [
+                  isAdmin && 
+                  [
+                   
+
                     {
                       content: "Delete",
                       destructive: true,

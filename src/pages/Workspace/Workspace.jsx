@@ -11,7 +11,7 @@ import { Space } from "@/styled/profilee";
 import { CustomersMinor } from "@shopify/polaris-icons";
 import { GridLayout } from "@/styled/containers";
 import { MembersModal } from "@/components/Modals";
-import { CustomModal } from "@/components/Modals/CusmonModel";
+import { CustomModal } from "@/components/Modals";
 
 export const Workspace = () => {
 
