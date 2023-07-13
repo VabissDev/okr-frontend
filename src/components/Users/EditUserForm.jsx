@@ -3,14 +3,13 @@ import { Button, FormLayout, TextField, Icon } from "@shopify/polaris";
 import { useNavigate, useParams } from "react-router-dom";
 import { getAccountData } from "@/redux/slices/accountSlice";
 import { useSelector } from "react-redux";
-import { CustomModal } from "../components/Modals";
+import { CustomModal } from "../Modals";
 import { EditMinor } from "@shopify/polaris-icons";
 
 
 
-const EditProfile = () => {
+export const EditUserForm = ({ id }) => {
   const navigate = useNavigate();
-  const { id } = useParams();
   const users = useSelector((state) => state.users.users);
   const user = users.find((user) => user.id === id);
   const account = useSelector(getAccountData);
@@ -32,9 +31,9 @@ const EditProfile = () => {
     onSave(profile);
     navigate(`/profile/${istifadeci.id}`);
   };
-const title = <Icon source={EditMinor} color="base" />
+  const title = <Icon source={EditMinor} color="base" />
   return (
-    <CustomModal buttonTitle= {title}>
+    <CustomModal buttonTitle={title} modalTitle={profile.fullName}>
       <FormLayout>
         <TextField
           label="Full name:"
@@ -71,8 +70,7 @@ const title = <Icon source={EditMinor} color="base" />
           Save
         </Button>
       </FormLayout>
-      </CustomModal>
+    </CustomModal>
   );
 };
 
-export default EditProfile;

@@ -1,5 +1,5 @@
 import { Navigation, Text } from "@shopify/polaris";
-import { HomeMinor, HashtagMinor, LockMinor } from "@shopify/polaris-icons";
+import { HomeMinor, LockMinor, GlobeMinor } from "@shopify/polaris-icons";
 import { useSelector } from "react-redux";
 import { getAllWorkspaces } from "@/redux/slices/workspaceSlices";
 import { getAccountData } from "@/redux/slices/accountSlice";
@@ -29,7 +29,7 @@ export const Navigations = () => {
   );
 
   filtered.map((item) => {
-    const icon = item.visibility === "public" ? HashtagMinor : LockMinor;
+    const icon = item.visibility === "public" ? GlobeMinor : LockMinor;
     const label = (
       <Text variant="headingMd" as="h4" color="subdued" children={item.name} />
     );

@@ -10,6 +10,7 @@ import {
   Label,
   Text,
   Box,
+  Icon,
 } from "@shopify/polaris";
 
 import members from "@/data/members.json";
@@ -17,6 +18,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAccountData } from "@/redux/slices/accountSlice";
 import { createWorkspace } from "@/redux/slices/workspaceSlices";
 import { MembersModal } from "@/components/Modals";
+import { CustomModal } from "../../components/Modals/CustomModal";
+import { FlexButton } from "../../styled/organization";
+import { InventoryMajor } from "@shopify/polaris-icons";
 
 export const WorkspaceCreate = () => {
   const dispatch = useDispatch();
@@ -82,16 +86,14 @@ export const WorkspaceCreate = () => {
     setWorkspaceName("");
   };
 
+
+  const buttonTitle = (
+    <FlexButton> New Workspace
+      <Icon source={InventoryMajor} color='base' />
+    </FlexButton>
+  )
   return (
-    <div>
-      <Box padding="8">
-        <Text
-          variant="headingXl"
-          as="h2"
-          children="Create Your Workspace"
-          alignment="center"
-        />
-      </Box>
+    <CustomModal buttonTitle={buttonTitle} modalTitle="Create New Workspace">
       <Form onSubmit={handleSubmit}>
         <FormLayout>
           <TextField type="text" label="Owner:" value={user.name} disabled />
@@ -152,6 +154,6 @@ export const WorkspaceCreate = () => {
           <Button submit fullWidth primary children="Create New Workspace" />
         </FormLayout>
       </Form>
-    </div>
+    </CustomModal>
   );
 };

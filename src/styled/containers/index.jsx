@@ -64,3 +64,11 @@ export const EmptyDataWrapper = styled.div`
     border-radius: 8px;
 }
 `
+
+export const FlexContainer = styled.div`
+    diplay: flex;
+    flex-direction: ${({ flex }) => flex || "row"};
+    justify-content: ${({ justify }) => justify};
+    align-items: ${({ align }) => align};
+    gap: ${({ gap }) => gap};
+`
