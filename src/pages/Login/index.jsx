@@ -20,6 +20,7 @@ import {
   userSelector,
 } from "../../redux/slices/AuthSlice";
 import { toast } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 export const Login = () => {
   const { isFetching, isSuccess, isError, errorMessage } =
@@ -84,6 +85,7 @@ export const Login = () => {
 
   return (
     <LoginLayout title={title} onSubmit={handleSubmit}>
+      <Toaster />
       {validFormData && (
         <Banner status="critical">
           <Text color="critical" children="Email or password is invalid" />
