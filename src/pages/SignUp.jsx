@@ -28,9 +28,9 @@ export const SignUp = () => {
     useSelector(userSelector);
 
   // form validation start
-  const title = "Create Account";
+  const title = "Create Organization";
   const [name, setName] = useState("");
-  const [company, setCompany] = useState("");
+  const [organization, setOrganization] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -44,8 +44,8 @@ export const SignUp = () => {
     setName(value);
   };
 
-  const handleCompanyChange = (value) => {
-    setCompany(value);
+  const handleOrganizationChange = (value) => {
+    setOrganization(value);
   };
 
   const handleEmailChange = (value) => {
@@ -68,8 +68,8 @@ export const SignUp = () => {
     if (!name.trim()) {
       setError("Please enter your name.");
       return;
-    } else if (!company.trim()) {
-      setError("Please enter your company name.");
+    } else if (!organization.trim()) {
+      setError("Please enter your organization name.");
       return;
     } else if (!email.trim()) {
       setError("Please enter your email address.");
@@ -89,7 +89,7 @@ export const SignUp = () => {
     setError("");
     const data = {
       fullName: name,
-      organizationName: company,
+      organizationName: organization,
       email,
       password,
     };
@@ -143,12 +143,12 @@ export const SignUp = () => {
         error={error && error.includes("your name") ? error : ""}
       />
       <TextField
-        label="Company Name:"
+        label="Organization Name:"
         type="text"
-        placeholder="ABC Company"
-        value={company}
-        onChange={handleCompanyChange}
-        error={error && error.includes("company") ? error : ""}
+        placeholder="ABC Organization"
+        value={organization}
+        onChange={handleOrganizationChange}
+        error={error && error.includes("organization") ? error : ""}
       />
       <TextField
         label="Email:"
