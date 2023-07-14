@@ -19,6 +19,7 @@ import {
   userSelector,
   clearState,
 } from "../redux/slices/AuthSlice";
+import { toast } from "react-hot-toast";
 
 export const SignUp = () => {
   // signup
@@ -126,7 +127,7 @@ export const SignUp = () => {
     }
 
     if (isError) {
-      // toast.error(errorMessage);
+      toast.error(errorMessage);
       console.log(errorMessage);
       dispatch(clearState());
     }
