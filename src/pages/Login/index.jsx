@@ -50,13 +50,13 @@ export const Login = () => {
     setPwdError(!pwd ? "Password field is required" : "");
     !email && setEmailError("Email field is required");
 
-    if (validEmail && pwd) {
-      const user = users.find((user) => user.email === email);
-      if (user?.password === pwd) {
-        navigate("/organization");
-        dispatch(login(user));
-      } else setValidFormData(true);
-    }
+    // if (validEmail && pwd) {
+    //   const user = users.find((user) => user.email === email);
+    //   if (user?.password === pwd) {
+    //     navigate("/organization");
+    //     dispatch(login(user));
+    //   } else setValidFormData(true);
+    // }
     const data = {
       email,
       password: pwd,
@@ -85,7 +85,7 @@ export const Login = () => {
 
   return (
     <LoginLayout title={title} onSubmit={handleSubmit}>
-      {/* <Toaster /> */}
+      <Toaster />
       {validFormData && (
         <Banner status="critical">
           <Text color="critical" children="Email or password is invalid" />
