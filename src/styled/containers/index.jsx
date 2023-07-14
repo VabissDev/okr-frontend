@@ -7,6 +7,14 @@ export const Centralizer = styled.div`
     height: ${({ height }) => height || "calc(100vh - 88px)"};
     position: relative;
 `
+export const CustomBox = styled.div`
+    margin: ${({ margin }) => margin} ;
+    margin-block: ${({ block }) => block};
+    margin-inline: ${({ inline }) => inline};
+    margin-bottom: ${({ bottom }) => bottom};
+    margin-top: ${({ top }) => top};
+    padding: ${({ padding }) => padding};
+` 
 
 export const FormWrapper = styled(Centralizer)`
 
