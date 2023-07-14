@@ -95,14 +95,15 @@ export const Organization = () => {
           );
         })}
       </VerticalStack>
-       <FlexContainer justifyContent="center" marginTop="20px">
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
        <PaginationComponent 
         currentPage={currentPage}
         onPageChange={handlePageChange}
         totalItems={accountWorkspaces.length}
         itemsPerPage={itemsPerPage}
       />
-      </FlexContainer>
+           </div>
+
     </>
   );
 };
