@@ -16,19 +16,20 @@ export const CustomModal = ({ buttonTitle, modalTitle, secondary, primary, child
 
     return (
         <>
-            <Button onClick={handleChange} size="slim" children={text} />
+            <Button onClick={handleChange} children={text} />
             <Modal
                 open={active}
                 title={title}
                 onClose={handleChange}
                 primaryAction={ primary && {
-                    content: primary.content,
+                    content: primary.content || "Delete",
                     onAction: primary.action,
+                    destructive: true,
                   }}
                   secondaryActions={ secondary && [
                     {
-                      content: 'Learn more',
-                      onAction: ()=> console.log("action"),
+                      content: secondary.content || "Cancel",
+                      onAction: handleChange,
                     },
                   ]}
             >
