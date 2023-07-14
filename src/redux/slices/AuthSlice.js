@@ -78,7 +78,9 @@ export const fetchUserBytoken = createAsyncThunk(
         {
           method: "GET",
           headers: {
+            Accept: "application/json",
             Authorization: token,
+            "Content-Type": "application/json",
           },
         }
       );
