@@ -22,7 +22,6 @@ export const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [isOrganization, setIsOrganization] = useState(false);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState({
     password: false,

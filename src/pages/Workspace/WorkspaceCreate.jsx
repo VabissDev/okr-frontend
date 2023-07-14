@@ -8,8 +8,6 @@ import {
   ButtonGroup,
   Select,
   Label,
-  Text,
-  Box,
   Icon,
 } from "@shopify/polaris";
 
@@ -18,9 +16,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAccountData } from "@/redux/slices/accountSlice";
 import { createWorkspace } from "@/redux/slices/workspaceSlices";
 import { MembersModal } from "@/components/Modals";
-import { CustomModal } from "../../components/Modals/CustomModal";
-import { FlexButton } from "../../styled/organization";
+import { CustomModal } from "@/components/Modals/CustomModal";
 import { InventoryMajor } from "@shopify/polaris-icons";
+import { FlexText } from "@/styled/buttons";
 
 export const WorkspaceCreate = () => {
   const dispatch = useDispatch();
@@ -88,9 +86,9 @@ export const WorkspaceCreate = () => {
 
 
   const buttonTitle = (
-    <FlexButton> New Workspace
+    <FlexText> New Workspace
       <Icon source={InventoryMajor} color='base' />
-    </FlexButton>
+    </FlexText>
   )
   return (
     <CustomModal buttonTitle={buttonTitle} modalTitle="Create New Workspace">

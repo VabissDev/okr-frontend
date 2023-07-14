@@ -11,7 +11,7 @@ import {
   VerticalStack
 } from "@shopify/polaris";
 import { SearchMinor } from "@shopify/polaris-icons";
-import { FlexText } from "@/styled/inputs";
+import { FlexText } from "@/styled/buttons";
 
 export const MembersModal = ({ members, title }) => {
   const [active, setActive] = useState(false);

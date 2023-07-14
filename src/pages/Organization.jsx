@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Button, Card, Divider, Icon, VerticalStack } from "@shopify/polaris";
+import { Button, Divider, HorizontalStack, Icon, VerticalStack } from "@shopify/polaris";
 import { getAllWorkspaces } from "@/redux/slices/workspaceSlices";
 import { getAccountData } from "@/redux/slices/accountSlice";
 import { Link } from "react-router-dom";
-import { CustomersMinor } from "@shopify/polaris-icons";
-import { FlexButton } from "@/styled/organization";
-import PaginationComponent from "../../src/components/PaginationComponent";
+import { CustomersMajor } from "@shopify/polaris-icons";
+import PaginationComponent from "@/components/PaginationComponent";
 
 
 // illustartions
@@ -17,8 +16,8 @@ import illustration4 from "@/assets/illustration/illustration4.png";
 import illustration5 from "@/assets/illustration/illustration5.png";
 import { WorkspaceCard, WorkspaceCreate } from "@/pages/Workspace";
 import { AddUserForm } from "@/components/Users/AddUserForm";
-import { FlexContainer } from "@/styled/containers";
-import { FlexText } from "../styled/inputs";
+import { CustomBox } from "@/styled/containers";
+import { FlexText } from "@/styled/buttons";
 
 export const Organization = () => {
   const workspaces = useSelector(getAllWorkspaces);
@@ -42,30 +41,38 @@ export const Organization = () => {
     <>
       {
 
-        <>
-          {account.role?.toLowerCase() === "admin" && (
-            <>
-              <Link to="/users">
-                <Button>
-                  <FlexButton>
-                    See all users
-                    <Icon source={CustomersMinor} color="base" />
-                  </FlexButton>
-                </Button>
-              </Link>
-              <AddUserForm />
-            </>
-          )}
-
-          {(account.role?.toLowerCase() === "admin" ||
-            account.role?.toLowerCase() === "teamlead") && (
-              <WorkspaceCreate />
-            )}
+        <VerticalStack gap="4">
           {(account.role?.toLowerCase() === "admin" ||
             account.role?.toLowerCase() === "teamlead") && (
               <Divider />
             )}
-        </>
+          <HorizontalStack gap="4">
+            {account.role?.toLowerCase() === "admin" && (
+              <>
+                <Link to="/users">
+                  <Button>
+                    <FlexText>
+                      All Users
+                      <Icon source={CustomersMajor} color="base" />
+                    </FlexText>
+                  </Button>
+                </Link>
+                <AddUserForm />
+              </>
+            )}
+
+            {(account.role?.toLowerCase() === "admin" ||
+              account.role?.toLowerCase() === "teamlead") && (
+                <WorkspaceCreate />
+              )}
+          </HorizontalStack>
+          {(account.role?.toLowerCase() === "admin" ||
+            account.role?.toLowerCase() === "teamlead") && (
+              <CustomBox bottom="20px">
+                <Divider />
+              </CustomBox>
+            )}
+        </VerticalStack>
       }
 
 
