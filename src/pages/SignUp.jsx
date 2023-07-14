@@ -1,44 +1,51 @@
-import { useDispatch, useSelector } from "react-redux";
-import { signup } from "@/redux/slices/userSlice";
-import { useState } from "react";
 import {
   TextField,
   Button,
   Text,
   Divider,
   Icon,
+  Spinner,
 } from "@shopify/polaris";
 import { LoginLayout } from "@/components/LoginLayout";
-import { Link } from "react-router-dom";
 import { PasswordInputWrapper } from "@/styled/inputs";
 import { HideMinor, ViewMinor } from "@shopify/polaris-icons";
-import axios from "@/api";
+import { useEffect, useState } from "react";
+
+// signup
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  signupUser,
+  userSelector,
+  clearState,
+} from "../redux/slices/AuthSlice";
 
 export const SignUp = () => {
+  // signup
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.users);
+  const navigate = useNavigate();
+  const { isFetching, isSuccess, isError, errorMessage } =
+    useSelector(userSelector);
+
+  // form validation start
+  const title = "Create Organization";
   const [name, setName] = useState("");
-  const [company, setCompany] = useState("");
+  const [organization, setOrganization] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [isOrganization, setIsOrganization] = useState(false);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState({
     password: false,
     confirm: false,
   });
-  const [token, setToken] = useState("");
-
-  const title = "Create Account";
-  const REGISTER_URL = '/auth/save'
 
   const handleNameChange = (value) => {
     setName(value);
   };
 
-  const handleCompanyChange = (value) => {
-    setCompany(value);
+  const handleOrganizationChange = (value) => {
+    setOrganization(value);
   };
 
   const handleEmailChange = (value) => {
@@ -52,12 +59,17 @@ export const SignUp = () => {
   const handlePasswordConfirmChange = (value) => {
     setPasswordConfirm(value);
   };
+  // form validation end
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // error messages
     if (!name.trim()) {
       setError("Please enter your name.");
+      return;
+    } else if (!organization.trim()) {
+      setError("Please enter your organization name.");
       return;
     } else if (!email.trim()) {
       setError("Please enter your email address.");
@@ -76,39 +88,49 @@ export const SignUp = () => {
     // Proceed with form submission
     setError("");
     const data = {
-      fullName: name, 
-      organizationName: company,
+      fullName: name,
+      organizationName: organization,
       email,
-      password
-    }
-    console.log(data)
+      password,
+    };
+    console.log(data);
 
-    try {
-      const response = await axios.post(REGISTER_URL, data)
-      console.log(response.data)
-      setToken(response.data.token)
-      console.log(token)
+    dispatch(signupUser(data));
 
-    } catch (error) {
-      console.log(error)
-    }
+    // try {
+    //   const response = await axios.post(REGISTER_URL, data);
+    //   console.log(response.data);
+    //   setToken(response.data.token);
+    //   console.log(token);
+    // } catch (error) {
+    //   console.log(error);
+    // }
 
-
-
-    // dispatch(
-    //   signup({
-    //     id: Date.now(),
-    //     organization: isOrganization,
-    //     name,
-    //     email,
-    //     password,
-    //   })
-    // );
-    setName("");
-    setEmail("");
+    // setName("");
+    // setEmail("");
     // setPassword("");
     // setPasswordConfirm("");
   };
+
+  // signup
+  useEffect(() => {
+    return () => {
+      dispatch(clearState());
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(clearState());
+      navigate("/organization");
+    }
+
+    if (isError) {
+      // toast.error(errorMessage);
+      console.log(errorMessage);
+      dispatch(clearState());
+    }
+  }, [isSuccess, isError]);
 
   return (
     <LoginLayout title={title} onSubmit={handleSubmit}>
@@ -118,15 +140,15 @@ export const SignUp = () => {
         placeholder="John Doe"
         value={name}
         onChange={handleNameChange}
-        error={error && error.includes("name") ? error : ""}
+        error={error && error.includes("your name") ? error : ""}
       />
       <TextField
-        label="Company Name:"
+        label="Organization Name:"
         type="text"
-        placeholder="ABC Company"
-        value={company}
-        onChange={handleCompanyChange}
-        error={error && error.includes("name") ? error : ""}
+        placeholder="ABC Organization"
+        value={organization}
+        onChange={handleOrganizationChange}
+        error={error && error.includes("organization") ? error : ""}
       />
       <TextField
         label="Email:"
@@ -154,7 +176,10 @@ export const SignUp = () => {
             })
           }
         >
-          <Icon source={showPassword.password ? ViewMinor : HideMinor} color="base" />
+          <Icon
+            source={showPassword.password ? ViewMinor : HideMinor}
+            color="base"
+          />
         </Button>
       </PasswordInputWrapper>
       <PasswordInputWrapper>
@@ -174,12 +199,19 @@ export const SignUp = () => {
             setShowPassword({ ...showPassword, confirm: !showPassword.confirm })
           }
         >
-          <Icon source={showPassword.confirm ? ViewMinor : HideMinor} color="base" />
+          <Icon
+            source={showPassword.confirm ? ViewMinor : HideMinor}
+            color="base"
+          />
         </Button>
       </PasswordInputWrapper>
 
       <Button primary submit fullWidth>
-        Sign Up
+        {isFetching ? (
+          <Spinner accessibilityLabel="Spinner example" size="small" />
+        ) : (
+          "Sign Up"
+        )}
       </Button>
       <Divider />
       <Text alignment="center" variant="headingSm" as="p" color="subdued">

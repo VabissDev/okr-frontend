@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Button, Card, Divider, Icon, VerticalStack } from "@shopify/polaris";
+import { Button, Divider, HorizontalStack, Icon, VerticalStack } from "@shopify/polaris";
 import { getAllWorkspaces } from "@/redux/slices/workspaceSlices";
 import { getAccountData } from "@/redux/slices/accountSlice";
 import { Link } from "react-router-dom";
-import { CustomersMinor } from "@shopify/polaris-icons";
-import { FlexButton } from "@/styled/organization";
+import { CustomersMajor } from "@shopify/polaris-icons";
+import PaginationComponent from "@/components/PaginationComponent";
+
 
 // illustartions
 import illustration1 from "@/assets/illustration/illustration1.jpg";
@@ -15,13 +16,15 @@ import illustration4 from "@/assets/illustration/illustration4.png";
 import illustration5 from "@/assets/illustration/illustration5.png";
 import { WorkspaceCard, WorkspaceCreate } from "@/pages/Workspace";
 import { AddUserForm } from "@/components/Users/AddUserForm";
-import { FlexContainer } from "@/styled/containers";
-import { FlexText } from "../styled/inputs";
+import { CustomBox } from "@/styled/containers";
+import { FlexText } from "@/styled/buttons";
 
 export const Organization = () => {
   const workspaces = useSelector(getAllWorkspaces);
   const account = useSelector(getAccountData);
   const [active, setActive] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 2;
 
   const illustrations = [
     illustration1,
@@ -35,41 +38,57 @@ export const Organization = () => {
     (workspace) => workspace.org_name === account.org_name
   );
 
+   const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayedWorkspaces = accountWorkspaces.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
 
   return (
     <>
       {
 
-        <>
-          {account.role?.toLowerCase() === "admin" && (
-            <>
-              <Link to="/users">
-                <Button>
-                  <FlexButton>
-                    See all users
-                    <Icon source={CustomersMinor} color="base" />
-                  </FlexButton>
-                </Button>
-              </Link>
-              <AddUserForm />
-            </>
-          )}
-
-          {(account.role?.toLowerCase() === "admin" ||
-            account.role?.toLowerCase() === "teamlead") && (
-              <WorkspaceCreate />
-            )}
+        <VerticalStack gap="4">
           {(account.role?.toLowerCase() === "admin" ||
             account.role?.toLowerCase() === "teamlead") && (
               <Divider />
             )}
-        </>
+          <HorizontalStack gap="4">
+            {account.role?.toLowerCase() === "admin" && (
+              <>
+                <Link to="/users">
+                  <Button>
+                    <FlexText>
+                      All Users
+                      <Icon source={CustomersMajor} color="base" />
+                    </FlexText>
+                  </Button>
+                </Link>
+                <AddUserForm />
+              </>
+            )}
+
+            {(account.role?.toLowerCase() === "admin" ||
+              account.role?.toLowerCase() === "teamlead") && (
+                <WorkspaceCreate />
+              )}
+          </HorizontalStack>
+          {(account.role?.toLowerCase() === "admin" ||
+            account.role?.toLowerCase() === "teamlead") && (
+              <CustomBox bottom="20px">
+                <Divider />
+              </CustomBox>
+            )}
+        </VerticalStack>
       }
 
 
       {/* Workspaces */}
-      <VerticalStack>
-        {accountWorkspaces.map((workspace) => {
+      <VerticalStack >
+        {displayedWorkspaces.map((workspace) => {
           const randomIllustration =
             illustrations[
             Math.floor(Math.floor(Math.random() * illustrations.length))
@@ -83,6 +102,15 @@ export const Organization = () => {
           );
         })}
       </VerticalStack>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+       <PaginationComponent 
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+        totalItems={accountWorkspaces.length}
+        itemsPerPage={itemsPerPage}
+      />
+           </div>
+
     </>
   );
 };

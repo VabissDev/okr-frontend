@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { TextField, FormLayout, Button, Select, Form, Icon } from '@shopify/polaris';
-import { CustomModal } from '../Modals/CustomModal';
-import { FlexText } from '../../styled/inputs';
+import { CustomModal } from '@/components/Modals/CustomModal';
 import { CustomerPlusMajor } from '@shopify/polaris-icons';
-import { FlexButton } from '../../styled/organization';
+import { FlexText } from '@/styled/buttons';
 
 
 export const AddUserForm = () => {
@@ -34,9 +33,9 @@ export const AddUserForm = () => {
     };
 
     const buttonTitle = (
-        <FlexButton> New User
+        <FlexText> New User
             <Icon source={CustomerPlusMajor} color='base' />
-        </FlexButton>
+        </FlexText>
     )
 
     return (

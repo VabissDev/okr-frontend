@@ -30,10 +30,5 @@ export const TagWrapper = styled.div`
         gap: 5px;
     }
 `
-export const FlexText = styled.div`
-cursor: pointer;
-.Polaris-Text--root {
-    display: flex;
-    gap: 5px;
-}
-`
+
+
