@@ -6,6 +6,8 @@ import { getAccountData } from "@/redux/slices/accountSlice";
 import { Link } from "react-router-dom";
 import { CustomersMinor } from "@shopify/polaris-icons";
 import { FlexButton } from "@/styled/organization";
+import PaginationComponent from "../../src/components/PaginationComponent";
+
 
 // illustartions
 import illustration1 from "@/assets/illustration/illustration1.jpg";
