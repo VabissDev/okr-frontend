@@ -1,176 +1,127 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  Button,
+  TextField,
+  Text,
+  Divider,
+  Icon,
+  Banner,
+  Spinner,
+} from "@shopify/polaris";
+import { LoginLayout } from "@/components/LoginLayout";
+import { Link, useNavigate } from "react-router-dom";
+import { ViewMinor, HideMinor } from "@shopify/polaris-icons";
+import { useEffect, useState } from "react";
+import { PasswordInputWrapper } from "@/styled/inputs";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "@/redux/slices/accountSlice";
+import {
+  clearState,
+  loginUser,
+  userSelector,
+} from "../../redux/slices/AuthSlice";
 
-export const signupUser = createAsyncThunk(
-  "users/signupUser",
-  async ({ fullName, organizationName, email, password }, thunkAPI) => {
-    try {
-      const response = await fetch(
-        "https://okr-backend-vabiss-c66783e088f5.herokuapp.com/auth/save",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            fullName,
-            organizationName,
-            email,
-            password,
-          }),
-        }
-      );
-      let data = await response.json();
-      console.log("data", data);
+export const Login = () => {
+  const { isFetching, isSuccess, isError, errorMessage } =
+    useSelector(userSelector);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { users } = useSelector((state) => state.users);
+  const title = "Welcome Back";
 
-      if (response.status === 200) {
-        localStorage.setItem("token", data.token);
-        return { ...data, fullName, organizationName, email };
-      } else {
-        return thunkAPI.rejectWithValue(data);
-      }
-    } catch (e) {
-      console.log("Error", e.response.data);
-      return thunkAPI.rejectWithValue(e.response.data);
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+
+  const [pwd, setPwd] = useState("");
+  const [pwdError, setPwdError] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [validFormData, setValidFormData] = useState(false);
+
+  const hanleEmailChange = (value) => setEmail(value.trim());
+  const hanlePwdChange = (value) => setPwd(value.trim());
+
+  const handleSubmit = () => {
+    const validEmail = EMAIL_REGEX.test(email);
+
+    setEmailError(!validEmail ? "Invalid Email Format" : "");
+    setPwdError(!pwd ? "Password field is required" : "");
+    !email && setEmailError("Email field is required");
+
+    // if (validEmail && pwd) {
+    //   const user = users.find((user) => user.email === email);
+    //   if (user?.password === pwd) {
+    //     navigate("/organization");
+    //     dispatch(login(user));
+    //   } else setValidFormData(true);
+    // }
+    const data = {
+      email,
+      password: pwd,
+    };
+    dispatch(loginUser(data));
+  };
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearState());
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isError) {
+      // toast.error(errorMessage);
+      console.log(errorMessage);
+      dispatch(clearState());
     }
-  }
-);
 
-export const loginUser = createAsyncThunk(
-  "users/login",
-  async ({ email, password }, thunkAPI) => {
-    try {
-      const response = await fetch(
-        "https://okr-backend-vabiss-c66783e088f5.herokuapp.com/auth/login",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-        }
-      );
-      let data = await response.json();
-      console.log("response", data);
-      if (response.status === 200) {
-        localStorage.setItem("token", data.token);
-        return data;
-      } else {
-        return thunkAPI.rejectWithValue(data);
-      }
-    } catch (e) {
-      console.log("Error", e.response.data);
-      thunkAPI.rejectWithValue(e.response.data);
+    if (isSuccess) {
+      dispatch(clearState());
+      navigate("/organization");
     }
-  }
-);
+  }, [isError, isSuccess]);
 
-export const fetchUserBytoken = createAsyncThunk(
-  "users/fetchUserByToken",
-  async ({ token }, thunkAPI) => {
-    try {
-      const response = await fetch(
-        "https://okr-backend-vabiss-c66783e088f5.herokuapp.com/auth/save",
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            Authorization: token,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      let data = await response.json();
-      console.log("data", data, response.status);
+  return (
+    <LoginLayout title={title} onSubmit={handleSubmit}>
+      {validFormData && (
+        <Banner status="critical">
+          <Text color="critical" children="Email or password is invalid" />
+        </Banner>
+      )}
+      <TextField
+        type="text"
+        placeholder="example@site.com"
+        label="Email:"
+        value={email}
+        onChange={hanleEmailChange}
+        autoComplete="email"
+        error={emailError}
+      />
+      <PasswordInputWrapper>
+        <TextField
+          label="Password:"
+          type={showPassword ? "text" : "password"}
+          placeholder="*********"
+          value={pwd}
+          onChange={hanlePwdChange}
+          error={pwdError}
+        />
+        <Button
+          className="show-password-btn"
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          <Icon source={showPassword ? ViewMinor : HideMinor} color="base" />
+        </Button>
+      </PasswordInputWrapper>
+      <Link to="#">Forgot Password?</Link>
 
-      if (response.status === 200) {
-        return { ...data };
-      } else {
-        return thunkAPI.rejectWithValue(data);
-      }
-    } catch (e) {
-      console.log("Error", e.response.data);
-      return thunkAPI.rejectWithValue(e.response.data);
-    }
-  }
-);
-
-export const authSlice = createSlice({
-  name: "user",
-  initialState: {
-    fullName: "",
-    organizationName: "",
-    email: "",
-    isFetching: false,
-    isSuccess: false,
-    isError: false,
-    errorMessage: "",
-  },
-  reducers: {
-    clearState: (state) => {
-      state.isError = false;
-      state.isSuccess = false;
-      state.isFetching = false;
-
-      return state;
-    },
-  },
-  extraReducers: {
-    [signupUser.fulfilled]: (state, { payload }) => {
-      console.log("payload", payload);
-      state.isFetching = false;
-      state.isSuccess = true;
-      state.email = payload.user.email;
-      state.fullName = payload.user.fullName;
-      state.organizationName = payload.user.organizationName;
-    },
-    [signupUser.pending]: (state) => {
-      state.isFetching = true;
-    },
-    [signupUser.rejected]: (state, { payload }) => {
-      state.isFetching = false;
-      state.isError = true;
-      state.errorMessage = payload.message;
-    },
-    [loginUser.fulfilled]: (state, { payload }) => {
-      state.email = payload.email;
-      state.fullName = payload.fullName;
-      state.organizationName = payload.organizationName;
-      state.isFetching = false;
-      state.isSuccess = true;
-      return state;
-    },
-    [loginUser.rejected]: (state, { payload }) => {
-      console.log("payload", payload);
-      state.isFetching = false;
-      state.isError = true;
-      state.errorMessage = payload.message;
-    },
-    [loginUser.pending]: (state) => {
-      state.isFetching = true;
-    },
-    [fetchUserBytoken.pending]: (state) => {
-      state.isFetching = true;
-    },
-    [fetchUserBytoken.fulfilled]: (state, { payload }) => {
-      state.isFetching = false;
-      state.isSuccess = true;
-
-      state.email = payload.email;
-      state.username = payload.name;
-    },
-    [fetchUserBytoken.rejected]: (state) => {
-      console.log("fetchUserBytoken");
-      state.isFetching = false;
-      state.isError = true;
-    },
-  },
-});
-
-export const { clearState } = authSlice.actions;
-
-export const userSelector = (state) => state.auth;
+      <Button submit fullWidth primary>
+        {isFetching ? <Spinner size="small" /> : "Login"}
+      </Button>
+      <Divider />
+      <Text alignment="center" variant="headingSm" as="p" color="subdued">
+        Don't have an account? <Link to="/signup"> Join Us</Link>
+      </Text>
+    </LoginLayout>
+  );
+};
