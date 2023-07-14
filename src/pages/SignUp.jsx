@@ -1,22 +1,34 @@
-import { useDispatch, useSelector } from "react-redux";
-import { signup } from "@/redux/slices/userSlice";
-import { useState } from "react";
 import {
   TextField,
   Button,
   Text,
   Divider,
   Icon,
+  Spinner,
 } from "@shopify/polaris";
 import { LoginLayout } from "@/components/LoginLayout";
-import { Link } from "react-router-dom";
 import { PasswordInputWrapper } from "@/styled/inputs";
 import { HideMinor, ViewMinor } from "@shopify/polaris-icons";
-import axios from "@/api";
+import { useEffect, useState } from "react";
+
+// signup
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  signupUser,
+  userSelector,
+  clearState,
+} from "../redux/slices/AuthSlice";
 
 export const SignUp = () => {
+  // signup
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.users);
+  const navigate = useNavigate();
+  const { isFetching, isSuccess, isError, errorMessage } =
+    useSelector(userSelector);
+
+  // form validation start
+  const title = "Create Account";
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
@@ -27,10 +39,6 @@ export const SignUp = () => {
     password: false,
     confirm: false,
   });
-  const [token, setToken] = useState("");
-
-  const title = "Create Account";
-  const REGISTER_URL = '/auth/save'
 
   const handleNameChange = (value) => {
     setName(value);
@@ -51,10 +59,12 @@ export const SignUp = () => {
   const handlePasswordConfirmChange = (value) => {
     setPasswordConfirm(value);
   };
+  // form validation end
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // error messages
     if (!name.trim()) {
       setError("Please enter your name.");
       return;
@@ -75,39 +85,49 @@ export const SignUp = () => {
     // Proceed with form submission
     setError("");
     const data = {
-      fullName: name, 
+      fullName: name,
       organizationName: company,
       email,
-      password
-    }
-    console.log(data)
+      password,
+    };
+    console.log(data);
 
-    try {
-      const response = await axios.post(REGISTER_URL, data)
-      console.log(response.data)
-      setToken(response.data.token)
-      console.log(token)
+    dispatch(signupUser(data));
 
-    } catch (error) {
-      console.log(error)
-    }
+    // try {
+    //   const response = await axios.post(REGISTER_URL, data);
+    //   console.log(response.data);
+    //   setToken(response.data.token);
+    //   console.log(token);
+    // } catch (error) {
+    //   console.log(error);
+    // }
 
-
-
-    // dispatch(
-    //   signup({
-    //     id: Date.now(),
-    //     organization: isOrganization,
-    //     name,
-    //     email,
-    //     password,
-    //   })
-    // );
-    setName("");
-    setEmail("");
+    // setName("");
+    // setEmail("");
     // setPassword("");
     // setPasswordConfirm("");
   };
+
+  // signup
+  useEffect(() => {
+    return () => {
+      dispatch(clearState());
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(clearState());
+      navigate("/");
+    }
+
+    if (isError) {
+      // toast.error(errorMessage);
+      console.log(errorMessage);
+      dispatch(clearState());
+    }
+  }, [isSuccess, isError]);
 
   return (
     <LoginLayout title={title} onSubmit={handleSubmit}>
@@ -153,7 +173,10 @@ export const SignUp = () => {
             })
           }
         >
-          <Icon source={showPassword.password ? ViewMinor : HideMinor} color="base" />
+          <Icon
+            source={showPassword.password ? ViewMinor : HideMinor}
+            color="base"
+          />
         </Button>
       </PasswordInputWrapper>
       <PasswordInputWrapper>
@@ -173,7 +196,10 @@ export const SignUp = () => {
             setShowPassword({ ...showPassword, confirm: !showPassword.confirm })
           }
         >
-          <Icon source={showPassword.confirm ? ViewMinor : HideMinor} color="base" />
+          <Icon
+            source={showPassword.confirm ? ViewMinor : HideMinor}
+            color="base"
+          />
         </Button>
       </PasswordInputWrapper>
 
