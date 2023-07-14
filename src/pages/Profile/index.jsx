@@ -89,6 +89,18 @@ export const Profile = () => {
                   </Space>
                 </Top>
               </VerticalStack>
+
+              {/* <PageActions
+                primaryAction={
+                  <DeleteModal name={profile.name} />
+                }
+                secondaryActions={
+                  isAdmin &&
+                    <EditUserForm id={id} />
+                }
+              /> */}
+
+
               <PageActions
 
             

@@ -48,7 +48,7 @@ export const UserList = () => {
           account.role === 'admin' &&
           <div style={{ display: "flex", gap: "10px" }}>
             <EditUserForm id={user.id} />
-            <DeleteModal />
+            <DeleteModal name={user.name}/>
           </div>
         }
 
