@@ -6,6 +6,7 @@ import { getAccountData } from "@/redux/slices/accountSlice";
 import { removeUser } from "@/redux/slices/userSlice";
 import PaginationComponent from '@/components/PaginationComponent';
 import { EditUserForm } from './EditUserForm';
+import { DeleteModal } from '../Modals/DeleteModal';
 
 
 export const UserList = () => {
@@ -59,7 +60,7 @@ export const UserList = () => {
           account.role === 'admin' &&
           <div style={{ display: "flex", gap: "10px" }}>
             <EditUserForm id={user.id} />
-            <Button {...deleteBtn}>Delete</Button>
+            <DeleteModal/>
           </div>
         }
 
