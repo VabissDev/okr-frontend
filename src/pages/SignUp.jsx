@@ -19,6 +19,8 @@ import {
   userSelector,
   clearState,
 } from "../redux/slices/AuthSlice";
+import { toast } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 export const SignUp = () => {
   // signup
@@ -126,7 +128,7 @@ export const SignUp = () => {
     }
 
     if (isError) {
-      // toast.error(errorMessage);
+      toast.error(errorMessage);
       console.log(errorMessage);
       dispatch(clearState());
     }
@@ -134,6 +136,7 @@ export const SignUp = () => {
 
   return (
     <LoginLayout title={title} onSubmit={handleSubmit}>
+      <Toaster />
       <TextField
         label="Full Name:"
         type="text"
