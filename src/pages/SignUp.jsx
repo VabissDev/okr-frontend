@@ -68,6 +68,9 @@ export const SignUp = () => {
     if (!name.trim()) {
       setError("Please enter your name.");
       return;
+    } else if (!company.trim()) {
+      setError("Please enter your company name.");
+      return;
     } else if (!email.trim()) {
       setError("Please enter your email address.");
       return;
@@ -137,7 +140,7 @@ export const SignUp = () => {
         placeholder="John Doe"
         value={name}
         onChange={handleNameChange}
-        error={error && error.includes("name") ? error : ""}
+        error={error && error.includes("your name") ? error : ""}
       />
       <TextField
         label="Company Name:"
@@ -145,7 +148,7 @@ export const SignUp = () => {
         placeholder="ABC Company"
         value={company}
         onChange={handleCompanyChange}
-        error={error && error.includes("name") ? error : ""}
+        error={error && error.includes("company") ? error : ""}
       />
       <TextField
         label="Email:"
