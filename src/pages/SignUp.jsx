@@ -122,7 +122,7 @@ export const SignUp = () => {
   useEffect(() => {
     if (isSuccess) {
       dispatch(clearState());
-      navigate("/");
+      navigate("/organization");
     }
 
     if (isError) {
