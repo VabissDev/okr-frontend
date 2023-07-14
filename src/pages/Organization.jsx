@@ -24,6 +24,8 @@ export const Organization = () => {
   const workspaces = useSelector(getAllWorkspaces);
   const account = useSelector(getAccountData);
   const [active, setActive] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 2;
 
   const illustrations = [
     illustration1,
@@ -36,6 +38,14 @@ export const Organization = () => {
   const accountWorkspaces = workspaces.filter(
     (workspace) => workspace.org_name === account.org_name
   );
+
+   const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayedWorkspaces = accountWorkspaces.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
 
   return (
@@ -70,8 +80,8 @@ export const Organization = () => {
 
 
       {/* Workspaces */}
-      <VerticalStack>
-        {accountWorkspaces.map((workspace) => {
+      <VerticalStack >
+        {displayedWorkspaces.map((workspace) => {
           const randomIllustration =
             illustrations[
             Math.floor(Math.floor(Math.random() * illustrations.length))
@@ -85,6 +95,14 @@ export const Organization = () => {
           );
         })}
       </VerticalStack>
+       <FlexContainer justifyContent="center" marginTop="20px">
+       <PaginationComponent 
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+        totalItems={accountWorkspaces.length}
+        itemsPerPage={itemsPerPage}
+      />
+      </FlexContainer>
     </>
   );
 };
