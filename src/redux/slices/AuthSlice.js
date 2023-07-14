@@ -134,7 +134,7 @@ export const authSlice = createSlice({
     [signupUser.rejected]: (state, { payload }) => {
       state.isFetching = false;
       state.isError = true;
-      state.errorMessage = payload.message;
+      state.errorMessage = payload.errorMsg;
     },
     [loginUser.fulfilled]: (state, { payload }) => {
       state.email = payload.email;
@@ -148,7 +148,7 @@ export const authSlice = createSlice({
       console.log("payload", payload);
       state.isFetching = false;
       state.isError = true;
-      state.errorMessage = payload.message;
+      state.errorMessage = payload.errorMsg;
     },
     [loginUser.pending]: (state) => {
       state.isFetching = true;
