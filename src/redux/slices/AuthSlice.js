@@ -8,6 +8,10 @@ export const signupUser = createAsyncThunk(
         "https://okr-backend-vabiss-c66783e088f5.herokuapp.com/auth/save",
         {
           method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({
             fullName,
             organizationName,
@@ -40,6 +44,10 @@ export const loginUser = createAsyncThunk(
         "https://okr-backend-vabiss-c66783e088f5.herokuapp.com/auth/login",
         {
           method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({
             email,
             password,
@@ -114,9 +122,9 @@ export const authSlice = createSlice({
       console.log("payload", payload);
       state.isFetching = false;
       state.isSuccess = true;
-      state.email = payload.email;
-      state.fullName = payload.fullName;
-      state.organizationName = payload.organizationName;
+      state.email = payload.user.email;
+      state.fullName = payload.user.fullName;
+      state.organizationName = payload.user.organizationName;
     },
     [signupUser.pending]: (state) => {
       state.isFetching = true;
