@@ -19,6 +19,7 @@ import {
   loginUser,
   userSelector,
 } from "../../redux/slices/AuthSlice";
+import { toast } from "react-hot-toast";
 
 export const Login = () => {
   const { isFetching, isSuccess, isError, errorMessage } =
@@ -70,7 +71,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (isError) {
-      // toast.error(errorMessage);
+      toast.error(errorMessage);
       console.log(errorMessage);
       dispatch(clearState());
     }
