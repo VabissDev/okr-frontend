@@ -204,7 +204,11 @@ export const SignUp = () => {
       </PasswordInputWrapper>
 
       <Button primary submit fullWidth>
-        Sign Up
+        {isFetching ? (
+          <Spinner accessibilityLabel="Spinner example" size="small" />
+        ) : (
+          "Sign Up"
+        )}
       </Button>
       <Divider />
       <Text alignment="center" variant="headingSm" as="p" color="subdued">
