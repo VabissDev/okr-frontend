@@ -10,6 +10,7 @@ export const Centralizer = styled.div`
 export const CustomBox = styled.div`
     margin: ${({ margin }) => margin} ;
     margin-block: ${({ block }) => block};
+
     margin-inline: ${({ inline }) => inline};
     margin-bottom: ${({ bottom }) => bottom};
     margin-top: ${({ top }) => top};
@@ -79,4 +80,10 @@ export const FlexContainer = styled.div`
     justify-content: ${({ justify }) => justify};
     align-items: ${({ align }) => align};
     gap: ${({ gap }) => gap};
+`
+
+export const TableWrapper = styled.div`
+    .Polaris-DataTable {
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    }
 `

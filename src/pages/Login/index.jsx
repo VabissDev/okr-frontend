@@ -13,24 +13,23 @@ import { ViewMinor, HideMinor } from "@shopify/polaris-icons";
 import { useEffect, useState } from "react";
 import { PasswordInputWrapper } from "@/styled/inputs";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "@/redux/slices/accountSlice";
 import {
   clearState,
   loginUser,
   userSelector,
-} from "../../redux/slices/AuthSlice";
+} from "@/redux/slices/AuthSlice";
 import { toast } from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
+import { EMAIL_REGEX } from "@/utils/regex";
 
 export const Login = () => {
   const { isFetching, isSuccess, isError, errorMessage } =
     useSelector(userSelector);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.users);
   const title = "Welcome Back";
 
-  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
 
@@ -65,12 +64,14 @@ export const Login = () => {
   };
 
   useEffect(() => {
+    console.log("did mount", isError,isSuccess)
     return () => {
       dispatch(clearState());
     };
   }, []);
 
   useEffect(() => {
+    console.log("did updated",isError,isSuccess)
     if (isError) {
       toast.error(errorMessage);
       console.log(errorMessage);
