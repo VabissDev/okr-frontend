@@ -1,35 +1,42 @@
 import React, { useState } from 'react';
-import { TextField, FormLayout, Button, Select, Form, Icon } from '@shopify/polaris';
+import { TextField, FormLayout, Select, Form, Icon } from '@shopify/polaris';
 import { CustomModal } from '@/components/Modals/CustomModal';
 import { CustomerPlusMajor } from '@shopify/polaris-icons';
 import { FlexText } from '@/styled/buttons';
+import { EMAIL_REGEX } from '@/utils/regex';
+import { userRoleOptions } from '@/utils/options';
 
 
 export const AddUserForm = () => {
     const [fullName, setFullName] = useState('');
+    const [nameError, setNameError] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [validEmail, setValidEmail] = useState(false);
+
+    const [emailError, setEmailError] = useState('');
     const [status, setStatus] = useState('viewer');
 
     const handleFullNameChange = (value) => {
-        setFullName(value);
+        setFullName(value.trim());
     };
 
     const handleEmailChange = (value) => {
-        setEmail(value);
-    };
-
-    const handlePasswordChange = (value) => {
-        setPassword(value);
+        setEmail(value.trim());
     };
 
     const handleStatusChange = (value) => {
-        setStatus(value);
+        setStatus(value.trim());
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Perform form submission logic here
+
+        setValidEmail(EMAIL_REGEX.test(email))
+
+        setEmailError(!validEmail ? "Invalid Email Format" : "");
+        setNameError(!fullName ? "Full Name is required" : "");
+        !email && setEmailError("Email field is required");
+
     };
 
     const buttonTitle = (
@@ -39,7 +46,12 @@ export const AddUserForm = () => {
     )
 
     return (
-        <CustomModal buttonTitle={buttonTitle} modalTitle="Fill Form to Create New User">
+        <CustomModal
+            buttonTitle={buttonTitle}
+            modalTitle="Add New User"
+            primary={{ content: "Invite", action: handleSubmit }}
+            secondary
+        >
             <Form onSubmit={handleSubmit}>
                 <FormLayout>
                     <TextField
@@ -47,6 +59,7 @@ export const AddUserForm = () => {
                         value={fullName}
                         onChange={handleFullNameChange}
                         type="text"
+                        error={nameError}
                         required
                     />
                     <TextField
@@ -54,28 +67,15 @@ export const AddUserForm = () => {
                         value={email}
                         onChange={handleEmailChange}
                         type="email"
-                        required
-                    />
-                    <TextField
-                        label="Password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        type="password"
+                        error={emailError}
                         required
                     />
                     <Select
                         label="Status"
-                        options={[
-                            { label: 'Team Lead', value: 'teamLead' },
-                            { label: 'Team Member', value: 'teamMember' },
-                            { label: 'Viewer', value: 'viewer', },
-                        ]}
+                        options={userRoleOptions}
                         value={status}
                         onChange={handleStatusChange}
                     />
-                    <Button primary submit>
-                        Submit
-                    </Button>
                 </FormLayout>
             </Form>
         </CustomModal>

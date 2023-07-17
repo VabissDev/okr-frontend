@@ -6,12 +6,14 @@ import { GridLayout } from "@/styled/containers";
 import { Navigations } from "./Navigation";
 import { useSelector } from "react-redux";
 import { getAccountData, isLoggedIn } from "@/redux/slices/accountSlice";
+import { organization } from "../redux/slices/organizationsSlice";
 
 export const MainLayout = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false);
   const login = useSelector(isLoggedIn)
   const account = useSelector(getAccountData);
+  //const organization = useSelector(organization)
   const location = useLocation();
   const navigate = useNavigate();
 

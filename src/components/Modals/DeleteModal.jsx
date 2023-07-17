@@ -9,7 +9,7 @@ export const DeleteModal = ({ name, primaryAction }) => {
       buttonTitle={<Icon source={DeleteMinor} />}
       modalTitle={`Delete ${name || "User"}`}
       children={`Are you sure you want to delete ${name || "this user"}`}
-      primary={{ action: primaryAction }}
+      primary={{ content:"Delete", action: primaryAction, destructive: true}}
       secondary
     />
   );

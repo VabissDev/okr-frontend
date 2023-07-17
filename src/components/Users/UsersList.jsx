@@ -5,10 +5,9 @@ import { getAllUsers } from "@/redux/slices/userSlice";
 import { getAccountData } from "@/redux/slices/accountSlice";
 import PaginationComponent from "@/components/PaginationComponent";
 import { EditUserForm } from "./EditUserForm";
-import { DeleteModal } from "../Modals/DeleteModal";
 import { TableWrapper } from "@/styled/containers";
 import { Link } from "react-router-dom";
-import { FlexContainer } from "@/styled/containers";
+import { DeleteModal } from "@/components/Modals";
 
 export const UserList = () => {
   const users = useSelector(getAllUsers);

@@ -10,13 +10,12 @@ import {
   PageActions,
 } from "@shopify/polaris";
 import { Top, Space } from "@/styled/profilee";
-import { DeleteMinor, EditMinor } from "@shopify/polaris-icons";
 import { Link, useParams } from "react-router-dom";
 import { getAccountData } from "@/redux/slices/accountSlice";
 import { useSelector } from "react-redux";
 import { EmptyData } from "@/components/EmptyData";
 import { EditUserForm } from "@/components/Users";
-import { DeleteModal } from "../../components/Modals/DeleteModal";
+import { DeleteModal } from "@/components/Modals";
 
 
 export const Profile = () => {
@@ -26,9 +25,11 @@ export const Profile = () => {
   const profile = users.find((user) => user.id === id);
   const canEdit = account.id === profile?.id;
   const isAdmin = account.role === "admin";
+
   const avatarSource =
     profile?.avatarSource ||
     "https://srv1.portal.p-cd.net/850p/2022/04/08/177405-1649405499-962966.jpg";
+
   return (
     <>
       {profile ? (
@@ -54,7 +55,7 @@ export const Profile = () => {
             </Box>
             <img
               src={avatarSource}
-              alt=""
+              alt="avatar"
               style={{ width: 100, height: 100, borderRadius: "50%" }}
             />
           </Space>
@@ -89,18 +90,6 @@ export const Profile = () => {
                   </Space>
                 </Top>
               </VerticalStack>
-
-              {/* <PageActions
-                primaryAction={
-                  <DeleteModal name={profile.name} />
-                }
-                secondaryActions={
-                  isAdmin &&
-                    <EditUserForm id={id} />
-                }
-              /> */}
-
-
               <PageActions
                 primaryAction={<DeleteModal name={profile.name} />}
                 secondaryActions={isAdmin && <EditUserForm id={id} />}
