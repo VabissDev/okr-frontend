@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FormLayout, TextField, Icon } from "@shopify/polaris";
+import { FormLayout, TextField, Icon, Link } from "@shopify/polaris";
 import { getAccountData } from "@/redux/slices/accountSlice";
 import { useSelector } from "react-redux";
 import { CustomModal } from "@/components/Modals";
@@ -17,6 +17,7 @@ export const EditUserForm = ({ id }) => {
     password: '',
     orgName: user.org_name,
   });
+
 
   const handleInputChange = (value, name) => {
     setProfile((prevProfile) => ({
@@ -55,17 +56,11 @@ export const EditUserForm = ({ id }) => {
           readOnly
           placeholder="example@mail.com"
         />
-        {/* <TextField
+        <TextField
           label="Avatar:"
           type="file"
-        /> */}
-        {/* <TextField
-          label="Password:"
-          type="password"
-          value={profile.password}
-          onChange={(value) => handleInputChange(value, "password")}
-          required
-        /> */}
+        />
+        <Link to="/">Reset Password</Link>
         <TextField
           label="Organization Name:"
           type="text"
