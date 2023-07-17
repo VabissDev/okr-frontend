@@ -30,7 +30,7 @@ export const CustomModal = ({
           primary && {
             content: primary.content || "Delete",
             onAction: primary.action,
-            destructive: true,
+            destructive: primary.destructive || false,
           }
         }
         secondaryActions={

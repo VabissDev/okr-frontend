@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
 import {
   FormLayout,
-  Button,
   TextField,
   Form,
   RadioButton,
@@ -19,25 +18,22 @@ import { MembersModal } from "@/components/Modals";
 import { CustomModal } from "@/components/Modals/CustomModal";
 import { InventoryMajor } from "@shopify/polaris-icons";
 import { FlexText } from "@/styled/buttons";
+import { workspaceStatusOptions } from "@/utils/options";
 
 export const WorkspaceCreate = () => {
   const dispatch = useDispatch();
   const [workspaceName, setWorkspaceName] = useState("");
+  const [validName, setValidName] = useState(false)
+  const [nameError, setNameError] = useState("");
   const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState("public");
   const [status, setStatus] = useState("active");
   const user = useSelector(getAccountData);
 
-  const [errorMessage, setErrorMessage] = useState("");
 
-  const statusOptions = [
-    { label: "Active", value: "active" },
-    { label: "Inactive", value: "inactive" },
-    { label: "Archived", value: "archived" },
-  ];
 
-  const handleNameChange = (value) => setWorkspaceName(value);
-  const handleDescriptionChange = (value) => setDescription(value);
+  const handleNameChange = (value) => setWorkspaceName(value.trim());
+  const handleDescriptionChange = (value) => setDescription(value.trim());
   const handleVisibilityChange = useCallback(
     (_, newValue) => setVisibility(newValue),
     []
@@ -46,42 +42,25 @@ export const WorkspaceCreate = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!workspaceName.trim()) {
-      setErrorMessage("Workspace name not defined. Please add workspace name.");
-      return;
-    } else if (
-      workspaceName.trim().length < 3 ||
-      workspaceName.trim().length > 20
-    ) {
-      setErrorMessage("Workspace name must be between 3 to 20 characters.");
-      return;
-    }
-    if (!description.trim()) {
-      setErrorMessage("Description not defined. Please add description.");
-      return;
-    } else if (
-      description.trim().length < 10 ||
-      description.trim().length > 100
-    ) {
-      setErrorMessage("Description must be between 10 to 100 characters.");
-      return;
-    }
-    setErrorMessage("");
 
-    const newWorkspace = {
-      id: Date.now(),
-      name: workspaceName,
-      description,
-      owner: user.id,
-      visibility,
-      status,
-      members: [45, 12, 13], // members id - progress...
-      org_name: "ABC",
-    };
+    setValidName(workspaceName.length > 5)
+    console.log(validName)
+    setNameError(!validName ? "Workspace name must include at least 5 chareacters" : "")
+    !workspaceName && setNameError("Workspace name is required")
 
-    dispatch(createWorkspace(newWorkspace));
-    setDescription("");
-    setWorkspaceName("");
+    // const newWorkspace = {
+    //   id: Date.now(),
+    //   name: workspaceName,
+    //   description,
+    //   owner: user.id,
+    //   visibility,
+    //   status,
+    //   members: [45, 12, 13], // members id - progress...
+    //   org_name: "ABC",
+    // };
+
+   // validName &&  dispatch(createWorkspace(newWorkspace));
+
   };
 
 
@@ -91,8 +70,13 @@ export const WorkspaceCreate = () => {
     </FlexText>
   )
   return (
-    <CustomModal buttonTitle={buttonTitle} modalTitle="Create New Workspace">
-      <Form onSubmit={handleSubmit}>
+    <CustomModal 
+    buttonTitle={buttonTitle} 
+    modalTitle="Create New Workspace"
+    primary={{ content: "Create", action: handleSubmit }}
+    secondary
+    >
+      <Form>
         <FormLayout>
           <TextField type="text" label="Owner:" value={user.name} disabled />
           <TextField
@@ -101,11 +85,7 @@ export const WorkspaceCreate = () => {
             label="Workspace Name:"
             value={workspaceName}
             onChange={handleNameChange}
-            error={
-              errorMessage && errorMessage.toLowerCase().includes("workspace")
-                ? errorMessage
-                : ""
-            }
+            error={nameError}
           />
           <TextField
             type="text"
@@ -115,11 +95,6 @@ export const WorkspaceCreate = () => {
             onChange={handleDescriptionChange}
             multiline={4}
             autoComplete="off"
-            error={
-              errorMessage && errorMessage.toLowerCase().includes("description")
-                ? errorMessage
-                : ""
-            }
           />
           <Label>Visibility:</Label>
           <ButtonGroup>
@@ -144,12 +119,11 @@ export const WorkspaceCreate = () => {
           </ButtonGroup>
           <Select
             label="Status:"
-            options={statusOptions}
+            options={workspaceStatusOptions}
             onChange={handleStatusChange}
             value={status}
           />
           <MembersModal members={members} title="Invite New Member" />
-          <Button submit fullWidth primary children="Create New Workspace" />
         </FormLayout>
       </Form>
     </CustomModal>

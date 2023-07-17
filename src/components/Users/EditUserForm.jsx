@@ -1,15 +1,13 @@
-import React, { useState } from "react";
-import { Button, FormLayout, TextField, Icon } from "@shopify/polaris";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { FormLayout, TextField, Icon } from "@shopify/polaris";
 import { getAccountData } from "@/redux/slices/accountSlice";
 import { useSelector } from "react-redux";
-import { CustomModal } from "../Modals";
+import { CustomModal } from "@/components/Modals";
 import { EditMinor } from "@shopify/polaris-icons";
 
 
 
 export const EditUserForm = ({ id }) => {
-  const navigate = useNavigate();
   const users = useSelector((state) => state.users.users);
   const user = users.find((user) => user.id === id);
   const account = useSelector(getAccountData);
@@ -27,13 +25,19 @@ export const EditUserForm = ({ id }) => {
     }));
   };
 
-  const handleSaveClick = () => {
-    onSave(profile);
-    navigate(`/profile/${istifadeci.id}`);
+  const handleSubmit = () => {
+    console.log(profile)
   };
+
   const title = <Icon source={EditMinor} color="base" />
+
   return (
-    <CustomModal buttonTitle={title} modalTitle={profile.fullName}>
+    <CustomModal
+      buttonTitle={title}
+      modalTitle={profile.fullName}
+      primary={{ content: "Save", action: handleSubmit }}
+      secondary
+    >
       <FormLayout>
         <TextField
           label="Full name:"
@@ -41,7 +45,7 @@ export const EditUserForm = ({ id }) => {
           value={profile.fullName}
           onChange={(value) => handleInputChange(value, "fullName")}
           required
-          placeholder={account.name}
+          placeholder="John Doe"
         />
         <TextField
           label="Email:"
@@ -49,15 +53,19 @@ export const EditUserForm = ({ id }) => {
           value={profile.email}
           onChange={(value) => handleInputChange(value, "email")}
           readOnly
-          placeholder={account.email}
+          placeholder="example@mail.com"
         />
-        <TextField
+        {/* <TextField
+          label="Avatar:"
+          type="file"
+        /> */}
+        {/* <TextField
           label="Password:"
           type="password"
           value={profile.password}
           onChange={(value) => handleInputChange(value, "password")}
           required
-        />
+        /> */}
         <TextField
           label="Organization Name:"
           type="text"
@@ -66,9 +74,6 @@ export const EditUserForm = ({ id }) => {
           readOnly
           placeholder={account.org_name}
         />
-        <Button primary onClick={handleSaveClick}>
-          Save
-        </Button>
       </FormLayout>
     </CustomModal>
   );
