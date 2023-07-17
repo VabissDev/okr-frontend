@@ -74,13 +74,15 @@ export const fetchUserBytoken = createAsyncThunk(
   async ({ token }, thunkAPI) => {
     try {
       const response = await fetch(
-        "https://okr-backend-vabiss-c66783e088f5.herokuapp.com/auth/save",
+        "https://okr-backend-vabiss-c66783e088f5.herokuapp.com/organizations/27",
         {
           method: "GET",
+          mode: "no-cors",
           headers: {
             Accept: "application/json",
-            Authorization: token,
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
           },
         }
       );
@@ -155,7 +157,7 @@ export const authSlice = createSlice({
       state.isSuccess = true;
       state.user = payload.user;
     },
-    
+
     [fetchUserBytoken.rejected]: (state) => {
       console.log("fetchUserBytoken");
       state.isFetching = false;
