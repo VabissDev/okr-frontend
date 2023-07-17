@@ -102,9 +102,7 @@ export const fetchUserBytoken = createAsyncThunk(
 export const authSlice = createSlice({
   name: "user",
   initialState: {
-    fullName: "",
-    organizationName: "",
-    email: "",
+    user: {},
     isFetching: false,
     isSuccess: false,
     isError: false,
@@ -124,9 +122,7 @@ export const authSlice = createSlice({
       console.log("payload", payload);
       state.isFetching = false;
       state.isSuccess = true;
-      state.email = payload.user.email;
-      state.fullName = payload.user.fullName;
-      state.organizationName = payload.user.organizationName;
+      state.user = payload.user;
     },
     [signupUser.pending]: (state) => {
       state.isFetching = true;
@@ -137,9 +133,7 @@ export const authSlice = createSlice({
       state.errorMessage = payload.error;
     },
     [loginUser.fulfilled]: (state, { payload }) => {
-      state.email = payload.email;
-      state.fullName = payload.fullName;
-      state.organizationName = payload.organizationName;
+      state.user = payload.user;
       state.isFetching = false;
       state.isSuccess = true;
       return state;
@@ -159,10 +153,9 @@ export const authSlice = createSlice({
     [fetchUserBytoken.fulfilled]: (state, { payload }) => {
       state.isFetching = false;
       state.isSuccess = true;
-
-      state.email = payload.email;
-      state.username = payload.name;
+      state.user = payload.user;
     },
+    
     [fetchUserBytoken.rejected]: (state) => {
       console.log("fetchUserBytoken");
       state.isFetching = false;
