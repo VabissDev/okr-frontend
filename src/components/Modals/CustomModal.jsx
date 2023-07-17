@@ -28,7 +28,7 @@ export const CustomModal = ({
         onClose={handleChange}
         primaryAction={
           primary && {
-            content: primary.content || "Delete",
+            content: primary.content,
             onAction: primary.action,
             destructive: primary.destructive || false,
           }
