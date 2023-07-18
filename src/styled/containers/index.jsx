@@ -89,6 +89,17 @@ export const TableWrapper = styled.div`
 `
 
 export const NavigationWrapper = styled.div`
+.Polaris-Navigation__Item:has(a[href="/organization"]) h3 {
+    color: var(--p-color-bg-primary);
+}
+
+.Polaris-Navigation__Icon {
+    margin: 0 .45rem 0 0;
+    height: 100%;
+    display: inline-grid;
+    place-items: center;
+}
+.Polaris-Navigation__Item:has(a[href="/organization"]) .Polaris-Icon__Svg,
 .Polaris-Navigation__Item:has(.active) .Polaris-Icon__Svg {
     fill: var(--p-color-bg-primary);
 }
