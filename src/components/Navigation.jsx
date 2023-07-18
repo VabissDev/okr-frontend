@@ -1,10 +1,10 @@
 import { Icon, Navigation, Text } from "@shopify/polaris";
-import { HomeMinor, LockMinor, GlobeMinor } from "@shopify/polaris-icons";
+import { HomeMinor, LockMinor, GlobeMinor, HomeMajor } from "@shopify/polaris-icons";
 import { useSelector } from "react-redux";
 import { getAllWorkspaces } from "@/redux/slices/workspaceSlices";
 import { getAccountData } from "@/redux/slices/accountSlice";
 import { NavLink } from "react-router-dom";
-import { ActiveLink } from "../styled/buttons";
+import { ActiveLink, NoneUnderline } from "../styled/buttons";
 import { NavigationWrapper } from "../styled/containers";
 
 export const Navigations = () => {
@@ -14,16 +14,18 @@ export const Navigations = () => {
   const navlinks = [
     {
       key: account.id,
-      url: "/organization ",
       label: (
-        <Text
-          variant="headingXl"
-          as="h3"
-          color="subdued"
-          children={account.org_name}
-        />
+        <NoneUnderline>
+          <NavLink to="/organization">
+            <Text
+              variant="headingXl"
+              as="h3"
+              children={account.org_name}
+            />
+          </NavLink>
+        </NoneUnderline>
       ),
-      icon: HomeMinor,
+      icon: HomeMajor,
     },
   ];
 
