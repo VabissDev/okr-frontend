@@ -28,7 +28,7 @@ export const UserList = () => {
     return [
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div style={{ display: "flex", gap: "20px" }}>
-          <Link to={`/profile${user.id}`}>
+          <Link to={`/profile/${user.id}`}>
             <Avatar
               customer
               size="medium"

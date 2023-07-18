@@ -23,11 +23,13 @@ import { Toaster } from "react-hot-toast";
 import { EMAIL_REGEX } from "@/utils/regex";
 
 export const Login = () => {
-  const { isFetching, isSuccess, isError, errorMessage } =
+  const {  isFetching, isSuccess, isError, errorMessage, user } =
     useSelector(userSelector);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const title = "Welcome Back";
+
+  console.log("user",user)
 
   
   const [email, setEmail] = useState("");

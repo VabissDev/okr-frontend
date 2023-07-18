@@ -5,21 +5,21 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { GridLayout } from "@/styled/containers";
 import { Navigations } from "./Navigation";
 import { useSelector } from "react-redux";
-import { getAccountData, isLoggedIn } from "@/redux/slices/accountSlice";
-import { organization } from "../redux/slices/organizationsSlice";
+import { getAuth } from "@/redux/slices/AuthSlice";
 
 export const MainLayout = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false);
-  const login = useSelector(isLoggedIn)
-  const account = useSelector(getAccountData);
-  //const organization = useSelector(organization)
   const location = useLocation();
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("token");
   useEffect(() => {
-    !login && navigate('/login')
-  }, [])
+    !token && navigate("/login");
+  }, []);
+
+  const auth = useSelector(getAuth);
+  console.log("auth", auth)
 
   const toggleIsUserMenuOpen = useCallback(() => {
     setIsUserMenuOpen((isUserMenuOpen) => !isUserMenuOpen);
@@ -29,31 +29,17 @@ export const MainLayout = () => {
     setIsSecondaryMenuOpen((isSecondaryMenuOpen) => !isSecondaryMenuOpen);
   }, []);
 
-
   const handleNavigationToggle = useCallback(() => {
     console.log("toggle navigation visibility");
   }, []);
 
-
-  const organizations = [
-    {
-      name: "ABC Company",
-      url: "https://www.abc-company.no/wp-content/uploads/2015/10/new-logo.png"
-    },
-    {
-      name: "XYZ Corporation",
-      url: "https://www.xyzcomms.com/wp-content/uploads/2017/10/XYZ.png"
-    }
-  ]
-
   const logo = {
     width: 100,
     height: 50,
-    topBarSource: `${organizations.find(org => org.name === account.org_name)?.url || "https://www.trplane.com/wp-content/uploads/2021/08/okrs.jpg"}`,
+    topBarSource: "https://www.trplane.com/wp-content/uploads/2021/08/okrs.jpg",
     url: "/organization",
     accessibilityLabel: "Jaded Pixel",
   };
-
 
   const userMenuMarkup = (
     <TopBar.UserMenu
@@ -63,7 +49,7 @@ export const MainLayout = () => {
             {
               content: (
                 <Link
-                  to={`/profile/${account.id}`}
+                  to={`/profile/${auth?.id}` || "/login"}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   My profile
@@ -73,18 +59,31 @@ export const MainLayout = () => {
           ],
         },
         {
-          items: [{ icon: ArrowRightMinor, content: "Logout" }],
+          items: [
+            {
+              icon: ArrowRightMinor,
+              content: (
+                <Link
+                  to="/"
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                  }}
+                >
+                  Logout
+                </Link>
+              ),
+            },
+          ],
         },
       ]}
-      name={account.name}
-      detail={account.role}
-      avatar={account.avatarSource}
+      name={auth?.fullName || "Anonymous User"}
+      detail={auth?.organization?.name || "Anonymous Company"}
+      avatar={auth?.avatar && auth.avatar}
+      initials={!auth?.avatar && auth?.fullName?.toUpperCase()?.slice(0,1) || "U"}
       open={isUserMenuOpen}
       onToggle={toggleIsUserMenuOpen}
     />
   );
-
-
 
   const secondaryMenuMarkup = (
     <TopBar.Menu
@@ -106,35 +105,29 @@ export const MainLayout = () => {
     />
   );
 
-  const topBarMarkup =
-
-
-    (
-      <TopBar
-        showNavigationToggle
-        userMenu={userMenuMarkup}
-        secondaryMenu={secondaryMenuMarkup}
-        onNavigationToggle={handleNavigationToggle}
-      />
-    )
-
-    ;
+  const topBarMarkup = (
+    <TopBar
+      showNavigationToggle
+      userMenu={userMenuMarkup}
+      secondaryMenu={secondaryMenuMarkup}
+      onNavigationToggle={handleNavigationToggle}
+    />
+  );
 
   const PageContent = () => {
     return (
       <Page>
-        {
-          location.pathname !== "/organization"
-            ? <GridLayout columns="1fr 3fr" gap="30px">
-              <Navigations />
-              <Outlet />
-            </GridLayout>
-            : <Outlet />
-        }
+        {location.pathname !== "/organization" ? (
+          <GridLayout columns="1fr 3fr" gap="30px">
+            <Navigations />
+            <Outlet />
+          </GridLayout>
+        ) : (
+          <Outlet />
+        )}
       </Page>
-    )
-
-  }
+    );
+  };
 
   return (
     <div style={{ height: "50px" }}>

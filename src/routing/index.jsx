@@ -8,6 +8,7 @@ import { Organization } from "@/pages/Organization";
 import { Workspace } from "@/pages/Workspace";
 import { Home } from "@/pages/Home";
 import { UserList } from "@/components/Users";
+import { ResetPassword } from "@/pages/ResetPassword";
 
 export const Routing = () => {
 
@@ -17,6 +18,7 @@ export const Routing = () => {
 
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route path="/reset" element={<ResetPassword />} />
 
       <Route path="/" element={<MainLayout />}>
         <Route path="organization" element={<Organization />} />
