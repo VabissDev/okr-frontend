@@ -168,4 +168,6 @@ export const authSlice = createSlice({
 
 export const { clearState } = authSlice.actions;
 
+export const getAuth = state => state.auth.user
+
 export const userSelector = (state) => state.auth;
