@@ -19,7 +19,7 @@ export const MainLayout = () => {
   }, []);
 
   const auth = useSelector(getAuth);
-  console.log("auth", auth)
+  console.log("auth",token, auth)
 
   const toggleIsUserMenuOpen = useCallback(() => {
     setIsUserMenuOpen((isUserMenuOpen) => !isUserMenuOpen);
@@ -128,6 +128,7 @@ export const MainLayout = () => {
       </Page>
     );
   };
+  
 
   return (
     <div style={{ height: "50px" }}>

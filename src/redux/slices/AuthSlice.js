@@ -79,14 +79,15 @@ export const fetchUserBytoken = createAsyncThunk(
           method: "GET",
           mode: "no-cors",
           headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${token}`,
+            "Accept": "application/json",
+            "Authorization": `Bearer ${token}`,
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
           },
         }
       );
       let data = await response.json();
+      console.log(data)
       console.log("data", data, response.status);
 
       if (response.status === 200) {
@@ -168,6 +169,6 @@ export const authSlice = createSlice({
 
 export const { clearState } = authSlice.actions;
 
-export const getAuth = state => state.auth.user
+export const getAuth = state => state.auth.user;
 
 export const userSelector = (state) => state.auth;

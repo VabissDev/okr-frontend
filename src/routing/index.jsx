@@ -12,6 +12,8 @@ import { ResetPassword } from "@/pages/ResetPassword";
 
 export const Routing = () => {
 
+  // const token = localStorage.getItem("token");
+
   return (
     <Routes>
       <Route index element={<Home />} />

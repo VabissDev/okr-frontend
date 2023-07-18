@@ -11,6 +11,7 @@ import { Space } from "@/styled/profilee";
 import { CustomersMinor } from "@shopify/polaris-icons";
 import { GridLayout } from "@/styled/containers";
 import { MembersModal } from "@/components/Modals";
+import { NoneUnderline } from "@/styled/buttons";
 
 
 export const Workspace = () => {
@@ -71,6 +72,7 @@ export const Workspace = () => {
                         as="h5"
                         children="Admin:"
                     />
+                    <NoneUnderline>
                     <Link to={`/profile/${workspace.owner}`}>
                         <Text
                             variant="headingMd"
@@ -78,6 +80,7 @@ export const Workspace = () => {
                             children={owner?.name || "unknown"}
                         />
                     </Link>
+                    </NoneUnderline>
                 </GridLayout>
                 <Space>
                     <Text
