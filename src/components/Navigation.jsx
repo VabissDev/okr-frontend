@@ -1,8 +1,11 @@
-import { Navigation, Text } from "@shopify/polaris";
+import { Icon, Navigation, Text } from "@shopify/polaris";
 import { HomeMinor, LockMinor, GlobeMinor } from "@shopify/polaris-icons";
 import { useSelector } from "react-redux";
 import { getAllWorkspaces } from "@/redux/slices/workspaceSlices";
 import { getAccountData } from "@/redux/slices/accountSlice";
+import { NavLink } from "react-router-dom";
+import { ActiveLink } from "../styled/buttons";
+import { NavigationWrapper } from "../styled/containers";
 
 export const Navigations = () => {
   const workspaces = useSelector(getAllWorkspaces);
@@ -31,11 +34,14 @@ export const Navigations = () => {
   filtered.map((item) => {
     const icon = item.visibility === "public" ? GlobeMinor : LockMinor;
     const label = (
-      <Text variant="headingMd" as="h4" color="subdued" children={item.name} />
+      <ActiveLink>
+        <NavLink to={`/workspace/${item.id}`}>
+          <Text variant="headingMd" as="h4" color="subdued" children={item.name} />
+        </NavLink>
+      </ActiveLink>
     );
     navlinks.push({
       key: item.id,
-      url: `/workspace/${item.id}`,
       label,
       icon,
     });
@@ -43,9 +49,11 @@ export const Navigations = () => {
 
   return (
     <Navigation location="/">
-      <Navigation.Section
-        items={navlinks}
-      />
+      <NavigationWrapper>
+        <Navigation.Section
+          items={navlinks}
+        />
+      </NavigationWrapper>
     </Navigation>
   );
 };

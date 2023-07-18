@@ -87,3 +87,9 @@ export const TableWrapper = styled.div`
         box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     }
 `
+
+export const NavigationWrapper = styled.div`
+.Polaris-Navigation__Item:has(.active) .Polaris-Icon__Svg {
+    fill: var(--p-color-bg-primary);
+}
+`
