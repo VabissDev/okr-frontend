@@ -21,7 +21,7 @@ export const Space = styled.div`
 `
 
 export const Top = styled.div`
-  padding-top: 10px;
+  padding-top: ${({ top }) => top || "20px"};;
 `
 
 export const Display = styled.div`
