@@ -1,14 +1,20 @@
 import { Icon, Navigation, Text } from "@shopify/polaris";
-import { HomeMinor, LockMinor, GlobeMinor, HomeMajor } from "@shopify/polaris-icons";
+import {
+  HomeMinor,
+  LockMinor,
+  GlobeMinor,
+  HomeMajor,
+} from "@shopify/polaris-icons";
 import { useSelector } from "react-redux";
-import { getAllWorkspaces } from "@/redux/slices/workspaceSlices";
+// import { getAllWorkspaces } from "@/redux/slices/workspaceSlices"; error verdiyi ucun helelik evezine fake data'dan ist etdim
+import workspaces from "@/data/workspaces.json";
 import { getAccountData } from "@/redux/slices/accountSlice";
 import { NavLink } from "react-router-dom";
 import { ActiveLink, NoneUnderline } from "../styled/buttons";
 import { NavigationWrapper } from "../styled/containers";
 
 export const Navigations = () => {
-  const workspaces = useSelector(getAllWorkspaces);
+  // const workspaces = useSelector(getAllWorkspaces);
   const account = useSelector(getAccountData);
 
   const navlinks = [
@@ -17,11 +23,7 @@ export const Navigations = () => {
       label: (
         <NoneUnderline>
           <NavLink to="/organization">
-            <Text
-              variant="headingXl"
-              as="h3"
-              children={account.org_name}
-            />
+            <Text variant="headingXl" as="h3" children={account.org_name} />
           </NavLink>
         </NoneUnderline>
       ),
@@ -38,7 +40,12 @@ export const Navigations = () => {
     const label = (
       <ActiveLink>
         <NavLink to={`/workspace/${item.id}`}>
-          <Text variant="headingMd" as="h4" color="subdued" children={item.name} />
+          <Text
+            variant="headingMd"
+            as="h4"
+            color="subdued"
+            children={item.name}
+          />
         </NavLink>
       </ActiveLink>
     );
@@ -52,9 +59,7 @@ export const Navigations = () => {
   return (
     <Navigation location="/">
       <NavigationWrapper>
-        <Navigation.Section
-          items={navlinks}
-        />
+        <Navigation.Section items={navlinks} />
       </NavigationWrapper>
     </Navigation>
   );
