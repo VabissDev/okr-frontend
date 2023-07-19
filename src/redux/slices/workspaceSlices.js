@@ -15,7 +15,7 @@ export const createWorkspace = createAsyncThunk(
           method: "POST",
           headers: {
             "Accept": "application/json",
-            "mode": "no-cors",
+           // "mode": "no-cors",
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`,
             "Access-Control-Allow-Origin": "*",

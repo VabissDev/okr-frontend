@@ -1,9 +1,12 @@
-import { useState } from "react";
-import { FormLayout, TextField, Icon, Link } from "@shopify/polaris";
+import { useCallback, useState } from "react";
+import { FormLayout, TextField, Icon, Link, Button, Collapsible, Text } from "@shopify/polaris";
 import { getAccountData } from "@/redux/slices/accountSlice";
 import { useSelector } from "react-redux";
 import { CustomModal } from "@/components/Modals";
 import { EditMinor } from "@shopify/polaris-icons";
+import { PasswordInputWrapper } from "@/styled/inputs"
+import { HideMinor, ViewMinor } from "@shopify/polaris-icons"
+import { ResetButtonWrapper } from "../../styled/buttons";
 
 
 
@@ -17,6 +20,22 @@ export const EditUserForm = ({ id }) => {
     password: '',
     orgName: user.org_name,
   });
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [confirmError, setConfirmError] = useState("");
+
+  const [showPassword, setShowPassword] = useState({
+    password: false,
+    confirm: false
+  });
+
+  const hanlePasswordChange = (value) => setPassword(value.trim());
+  const hanleConfirmChange = (value) => setConfirm(value.trim());
+
+  const [open, setOpen] = useState(false);
+
+  const handleToggle = useCallback(() => setOpen((open) => !open), []);
 
 
   const handleInputChange = (value, name) => {
@@ -60,7 +79,71 @@ export const EditUserForm = ({ id }) => {
           label="Avatar:"
           type="file"
         />
-        <Link to="/">Reset Password</Link>
+        <ResetButtonWrapper>
+          <Button
+            onClick={handleToggle}
+            ariaExpanded={open}
+            ariaControls="basic-collapsible"
+          >
+            Reset your password
+          </Button>
+        </ResetButtonWrapper>
+
+        <Collapsible
+          open={open}
+          id="basic-collapsible"
+          transition={{ duration: '500ms', timingFunction: 'ease-in-out' }}
+          expandOnPrint
+        >
+          <PasswordInputWrapper>
+            <TextField
+              label="Password:"
+              type={showPassword.password ? "text" : "password"}
+              placeholder="*********"
+              value={password}
+              onChange={hanlePasswordChange}
+              error={passwordError}
+            />
+            <Button
+              className="show-password-btn"
+              onClick={() =>
+                setShowPassword({
+                  ...showPassword,
+                  password: !showPassword.password,
+                })
+              }
+            >
+              <Icon
+                source={showPassword.password ? ViewMinor : HideMinor}
+                color="base"
+              />
+            </Button>
+          </PasswordInputWrapper>
+          <PasswordInputWrapper>
+            <TextField
+              label="Password Confirm:"
+              type={showPassword.confirm ? "text" : "password"}
+              placeholder="*********"
+              value={confirm}
+              onChange={hanleConfirmChange}
+              error={confirmError}
+            />
+            <Button
+              className="show-password-btn"
+              onClick={() =>
+                setShowPassword({
+                  ...showPassword,
+                  confirm: !showPassword.confirm,
+                })
+              }
+            >
+              <Icon
+                source={showPassword.password ? ViewMinor : HideMinor}
+                color="base"
+              />
+            </Button>
+          </PasswordInputWrapper>
+        </Collapsible>
         <TextField
           label="Organization Name:"
           type="text"
@@ -70,7 +153,7 @@ export const EditUserForm = ({ id }) => {
           placeholder={account.org_name}
         />
       </FormLayout>
-    </CustomModal>
+    </CustomModal >
   );
 };
 

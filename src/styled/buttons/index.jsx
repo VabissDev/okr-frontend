@@ -16,3 +16,15 @@ export const ActiveLink = styled(NoneUnderline)`
     color: var(--p-color-bg-primary);
 }
 `
+
+export const ResetButtonWrapper = styled.div`
+.Polaris-Button {
+    border: none;
+    padding-inline: 0;
+    &:hover {
+        background-color: transparent;
+        color: blue;
+    }
+}
+
+`
