@@ -82,7 +82,7 @@ const workspaceSlice = createSlice({
     [createWorkspace.rejected]: (state, { payload }) => {
       state.isFetching = false;
       state.isError = true;
-      state.errorMessage = payload.error;
+      state.errorMessage = payload; // payload.message || payload.error;
     },
   },
 });

@@ -19,6 +19,7 @@ import { FlexText } from "@/styled/buttons";
 import { workspaceStatusOptions } from "@/utils/options";
 
 import { getAuth } from "@/redux/slices/AuthSlice";
+import { createWorkspace } from "@/redux/slices/workspaceSlices";
 
 export const WorkspaceCreate = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export const WorkspaceCreate = () => {
   const [visibility, setVisibility] = useState("public");
   const [status, setStatus] = useState("active");
   const user = useSelector(getAuth);
+  const { fullName, id, organizationId } = user;
 
   const handleNameChange = (value) => setWorkspaceName(value.trim());
   const handleDescriptionChange = (value) => setDescription(value.trim());
@@ -60,16 +62,16 @@ export const WorkspaceCreate = () => {
       return;
     }
 
-    // const newWorkspace = {
-    //   id: Date.now(),
-    //   name: workspaceName,
-    //   description,
-    //   owner: user.id,
-    //   visibility,
-    //   status,
-    //   members: [45, 12, 13], // members id - progress...
-    //   org_name: "ABC",
-    // };
+    const data = {
+      name: workspaceName,
+      owner: id,
+      description,
+      level: visibility,
+      status: status,
+      organizationId,
+    };
+
+    dispatch(createWorkspace(data));
 
     // reset form
     setErrorMessage("");
@@ -95,12 +97,7 @@ export const WorkspaceCreate = () => {
     >
       <Form>
         <FormLayout>
-          <TextField
-            type="text"
-            label="Owner:"
-            value={user.fullName}
-            disabled
-          />
+          <TextField type="text" label="Owner:" value={fullName} disabled />
           <TextField
             type="text"
             placeholder="Enter workspace name"
