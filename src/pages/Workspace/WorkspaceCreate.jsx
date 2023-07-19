@@ -12,25 +12,22 @@ import {
 
 import members from "@/data/members.json";
 import { useDispatch, useSelector } from "react-redux";
-import { getAccountData } from "@/redux/slices/accountSlice";
-import { createWorkspace } from "@/redux/slices/workspaceSlices";
 import { MembersModal } from "@/components/Modals";
 import { CustomModal } from "@/components/Modals/CustomModal";
 import { InventoryMajor } from "@shopify/polaris-icons";
 import { FlexText } from "@/styled/buttons";
 import { workspaceStatusOptions } from "@/utils/options";
 
+import { getAuth } from "@/redux/slices/AuthSlice";
+
 export const WorkspaceCreate = () => {
   const dispatch = useDispatch();
   const [workspaceName, setWorkspaceName] = useState("");
-  const [validName, setValidName] = useState(false)
-  const [nameError, setNameError] = useState("");
   const [description, setDescription] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [visibility, setVisibility] = useState("public");
   const [status, setStatus] = useState("active");
-  const user = useSelector(getAccountData);
-
-
+  const user = useSelector(getAuth);
 
   const handleNameChange = (value) => setWorkspaceName(value.trim());
   const handleDescriptionChange = (value) => setDescription(value.trim());
@@ -43,10 +40,16 @@ export const WorkspaceCreate = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setValidName(workspaceName.length > 5)
-    console.log(validName)
-    setNameError(!validName ? "Workspace name must include at least 5 chareacters" : "")
-    !workspaceName && setNameError("Workspace name is required")
+    if (!workspaceName.trim()) {
+      setErrorMessage("Workspace name not defined. Please add workspace name.");
+      return;
+    } else if (!description.trim()) {
+      setErrorMessage("Description not defined. Please add description.");
+      return;
+    }
+    setErrorMessage("");
+    setDescription("");
+    setWorkspaceName("");
 
     // const newWorkspace = {
     //   id: Date.now(),
@@ -58,23 +61,21 @@ export const WorkspaceCreate = () => {
     //   members: [45, 12, 13], // members id - progress...
     //   org_name: "ABC",
     // };
-
-   // validName &&  dispatch(createWorkspace(newWorkspace));
-
   };
 
-
   const buttonTitle = (
-    <FlexText> New Workspace
-      <Icon source={InventoryMajor} color='base' />
+    <FlexText>
+      {" "}
+      New Workspace
+      <Icon source={InventoryMajor} color="base" />
     </FlexText>
-  )
+  );
   return (
-    <CustomModal 
-    buttonTitle={buttonTitle} 
-    modalTitle="Create New Workspace"
-    primary={{ content: "Create", action: handleSubmit }}
-    secondary
+    <CustomModal
+      buttonTitle={buttonTitle}
+      modalTitle="Create New Workspace"
+      primary={{ content: "Create", action: handleSubmit }}
+      secondary
     >
       <Form>
         <FormLayout>
@@ -85,7 +86,11 @@ export const WorkspaceCreate = () => {
             label="Workspace Name:"
             value={workspaceName}
             onChange={handleNameChange}
-            error={nameError}
+            error={
+              errorMessage && errorMessage.toLowerCase().includes("workspace")
+                ? errorMessage
+                : ""
+            }
           />
           <TextField
             type="text"
@@ -95,6 +100,11 @@ export const WorkspaceCreate = () => {
             onChange={handleDescriptionChange}
             multiline={4}
             autoComplete="off"
+            error={
+              errorMessage && errorMessage.toLowerCase().includes("description")
+                ? errorMessage
+                : ""
+            }
           />
           <Label>Visibility:</Label>
           <ButtonGroup>
