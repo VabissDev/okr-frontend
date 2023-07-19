@@ -1,214 +1,212 @@
-{
-  "data": [
-    {
-      "id": 32,
-      "name": "Project Alpha",
-      "owner": 151,
-      "visibility": "public",
-      "status": "active",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "ABC Company",
-      "description": "Project Alpha is a public workspace owned by User 151 in ABC Company. It is an ongoing project focused on developing a new mobile application for ABC Company. The project is currently active and welcomes collaboration from members within the organization."
-    },
-    {
-      "id": 33,
-      "name": "Project Beta",
-      "owner": 1,
-      "visibility": "public",
-      "status": "active",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "XYZ Corporation",
-      "description": "Project Beta is a public workspace owned by User 1 in XYZ Corporation. It is a cross-functional initiative aimed at improving customer support processes and enhancing the overall user experience. The project is currently active and open to contributions from all members."
-    },
-    {
-      "id": 34,
-      "name": "Project Gamma",
-      "owner": 1,
-      "visibility": "public",
-      "status": "active",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "ABC Company",
-      "description": "Project Gamma is a public workspace owned by User 1 in ABC Company. It is a research and development project exploring innovative technologies for the automotive industry. The project is currently active and seeks to leverage the expertise of members to drive groundbreaking advancements."
-    },
-    {
-      "id": 35,
-      "name": "Project Delta",
-      "owner": 1,
-      "visibility": "public",
-      "status": "active",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "XYZ Corporation",
-      "description": "Project Delta is a public workspace owned by User 1 in XYZ Corporation. It focuses on developing a new marketing campaign strategy to expand the company's reach. The project is currently active and encourages members to contribute creative ideas and execute marketing initiatives."
-    },
-    {
-      "id": 36,
-      "name": "Project Epsilon",
-      "owner": 1,
-      "visibility": "public",
-      "status": "active",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "ABC Company",
-      "description": "Project Epsilon is a public workspace owned by User 1 in ABC Company. It aims to optimize the supply chain processes to increase operational efficiency and reduce costs. The project is currently active and welcomes collaboration from members with expertise in logistics and procurement."
-    },
-    {
-      "id": 37,
-      "name": "Project Zeta",
-      "owner": 146,
-      "visibility": "public",
-      "status": "active",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "ABC Company",
-      "description": "Project Zeta is a public workspace owned by User 146 in ABC Company. It focuses on developing a new software application to streamline internal communication and collaboration. The project iscurrently active and encourages members to contribute their ideas and expertise in software development and user experience design."
-    },
-    {
-      "id": 38,
-      "name": "Project Eta",
-      "owner": 146,
-      "visibility": "public",
-      "status": "active",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "XYZ Corporation",
-      "description": "Project Eta is a public workspace owned by User 146 in XYZ Corporation. It is a collaborative project aimed at developing a new product prototype for market testing. The project is currently active and welcomes members from various departments to contribute their expertise in product design, engineering, and market research."
-    },
-    {
-      "id": 39,
-      "name": "Project Theta",
-      "owner": 146,
-      "visibility": "private",
-      "status": "active",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "ABC Company",
-      "description": "Project Theta is a private workspace owned by User 146 in ABC Company. It focuses on sensitive research and development activities related to a confidential project. The project is currently active and limited to a select group of trusted members with special access permissions."
-    },
-    {
-      "id": 40,
-      "name": "Project Iota",
-      "owner": 146,
-      "visibility": "private",
-      "status": "archived",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "XYZ Corporation",
-      "description": "Project Iota is a private workspace owned by User 146 in XYZ Corporation. It was an initiative aimed at developing a new software application, which has now been completed and archived. The project is no longer active but serves as a reference for future projects."
-    },
-    {
-      "id": 41,
-      "name": "Project Kappa",
-      "owner": 146,
-      "visibility": "private",
-      "status": "active",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "XYZ Corporation",
-      "description": "Project Kappa is a private workspace owned by User 146 in XYZ Corporation. It is a confidential project focused on developing a new product line for an upcoming product launch. The project is currently active and limited to a select group of members involved in product development, marketing, and operations."
-    },
-    {
-      "id": 42,
-      "name": "Project Lambda",
-      "owner": 146,
-      "visibility": "private",
-      "status": "active",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "XYZ Corporation",
-      "description": "Project Lambda is a private workspace owned by User 146 in XYZ Corporation. It is a strategic initiative focused on market expansion into new regions. The project is currently active and seeks inputs from members with expertise in market research, business development, and international operations."
-    },
-    {
-      "id": 43,
-      "name": "Project Mu",
-      "owner": 150,
-      "visibility": "private",
-      "status": "inactive",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "XYZ Corporation",
-      "description": "Project Mu is a private workspace ownedby User 150 in XYZ Corporation. It was a research project focused on developing a new algorithm for data analysis. However, the project is currently inactive and no longer accepting contributions or undergoing further development."
-    },
-    {
-      "id": 44,
-      "name": "Project Nu",
-      "owner": 150,
-      "visibility": "private",
-      "status": "archived",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "XYZ Corporation",
-      "description": "Project Nu is a private workspace owned by User 150 in XYZ Corporation. It was a collaborative initiative to revamp the company's website and improve its online presence. The project has been completed and archived, serving as a reference for future website enhancements."
-    },
-    {
-      "id": 45,
-      "name": "Project Xi",
-      "owner": 150,
-      "visibility": "private",
-      "status": "inactive",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "XYZ Corporation",
-      "description": "Project Xi is a private workspace owned by User 150 in XYZ Corporation. It aimed to explore opportunities for collaboration with external research institutions and industry partners. However, the project is currently inactive and no longer pursuing partnership initiatives."
-    },
-    {
-      "id": 46,
-      "name": "Project Omicron",
-      "owner": 150,
-      "visibility": "private",
-      "status": "active",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "XYZ Corporation",
-      "description": "Project Omicron is a private workspace owned by User 150 in XYZ Corporation. It focuses on developing a new cloud-based software solution for streamlining internal operations. The project is currently active and welcomes collaboration from members with expertise in software development and cloud architecture."
-    },
-    {
-      "id": 47,
-      "name": "Project Pi",
-      "owner": 150,
-      "visibility": "private",
-      "status": "inactive",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "XYZ Corporation",
-      "description": "Project Pi is a private workspace owned by User 150 in XYZ Corporation. It was an initiative focused on developing a new training program for employees. However, the project is currently inactive and no longer undergoing further development."
-    },
-    {
-      "id": 48,
-      "name": "Project Rho",
-      "owner": 150,
-      "visibility": "private",
-      "status": "archived",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "XYZ Corporation",
-      "description": "Project Rho is a private workspace owned by User 150 in XYZ Corporation. It was a project aimed at optimizing the company's manufacturing processes. The project has been completed and archived, serving as a reference for future process improvement initiatives."
-    },
-    {
-      "id": 49,
-      "name": "Project Sigma",
-      "owner": 150,
-      "visibility": "private",
-      "status": "active",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "XYZ Corporation",
-      "description": "Project Sigma is a private workspace owned by User 150 in XYZCorporation. It is a confidential project focused on developing a new product line for an upcoming product launch. The project is currently active and limited to a select group of members involved in product development, marketing, and operations."
-    },
-    {
-      "id": 50,
-      "name": "Project Tau",
-      "owner": 150,
-      "visibility": "private",
-      "status": "inactive",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "XYZ Corporation",
-      "description": "Project Tau is a private workspace owned by User 150 in XYZ Corporation. It was a research project focused on developing innovative solutions for sustainable energy. However, the project is currently inactive and no longer undergoing further development."
-    },
-    {
-      "id": 51,
-      "name": "Project Upsilon",
-      "owner": 152,
-      "visibility": "private",
-      "status": "archived",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "XYZ Corporation",
-      "description": "Project Upsilon is a private workspace owned by User 152 in XYZ Corporation. It was a collaborative initiative aimed at optimizing the company's supply chain and logistics operations. The project has been completed and archived, serving as a reference for future process improvement initiatives."
-    },
-    {
-      "id": 52,
-      "name": "Project Phi",
-      "owner": 152,
-      "visibility": "private",
-      "status": "inactive",
-      "members": [148, 151, 153, 154, 155, 156, 158],
-      "org_name": "XYZ Corporation",
-      "description": "Project Phi is a private workspace owned by User 152 in XYZ Corporation. It was a research project focused on developing advanced machine learning algorithms for data analysis. However, the project is currently inactive and no longer undergoing further development."
-    }
-  ]
-}
+[
+  {
+    "id": 32,
+    "name": "Project Alpha",
+    "owner": 151,
+    "visibility": "public",
+    "status": "active",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "ABC Company",
+    "description": "Project Alpha is a public workspace owned by User 151 in ABC Company. It is an ongoing project focused on developing a new mobile application for ABC Company. The project is currently active and welcomes collaboration from members within the organization."
+  },
+  {
+    "id": 33,
+    "name": "Project Beta",
+    "owner": 1,
+    "visibility": "public",
+    "status": "active",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "XYZ Corporation",
+    "description": "Project Beta is a public workspace owned by User 1 in XYZ Corporation. It is a cross-functional initiative aimed at improving customer support processes and enhancing the overall user experience. The project is currently active and open to contributions from all members."
+  },
+  {
+    "id": 34,
+    "name": "Project Gamma",
+    "owner": 1,
+    "visibility": "public",
+    "status": "active",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "ABC Company",
+    "description": "Project Gamma is a public workspace owned by User 1 in ABC Company. It is a research and development project exploring innovative technologies for the automotive industry. The project is currently active and seeks to leverage the expertise of members to drive groundbreaking advancements."
+  },
+  {
+    "id": 35,
+    "name": "Project Delta",
+    "owner": 1,
+    "visibility": "public",
+    "status": "active",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "XYZ Corporation",
+    "description": "Project Delta is a public workspace owned by User 1 in XYZ Corporation. It focuses on developing a new marketing campaign strategy to expand the company's reach. The project is currently active and encourages members to contribute creative ideas and execute marketing initiatives."
+  },
+  {
+    "id": 36,
+    "name": "Project Epsilon",
+    "owner": 1,
+    "visibility": "public",
+    "status": "active",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "ABC Company",
+    "description": "Project Epsilon is a public workspace owned by User 1 in ABC Company. It aims to optimize the supply chain processes to increase operational efficiency and reduce costs. The project is currently active and welcomes collaboration from members with expertise in logistics and procurement."
+  },
+  {
+    "id": 37,
+    "name": "Project Zeta",
+    "owner": 146,
+    "visibility": "public",
+    "status": "active",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "ABC Company",
+    "description": "Project Zeta is a public workspace owned by User 146 in ABC Company. It focuses on developing a new software application to streamline internal communication and collaboration. The project iscurrently active and encourages members to contribute their ideas and expertise in software development and user experience design."
+  },
+  {
+    "id": 38,
+    "name": "Project Eta",
+    "owner": 146,
+    "visibility": "public",
+    "status": "active",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "XYZ Corporation",
+    "description": "Project Eta is a public workspace owned by User 146 in XYZ Corporation. It is a collaborative project aimed at developing a new product prototype for market testing. The project is currently active and welcomes members from various departments to contribute their expertise in product design, engineering, and market research."
+  },
+  {
+    "id": 39,
+    "name": "Project Theta",
+    "owner": 146,
+    "visibility": "private",
+    "status": "active",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "ABC Company",
+    "description": "Project Theta is a private workspace owned by User 146 in ABC Company. It focuses on sensitive research and development activities related to a confidential project. The project is currently active and limited to a select group of trusted members with special access permissions."
+  },
+  {
+    "id": 40,
+    "name": "Project Iota",
+    "owner": 146,
+    "visibility": "private",
+    "status": "archived",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "XYZ Corporation",
+    "description": "Project Iota is a private workspace owned by User 146 in XYZ Corporation. It was an initiative aimed at developing a new software application, which has now been completed and archived. The project is no longer active but serves as a reference for future projects."
+  },
+  {
+    "id": 41,
+    "name": "Project Kappa",
+    "owner": 146,
+    "visibility": "private",
+    "status": "active",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "XYZ Corporation",
+    "description": "Project Kappa is a private workspace owned by User 146 in XYZ Corporation. It is a confidential project focused on developing a new product line for an upcoming product launch. The project is currently active and limited to a select group of members involved in product development, marketing, and operations."
+  },
+  {
+    "id": 42,
+    "name": "Project Lambda",
+    "owner": 146,
+    "visibility": "private",
+    "status": "active",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "XYZ Corporation",
+    "description": "Project Lambda is a private workspace owned by User 146 in XYZ Corporation. It is a strategic initiative focused on market expansion into new regions. The project is currently active and seeks inputs from members with expertise in market research, business development, and international operations."
+  },
+  {
+    "id": 43,
+    "name": "Project Mu",
+    "owner": 150,
+    "visibility": "private",
+    "status": "inactive",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "XYZ Corporation",
+    "description": "Project Mu is a private workspace ownedby User 150 in XYZ Corporation. It was a research project focused on developing a new algorithm for data analysis. However, the project is currently inactive and no longer accepting contributions or undergoing further development."
+  },
+  {
+    "id": 44,
+    "name": "Project Nu",
+    "owner": 150,
+    "visibility": "private",
+    "status": "archived",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "XYZ Corporation",
+    "description": "Project Nu is a private workspace owned by User 150 in XYZ Corporation. It was a collaborative initiative to revamp the company's website and improve its online presence. The project has been completed and archived, serving as a reference for future website enhancements."
+  },
+  {
+    "id": 45,
+    "name": "Project Xi",
+    "owner": 150,
+    "visibility": "private",
+    "status": "inactive",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "XYZ Corporation",
+    "description": "Project Xi is a private workspace owned by User 150 in XYZ Corporation. It aimed to explore opportunities for collaboration with external research institutions and industry partners. However, the project is currently inactive and no longer pursuing partnership initiatives."
+  },
+  {
+    "id": 46,
+    "name": "Project Omicron",
+    "owner": 150,
+    "visibility": "private",
+    "status": "active",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "XYZ Corporation",
+    "description": "Project Omicron is a private workspace owned by User 150 in XYZ Corporation. It focuses on developing a new cloud-based software solution for streamlining internal operations. The project is currently active and welcomes collaboration from members with expertise in software development and cloud architecture."
+  },
+  {
+    "id": 47,
+    "name": "Project Pi",
+    "owner": 150,
+    "visibility": "private",
+    "status": "inactive",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "XYZ Corporation",
+    "description": "Project Pi is a private workspace owned by User 150 in XYZ Corporation. It was an initiative focused on developing a new training program for employees. However, the project is currently inactive and no longer undergoing further development."
+  },
+  {
+    "id": 48,
+    "name": "Project Rho",
+    "owner": 150,
+    "visibility": "private",
+    "status": "archived",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "XYZ Corporation",
+    "description": "Project Rho is a private workspace owned by User 150 in XYZ Corporation. It was a project aimed at optimizing the company's manufacturing processes. The project has been completed and archived, serving as a reference for future process improvement initiatives."
+  },
+  {
+    "id": 49,
+    "name": "Project Sigma",
+    "owner": 150,
+    "visibility": "private",
+    "status": "active",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "XYZ Corporation",
+    "description": "Project Sigma is a private workspace owned by User 150 in XYZCorporation. It is a confidential project focused on developing a new product line for an upcoming product launch. The project is currently active and limited to a select group of members involved in product development, marketing, and operations."
+  },
+  {
+    "id": 50,
+    "name": "Project Tau",
+    "owner": 150,
+    "visibility": "private",
+    "status": "inactive",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "XYZ Corporation",
+    "description": "Project Tau is a private workspace owned by User 150 in XYZ Corporation. It was a research project focused on developing innovative solutions for sustainable energy. However, the project is currently inactive and no longer undergoing further development."
+  },
+  {
+    "id": 51,
+    "name": "Project Upsilon",
+    "owner": 152,
+    "visibility": "private",
+    "status": "archived",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "XYZ Corporation",
+    "description": "Project Upsilon is a private workspace owned by User 152 in XYZ Corporation. It was a collaborative initiative aimed at optimizing the company's supply chain and logistics operations. The project has been completed and archived, serving as a reference for future process improvement initiatives."
+  },
+  {
+    "id": 52,
+    "name": "Project Phi",
+    "owner": 152,
+    "visibility": "private",
+    "status": "inactive",
+    "members": [148, 151, 153, 154, 155, 156, 158],
+    "org_name": "XYZ Corporation",
+    "description": "Project Phi is a private workspace owned by User 152 in XYZ Corporation. It was a research project focused on developing advanced machine learning algorithms for data analysis. However, the project is currently inactive and no longer undergoing further development."
+  }
+]

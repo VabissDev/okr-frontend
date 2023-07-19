@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Button, Divider, HorizontalStack, Icon, VerticalStack } from "@shopify/polaris";
-import { getAllWorkspaces } from "@/redux/slices/workspaceSlices";
+import {
+  Button,
+  Divider,
+  HorizontalStack,
+  Icon,
+  VerticalStack,
+} from "@shopify/polaris";
+// import { getAllWorkspaces } from "@/redux/slices/workspaceSlices"; error verdiyi ucun helelik evezine fake data'dan ist etdim
+import workspaces from "@/data/workspaces.json";
 import { getAccountData } from "@/redux/slices/accountSlice";
 import { Link } from "react-router-dom";
 import { CustomersMajor } from "@shopify/polaris-icons";
 import PaginationComponent from "@/components/PaginationComponent";
-
 
 // illustartions
 import illustration1 from "@/assets/illustration/illustration1.jpg";
@@ -20,7 +26,7 @@ import { CustomBox } from "@/styled/containers";
 import { FlexText } from "@/styled/buttons";
 
 export const Organization = () => {
-  const workspaces = useSelector(getAllWorkspaces);
+  // const workspaces = useSelector(getAllWorkspaces);
   const account = useSelector(getAccountData);
   const [active, setActive] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,11 +40,12 @@ export const Organization = () => {
     illustration5,
   ];
 
+  console.log();
   const accountWorkspaces = workspaces.filter(
     (workspace) => workspace.org_name === account.org_name
   );
 
-   const startIndex = (currentPage - 1) * itemsPerPage;
+  const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const displayedWorkspaces = accountWorkspaces.slice(startIndex, endIndex);
 
@@ -46,16 +53,12 @@ export const Organization = () => {
     setCurrentPage(page);
   };
 
-
   return (
     <>
       {
-
         <VerticalStack gap="4">
           {(account.role?.toLowerCase() === "admin" ||
-            account.role?.toLowerCase() === "teamlead") && (
-              <Divider />
-            )}
+            account.role?.toLowerCase() === "teamlead") && <Divider />}
           <HorizontalStack gap="4">
             {account.role?.toLowerCase() === "admin" && (
               <>
@@ -73,25 +76,24 @@ export const Organization = () => {
 
             {(account.role?.toLowerCase() === "admin" ||
               account.role?.toLowerCase() === "teamlead") && (
-                <WorkspaceCreate />
-              )}
+              <WorkspaceCreate />
+            )}
           </HorizontalStack>
           {(account.role?.toLowerCase() === "admin" ||
             account.role?.toLowerCase() === "teamlead") && (
-              <CustomBox bottom="20px">
-                <Divider />
-              </CustomBox>
-            )}
+            <CustomBox bottom="20px">
+              <Divider />
+            </CustomBox>
+          )}
         </VerticalStack>
       }
 
-
       {/* Workspaces */}
-      <VerticalStack >
+      <VerticalStack>
         {displayedWorkspaces.map((workspace) => {
           const randomIllustration =
             illustrations[
-            Math.floor(Math.floor(Math.random() * illustrations.length))
+              Math.floor(Math.floor(Math.random() * illustrations.length))
             ];
           return (
             <WorkspaceCard
@@ -102,15 +104,16 @@ export const Organization = () => {
           );
         })}
       </VerticalStack>
-      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-       <PaginationComponent 
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-        totalItems={accountWorkspaces.length}
-        itemsPerPage={itemsPerPage}
-      />
-           </div>
-
+      <div
+        style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}
+      >
+        <PaginationComponent
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+          totalItems={accountWorkspaces.length}
+          itemsPerPage={itemsPerPage}
+        />
+      </div>
     </>
   );
 };
