@@ -128,7 +128,7 @@ export const SignUp = () => {
     }
 
     if (isError) {
-      toast.error(errorMessage);
+      // toast.error(errorMessage);
       console.log(errorMessage);
       dispatch(clearState());
     }

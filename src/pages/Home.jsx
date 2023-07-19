@@ -97,7 +97,7 @@ export const Home = () => {
     if (isError) {
       dispatch(clearState());
       console.log("error");
-      navigate("/login");
+      navigate("/");
     }
   }, [isError, isSuccess]);
 
