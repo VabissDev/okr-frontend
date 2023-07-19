@@ -59,9 +59,6 @@ export const WorkspaceCreate = () => {
       setErrorMessage("Description must be between 10 to 100 characters.");
       return;
     }
-    setErrorMessage("");
-    setDescription("");
-    setWorkspaceName("");
 
     // const newWorkspace = {
     //   id: Date.now(),
@@ -73,6 +70,13 @@ export const WorkspaceCreate = () => {
     //   members: [45, 12, 13], // members id - progress...
     //   org_name: "ABC",
     // };
+
+    // reset form
+    setErrorMessage("");
+    setDescription("");
+    setWorkspaceName("");
+    setVisibility("public");
+    setStatus("active");
   };
 
   const buttonTitle = (
@@ -91,7 +95,12 @@ export const WorkspaceCreate = () => {
     >
       <Form>
         <FormLayout>
-          <TextField type="text" label="Owner:" value={user.name} disabled />
+          <TextField
+            type="text"
+            label="Owner:"
+            value={user.fullName}
+            disabled
+          />
           <TextField
             type="text"
             placeholder="Enter workspace name"
