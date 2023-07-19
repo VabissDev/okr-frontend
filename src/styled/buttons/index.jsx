@@ -21,6 +21,7 @@ export const ResetButtonWrapper = styled.div`
 .Polaris-Button {
     border: none;
     padding-inline: 0;
+    box-shadow: none;
     &:hover {
         background-color: transparent;
         color: blue;
