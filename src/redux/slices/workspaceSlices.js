@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+const token = localStorage.getItem("token");
+
 export const createWorkspace = createAsyncThunk(
   "workspaces/createWorkspace",
   async (
@@ -12,8 +14,11 @@ export const createWorkspace = createAsyncThunk(
         {
           method: "POST",
           headers: {
-            Accept: "application/json",
+            "Accept": "application/json",
+           // "mode": "no-cors",
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+            "Access-Control-Allow-Origin": "*",
           },
           body: JSON.stringify({
             name,
