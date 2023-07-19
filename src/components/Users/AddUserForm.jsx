@@ -5,6 +5,9 @@ import { CustomerPlusMajor } from '@shopify/polaris-icons';
 import { FlexText } from '@/styled/buttons';
 import { EMAIL_REGEX } from '@/utils/regex';
 import { userRoleOptions } from '@/utils/options';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuth } from '@/redux/slices/AuthSlice';
+import { createUser } from '@/redux/slices/usersSlice';
 
 
 export const AddUserForm = () => {
@@ -15,6 +18,10 @@ export const AddUserForm = () => {
 
     const [emailError, setEmailError] = useState('');
     const [status, setStatus] = useState('viewer');
+
+    const auth = useSelector(getAuth)
+
+    const dispatch = useDispatch()
 
     const handleFullNameChange = (value) => {
         setFullName(value.trim());
@@ -36,6 +43,20 @@ export const AddUserForm = () => {
         setEmailError(!validEmail ? "Invalid Email Format" : "");
         setNameError(!fullName ? "Full Name is required" : "");
         !email && setEmailError("Email field is required");
+
+        const password = "111";
+
+        const organizationId = auth.organization.id
+
+        const data = {
+            fullName,
+            email,
+            organizationId,
+            password
+        }
+
+        console.log(data)
+        dispatch(createUser(data));
 
     };
 
