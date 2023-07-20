@@ -1,15 +1,19 @@
 # okr-frontend
 
 ## Home Component Documentation
+
 This component provides a visually appealing and informative layout for the home page, displaying a header with a logo and buttons for logging in and signing up. The content section introduces the concept of an OKR system, its benefits, and encourages users to get started by clicking the "Get Started" button that links to the signup page.
 
 ## Login Component Documentation
+
 The Login component is a form-based component that allows users to log in to an application. It provides a user interface for entering email and password credentials, as well as an option for selecting organization login and a link for password recovery. The component is built using the React framework and utilizes various dependencies and custom components.
 
 ### Props
+
 The Login component does not accept any props. However, it relies on the LoginLayout component for rendering the overall layout and handling form submission.
 
 ### State
+
 The Login component maintains the following states:
 
 formData: An object that stores the form data, including email, password, and isOrganization (a boolean indicating whether the login is for an organization).
@@ -21,12 +25,14 @@ dispatch: A function provided by the useDispatch hook from React Redux for dispa
 title: A string representing the title displayed in the login layout.
 
 ### Event Handlers
+
 The Login component defines the following event handlers:
 
 handleChange: A function that updates the form data state based on the provided key and value.
 onSubmit: A function that validates the form data, authenticates the user, and triggers the login action if the credentials are valid.
 
-###  Rendering
+### Rendering
+
 The Login component renders the following elements:
 
 LoginLayout: The main layout component that wraps the login form and handles form submission. It receives the title prop and the onSubmit event handler.
@@ -41,21 +47,24 @@ Link: Provides a link to the password recovery page.
 Text: Displays a message with a link to the signup page. It receives the alignment, variant, as, color, and children props.
 
 ### Additional Notes
+
 The Login component relies on other components, dependencies, and custom styles that should be imported and available in your project for proper usage.
 The component uses Redux for managing the state and dispatching actions. Make sure to set up your Redux store and reducers accordingly.
 The component utilizes React Router for navigation. Ensure that you have set up your routes and have the necessary dependencies installed.
 Custom styling and additional functionality may be implemented through the imported dependencies, components, and hooks used in the Login component.
 
-![Login picture](login.png)
-
+![Login picture](./src/assets/login.png)
 
 ## SignUp Component Documentation
+
 The SignUp component is a form-based component that allows users to sign up for an account. It provides a user interface for entering name, email, password, and organization details. The component is built using the React framework and utilizes various dependencies and custom components.
 
 ### Props
+
 The SignUp component does not accept any props. However, it relies on the LoginLayout component for rendering the overall layout and handling form submission.
 
 ### State
+
 The SignUp component maintains the following states:
 
 name: A string representing the user's name or organization name.
@@ -70,6 +79,7 @@ users: An array of user objects retrieved from the Redux store.
 title: A string representing the title displayed in the login layout.
 
 ### Event Handlers
+
 The SignUp component defines the following event handlers:
 
 handleNameChange: A function that updates the name state based on the input value.
@@ -80,6 +90,7 @@ handleCheckbox: A function that toggles the isOrganization state between true an
 handleSubmit: A function that validates the form data, dispatches the signup action, and clears the form fields.
 
 ### Rendering
+
 The SignUp component renders the following elements:
 
 LoginLayout: The main layout component that wraps the signup form and handles form submission. It receives the title prop and the onSubmit event handler.
@@ -91,9 +102,7 @@ Divider: Renders a horizontal divider line.
 Text: Displays a message with a link to the login page.
 Link: Provides a link to the login page.
 
-
-![SignUp picture](signup.png)
-
+![SignUp picture](./src/assets/signup.png)
 
 ## EditProfile Component Documentation
 
@@ -101,12 +110,14 @@ EditProfile Component Documentation
 The EditProfile component is a form-based component that allows users to edit their profile information. It provides a user interface for modifying the user's full name, email, password, organization name, and team name. The component is built using the React framework and utilizes various dependencies and custom components.
 
 ### Props
+
 The EditProfile component accepts the following props:
 
 user (required): An object representing the user's profile information. It should include the properties fullName, email, password, orgName, and teamName.
 onSave (required): A callback function that will be called when the user clicks the "Save" button. It should handle the saving of the updated profile information.
 
 ### State
+
 The EditProfile component maintains the following state:
 
 profile: An object that stores the edited profile information, including fullName, email, password, orgName, and teamName.
@@ -117,6 +128,7 @@ handleInputChange: A function that updates the profile state based on the input 
 handleSaveClick: A function that calls the onSave callback function with the updated profile object and navigates to the user's profile page.
 
 ### Rendering
+
 The EditProfile component renders the following elements:
 
 FormLayout: The main layout component for the form, which wraps the form fields.
@@ -124,19 +136,23 @@ TextField: Input fields for editing the user's full name, email, password, organ
 Button: Triggers the handleSaveClick event handler when clicked. It receives the primary and onClick props.
 
 ### Additional Notes
+
 The EditProfile component relies on other components, dependencies, and custom styles that should be imported and available in your project for proper usage.
 Custom styling and additional functionality may be implemented through the imported dependencies, components, and hooks used in the EditProfile component.
 
 ## Profile Component Documentation
+
 The Profile component displays the profile information of a user. It provides a user interface for viewing and editing the user's personal information, such as name, organization, email, team name, and avatar. The component is built using the React framework and utilizes various dependencies and custom components.
 
 ### Props
+
 The Profile component accepts the following props:
 
 user (required): An object representing the user's profile information. It should include properties such as name, org_name, email, teams, and avatarSource.
 onSave (required): A callback function that will be called when the user clicks the "Save" button. It should handle the saving of any updated profile information.
 
 ### State
+
 The Profile component maintains the following state:
 
 updatedUser: An object representing the updated user profile information. It is initially set to null and gets updated when the user saves any changes.
@@ -146,6 +162,7 @@ The Profile component defines the following event handler:
 handleSaveProfile: A function that receives the updated profile information and calls the onSave callback function with the updated profile. It also updates the updatedUser state.
 
 ### Rendering
+
 The Profile component renders the following elements:
 
 Card: A container component that displays the user's profile information.
@@ -159,8 +176,8 @@ Top: A styled component that positions the team name and team tags at the top.
 Tag: Displays the user's team names as tags.
 PageActions: Displays the primary action button for editing the profile and secondary action buttons, such as deleting the profile.
 
-
 ## Organization Component Documentation
+
 The Organization component is responsible for displaying the organization view. Here's a breakdown of its functionality:
 
 It imports necessary modules and components for rendering.
