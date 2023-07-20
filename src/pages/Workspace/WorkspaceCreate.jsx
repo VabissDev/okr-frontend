@@ -31,8 +31,8 @@ export const WorkspaceCreate = () => {
   const user = useSelector(getAuth);
   const { fullName, id, organizationId } = user;
 
-  const handleNameChange = (value) => setWorkspaceName(value.trim());
-  const handleDescriptionChange = (value) => setDescription(value.trim());
+  const handleNameChange = (value) => setWorkspaceName(value);
+  const handleDescriptionChange = (value) => setDescription(value);
   const handleVisibilityChange = useCallback(
     (_, newValue) => setVisibility(newValue),
     []
